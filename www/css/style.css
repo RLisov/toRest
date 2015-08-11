@@ -39,7 +39,7 @@ body, .item p {
 .tours .card {
 	margin-top: 10px;
 	margin-bottom: 10px;
-	height: 145px;
+	height: 9em;
 }
 
 .tours .card .row {
@@ -55,7 +55,7 @@ body, .item p {
 }
 
 .tours .card .thumbnail {
-	width: 145px;
+	width: 30vw;
 	padding: 0;
 	border-bottom-left-radius: 2px;
 	border-top-left-radius: 2px;
@@ -69,17 +69,22 @@ body, .item p {
 }
 
 .tours .card .description p {
-	margin-bottom: 6px;
+	margin-bottom: 0.1em;
 }
 
 .tours .card .description .title {
 	font-family: "Lato Medium", sans-serif;
 	color: #f59e35;
-	font-size: 22px;
+	font-size: 1.4em;
+	margin-bottom: 0.3em;
 }
 
 .tours .card .description .hotel {
-	font-size: 20px;
+	font-size: 1.1em;
+}
+
+.tours .card .description .during-time {
+	font-size: 0.9em;
 }
 
 .tours .card .description ul.rating li {
@@ -94,8 +99,10 @@ body, .item p {
 	font-size: 18px;
 }
 
+
+
 .tours .card .description .prices {
-	margin-top: 10px;
+	margin-top: 0.6em;
 }
 
 .blue-badge {
@@ -106,8 +113,8 @@ body, .item p {
 }
 
 .new-price {
-	font-size: 24px;
-	line-height: 24px;
+	font-size: 1.2em;
+	line-height: 1.2em;
 	padding: 2px 15px;
 	display: inline-block;
 	font-family: "BebasBold", sans-serif;
@@ -121,3 +128,17 @@ body, .item p {
 	text-decoration: line-through;
 	text-align: right;
 }
+
+/*@media 
+(-webkit-min-device-pixel-ratio: 2) { 
+    .tours .card .thumbnail {
+		width: 6em;
+    }
+}
+
+@media 
+(-webkit-min-device-pixel-ratio: 3) { 
+    .tours .card .thumbnail {
+		width: 9em;
+    }
+}*/
