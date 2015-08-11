@@ -1,0 +1,123 @@
+@import "../fonts/bebas.css";
+@import "../fonts/lato.css";
+
+body {
+	font-family: 'Lato Regular', sans-serif;
+}
+
+ion-content {
+	background-image: url(../img/background.png);
+	background-repeat: repeat;
+}
+
+body, .item p {
+	color: #000102;
+}
+
+
+.orange-bg {
+	background-color: #e8a765;
+	color: white;
+}
+
+.orange-bg button {
+	color: white;	
+}
+
+.dark-orange-color {
+	background-color: #f59e35;
+}
+
+.bar-footer .button.button-full {
+	margin: 0;
+}
+
+.bar-footer .button-clear.button-clear {
+	color: white;
+}
+
+.tours .card {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 145px;
+}
+
+.tours .card .row {
+	height: 100%;
+}
+
+.tours .card .row .col {
+	padding: 0px;
+}
+
+.tours .card, .tours .card .row {
+	padding: 0px;
+}
+
+.tours .card .thumbnail {
+	width: 145px;
+	padding: 0;
+	border-bottom-left-radius: 2px;
+	border-top-left-radius: 2px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.tours .card .col.description {
+	padding: 5px 20px;
+}
+
+.tours .card .description p {
+	margin-bottom: 6px;
+}
+
+.tours .card .description .title {
+	font-family: "Lato Medium", sans-serif;
+	color: #f59e35;
+	font-size: 22px;
+}
+
+.tours .card .description .hotel {
+	font-size: 20px;
+}
+
+.tours .card .description ul.rating li {
+	padding: 5px;
+}
+
+.tours .card .description ul.rating li:first-child {
+	padding-left: 0px;
+}
+
+.tours .card .description ul.rating li i {
+	font-size: 18px;
+}
+
+.tours .card .description .prices {
+	margin-top: 10px;
+}
+
+.blue-badge {
+	background-color: #4e94e1;
+	border-radius: 100px;
+	color: white;
+	text-align: center;
+}
+
+.new-price {
+	font-size: 24px;
+	line-height: 24px;
+	padding: 2px 15px;
+	display: inline-block;
+	font-family: "BebasBold", sans-serif;
+}
+
+.old-price {
+	padding-top: 2px;
+	font-size: 15px;
+	line-height: 24px;
+	font-family: "BebasRegular", sans-serif;
+	text-decoration: line-through;
+	text-align: right;
+}

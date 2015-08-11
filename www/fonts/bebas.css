@@ -1,0 +1,50 @@
+/* font-family: "BebasRegular"; */
+@font-face {
+    font-family: "BebasRegular";
+    src: url("BebasRegular/BebasRegular.eot");
+    src: url("BebasRegular/BebasRegular.eot?#iefix")format("embedded-opentype"),
+    url("BebasRegular/BebasRegular.woff") format("woff"),
+    url("BebasRegular/BebasRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+/* font-family: "BebasBook"; */
+@font-face {
+    font-family: "BebasBook";
+    src: url("BebasBook/BebasBook.eot");
+    src: url("BebasBook/BebasBook.eot?#iefix")format("embedded-opentype"),
+    url("BebasBook/BebasBook.woff") format("woff"),
+    url("BebasBook/BebasBook.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+/* font-family: "BebasBold"; */
+@font-face {
+    font-family: "BebasBold";
+    src: url("BebasBold/BebasBold.eot");
+    src: url("BebasBold/BebasBold.eot?#iefix")format("embedded-opentype"),
+    url("BebasBold/BebasBold.woff") format("woff"),
+    url("BebasBold/BebasBold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+/* font-family: "BebasLight"; */
+@font-face {
+    font-family: "BebasLight";
+    src: url("BebasLight/BebasLight.eot");
+    src: url("BebasLight/BebasLight.eot?#iefix")format("embedded-opentype"),
+    url("BebasLight/BebasLight.woff") format("woff"),
+    url("BebasLight/BebasLight.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+/* font-family: "BebasThin"; */
+@font-face {
+    font-family: "BebasThin";
+    src: url("BebasThin/BebasThin.eot");
+    src: url("BebasThin/BebasThin.eot?#iefix")format("embedded-opentype"),
+    url("BebasThin/BebasThin.woff") format("woff"),
+    url("BebasThin/BebasThin.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
