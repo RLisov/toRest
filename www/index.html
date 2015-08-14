@@ -2,12 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"> -->
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link rel="stylesheet" href="lib/ionic-rating/ionic-rating.css">
+    <link rel="stylesheet" href="lib/tabSlideBox/tabSlideBox.css">
     <link href="css/style.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -16,7 +16,8 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="lib/ionic-rating/ionic-rating.min.js"></script>
+    <script src="lib/ionic-rating/ionic-rating.js"></script>
+    <script src="lib/tabSlideBox/tabSlideBox.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -26,7 +27,11 @@
     <script src="js/controllers.js"></script>
   </head>
   <body ng-app="toRest">
-    <ion-nav-bar class="orange-bg" align-title="center"></ion-nav-bar>
+    <ion-nav-bar class="orange-bg" align-title="center">
+        <ion-nav-back-button class="button-clear">
+            <i class="ion-chevron-left"></i>
+        </ion-nav-back-button>
+    </ion-nav-bar>
     <ion-nav-view></ion-nav-view>
   </body>
 </html>
