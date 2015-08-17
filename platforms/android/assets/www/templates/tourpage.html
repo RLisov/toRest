@@ -1,0 +1,130 @@
+
+  <!-- The title of the ion-view will be shown on the navbar -->
+  <ion-view view-title="О туре">
+    <ion-content has-subheader="false" class="tourpage" scroll="false">
+      <div class="head">
+        <div class="row">
+          <div class="thumbnail" style="background-image: url(../img/egypt.jpg)"></div>
+          <div class="col description">
+            <div class="item">
+              <div class="row">
+                <div class="col col-66">
+                  <p class="title">Египет</p>
+                  <p class="hotel">Hotel Azimut</p>
+                  <rating readOnly="true" ng-model="rate" max="5"></rating>
+                </div>
+                <div class="col col-33">
+                  <div class="tabs tabs-icon-top">
+                    <a class="tab-item">
+                      <i class="icon ion-android-star-outline"></i>
+                      В избранное
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <tab-slide-box tab="0">
+        <div class="tsb-icons">
+            <div class="tsb-ic-wrp ">
+                <a href="javascript:;" class="ion-clipboard"></a>
+                <a href="javascript:;" class="ion-images"></a>
+                <a href="javascript:;" class="ion-map"></a>
+                <a href="javascript:;" class="ion-model-s"></a>
+                <a href="javascript:;" class="ion-social-google-outline"></a>
+            </div>
+        </div>
+        <ion-slide-box show-pager="false" delegate-handle="main-tabs" on-slide-changed="slideHasChanged($index, 'tabs')">
+          <ion-slide disable-scroll="true" style="max-height: calc(100% - 160px); ">
+            <!-- MAIN PAGE -->
+            <ion-scroll style="height: 100%">
+              <a class="no-decoration" href="#">
+                <div class="blue-badge small-corners">
+                  <div class="row">
+                    <div class="col col-80">
+                      <h3>Заезд 30.01.2015 на 9 ночей</h3>
+                      <p>нажмите, чтобы изменить дату заезда</p>
+                    </div>
+                    <div class="col col-20">
+                      <p class="ion-calendar icon"></p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <ion-radio ng-model="choice" ng-value="'A'">
+                <div class="price">39.900 RUB</div>
+                <p class="description food">Питание: All Inclusive</p>
+                <p class="description room">Standart Room (2 взр.)</p>
+              </ion-radio>
+              <ion-radio ng-model="choice" ng-value="'B'">
+                <div class="price">39.900 RUB</div>
+                <p class="description food">Питание: All Inclusive</p>
+                <p class="description room">Standart Room (2 взр.)</p>
+              </ion-radio>
+              <ion-radio ng-model="choice" ng-value="'C'">
+                <div class="price">39.900 RUB</div>
+                <p class="description food">Питание: All Inclusive</p>
+                <p class="description room">Standart Room (2 взр.)</p>
+              </ion-radio>
+            </ion-scroll>
+          </ion-slide>
+          <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); " >
+              <!-- GALLERY -->
+              <ion-slide-box delegate-handle="gallery" on-slide-changed="slideHasChanged($index, 'gallery', 4)">
+                <ion-slide>
+                  <div class="box blue"><h1>BLUE</h1></div>
+                </ion-slide>
+                <ion-slide >
+                  <div class="box yellow"><h1>YELLOW</h1></div>
+                </ion-slide>
+                <ion-slide>
+                  <div class="box pink"><h1>PINK</h1></div>
+                </ion-slide>
+                <ion-slide>
+                  <div class="box pink"><h1>RED</h1></div>
+                </ion-slide>
+              </ion-slide-box>
+          </ion-slide>
+          <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); ">
+              <!-- MAP -->
+          </ion-slide>
+          <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); ">
+              <!-- HOTEL INFO -->
+          </ion-slide>
+          <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); ">
+              <!-- GOOGLE -->
+          </ion-slide>
+        </ion-slide-box>
+      </tab-slide-box>
+    </ion-content>
+
+<!--      <ion-pane>
+        <ion-tabs class="">
+            
+            <ion-tab href="#/tourpage/main" icon="ion-home">
+                <ion-nav-view name="main">
+                    <ion-content>
+                        <div ng-include src="'templates/tourpage/_main.html'"></div>
+                    </ion-content>
+                    <ion-footer-bar class="orange-bg">
+                      <button class="button button-full button-clear">Забронировать</button>    
+                    </ion-footer-bar>
+                </ion-nav-view>
+            </ion-tab>
+
+            
+            <ion-tab href="#/tourpage/gallery" icon="ion-images">
+                <ion-nav-view name="gallery">
+                    <ion-content>
+                        <div ng-include src="'templates/tourpage/_gallery.html'"></div>
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+        </ion-tabs>
+
+    </ion-pane> -->
+  </ion-view>
+
+  <script>$.ionTabs("#tabs_1");</script>

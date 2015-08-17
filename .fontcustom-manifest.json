@@ -1,0 +1,114 @@
+{
+  "checksum": {
+    "previous": "fcc131ceee5ef5a1b53796fe4a071aa918c4fafe6181495baf1b702e995bce89",
+    "current": "fcc131ceee5ef5a1b53796fe4a071aa918c4fafe6181495baf1b702e995bce89"
+  },
+  "fonts": [
+    "fontcustom/fontcustom_fcc131ceee5ef5a1b53796fe4a071aa9.ttf",
+    "fontcustom/fontcustom_fcc131ceee5ef5a1b53796fe4a071aa9.svg",
+    "fontcustom/fontcustom_fcc131ceee5ef5a1b53796fe4a071aa9.woff",
+    "fontcustom/fontcustom_fcc131ceee5ef5a1b53796fe4a071aa9.eot"
+  ],
+  "glyphs": {
+    "checkbox": {
+      "codepoint": 61696,
+      "source": "/home/shaq/Downloads/icon/checkbox.svg"
+    },
+    "checkbox-off": {
+      "codepoint": 61697,
+      "source": "/home/shaq/Downloads/icon/checkbox-off.svg"
+    },
+    "checkbox-small": {
+      "codepoint": 61698,
+      "source": "/home/shaq/Downloads/icon/checkbox-small.svg"
+    },
+    "google": {
+      "codepoint": 61699,
+      "source": "/home/shaq/Downloads/icon/google.svg"
+    },
+    "hotel": {
+      "codepoint": 61700,
+      "source": "/home/shaq/Downloads/icon/hotel.svg"
+    },
+    "info": {
+      "codepoint": 61701,
+      "source": "/home/shaq/Downloads/icon/info.svg"
+    },
+    "info-2": {
+      "codepoint": 61702,
+      "source": "/home/shaq/Downloads/icon/info-2.svg"
+    },
+    "map": {
+      "codepoint": 61703,
+      "source": "/home/shaq/Downloads/icon/map.svg"
+    },
+    "phone": {
+      "codepoint": 61704,
+      "source": "/home/shaq/Downloads/icon/phone.svg"
+    },
+    "photo": {
+      "codepoint": 61705,
+      "source": "/home/shaq/Downloads/icon/photo.svg"
+    },
+    "star-favourite": {
+      "codepoint": 61706,
+      "source": "/home/shaq/Downloads/icon/star-favourite.svg"
+    },
+    "star-favourite-blue": {
+      "codepoint": 61707,
+      "source": "/home/shaq/Downloads/icon/star-favourite-blue.svg"
+    },
+    "star-favourite-blue-active": {
+      "codepoint": 61708,
+      "source": "/home/shaq/Downloads/icon/star-favourite-blue-active.svg"
+    },
+    "star-hotel": {
+      "codepoint": 61709,
+      "source": "/home/shaq/Downloads/icon/star-hotel.svg"
+    },
+    "star-hotel-2": {
+      "codepoint": 61710,
+      "source": "/home/shaq/Downloads/icon/star-hotel-2.svg"
+    },
+    "suit": {
+      "codepoint": 61711,
+      "source": "/home/shaq/Downloads/icon/suit.svg"
+    },
+    "ticket": {
+      "codepoint": 61712,
+      "source": "/home/shaq/Downloads/icon/ticket.svg"
+    }
+  },
+  "options": {
+    "autowidth": false,
+    "config": false,
+    "css_selector": ".icon-{{glyph}}",
+    "debug": false,
+    "font_ascent": 448,
+    "font_descent": 64,
+    "font_design_size": 16,
+    "font_em": 512,
+    "font_name": "fontcustom",
+    "force": false,
+    "input": {
+      "templates": "/home/shaq/Downloads/icon",
+      "vectors": "/home/shaq/Downloads/icon"
+    },
+    "no_hash": false,
+    "output": {
+      "css": "fontcustom",
+      "fonts": "fontcustom",
+      "preview": "fontcustom"
+    },
+    "preprocessor_path": null,
+    "quiet": false,
+    "templates": [
+      "css",
+      "preview"
+    ]
+  },
+  "templates": [
+    "fontcustom/fontcustom.css",
+    "fontcustom/fontcustom-preview.html"
+  ]
+}

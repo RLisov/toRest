@@ -407,6 +407,50 @@ slider span.pointer:after {
 	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 }
 
+.galery-pic {
+	margin-top: 20%;
+	width: 100%;
+	height: 230px;
+}
+
+.google {
+	margin-top: 35%;
+	color:white;
+	background-color: #4e94e1;
+	border-radius:3px;
+}
+
+.hotel-wrapper {
+	font-family: "Lato Regular";
+}
+.head-hotel {
+	text-align: left;
+	font-weight: 600;
+}
+.describe-text {
+	text-align: left;
+	padding: 10px;
+}
+
+.ion-ios-telephone-outline {
+	font-size: 135%;
+	padding: 5px;
+}
+
+.horizontal-sep {
+	width: 95%;
+}
+
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+.align-right {
+	text-align: right;
+}
 /*@media 
 (-webkit-min-device-pixel-ratio: 2) { 
     .tours .card .thumbnail {

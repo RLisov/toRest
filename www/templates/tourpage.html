@@ -36,7 +36,7 @@
                 <a href="javascript:;" class="ion-social-google-outline"></a>
             </div>
         </div>
-        <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+        <ion-slide-box show-pager="false" delegate-handle="main-tabs" on-slide-changed="slideHasChanged($index, 'tabs')">
           <ion-slide disable-scroll="true" style="max-height: calc(100% - 160px); ">
             <!-- MAIN PAGE -->
             <ion-scroll style="height: 100%">
@@ -70,17 +70,23 @@
               </ion-radio>
             </ion-scroll>
           </ion-slide>
-          <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); ">
+          <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); " >
               <!-- GALLERY -->
-              <ion-slide-box delegate-handle="gallery" on-slide-changed="gallerySlider($index)">
+              <ion-slide-box delegate-handle="gallery" on-slide-changed="slideHasChanged($index, 'gallery', 4)">
                 <ion-slide>
-                  <div class="box blue"><h1>BLUE</h1></div>
+                  <img class="galery-pic" src="../img/slide1.jpg" >
+                  <div class="label-pic">Standart rest room</div>
+                </ion-slide>
+                <ion-slide >
+                  <img src="../img/slide2.jpg" class="galery-pic" >
+                 <div class="label-pic">Standart rest room</div>
                 </ion-slide>
                 <ion-slide>
-                  <div class="box yellow"><h1>YELLOW</h1></div>
+                  <img src="../img/slide3.jpg" class="galery-pic" >
+                  <div class="label-pic">Standart rest room</div>
                 </ion-slide>
                 <ion-slide>
-                  <div class="box pink"><h1>PINK</h1></div>
+                  <div class="label-pic">Standart rest room</div>
                 </ion-slide>
               </ion-slide-box>
           </ion-slide>
@@ -89,12 +95,36 @@
           </ion-slide>
           <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); ">
               <!-- HOTEL INFO -->
+              <div class="hotel-wrapper">
+                <div class="head-hotel">
+                  <i class="ion-ios-telephone-outline"></i>
+                  Описание отеля:
+                </div>
+                <div class="describe-text">
+                  Небольшой отель, расположен в 50 м от моря, в 700 м от центра города Каир. Отель состоит из одного 7-ми этажного здания.Внимание! Отель не размещает одиноких мужчин.
+                </div>
+                <hr class="horizontal-sep">
+                <div class="head-hotel">
+                  <i class="ion-ios-telephone-outline"></i>
+                  Контактная информация:
+                </div>
+
+                <div class="padding align-right ">
+                  <p class="alignleft">Тел.:</br>Факс:</br>Web:</p>
+                  <p class="alignright">+90(252)412-38-29</br>+90(252)412-38-29</br>www.sonnenhotelmarmaris.com</p>
+                </div>          
+                 <hr class="horizontal-sep">
+              </div>
           </ion-slide>
           <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); ">
               <!-- GOOGLE -->
+              <a class="button google">Нажмите, чтобы посмотреть дополнительную информацию об отеле в Google</a>
           </ion-slide>
         </ion-slide-box>
       </tab-slide-box>
+      <ion-footer-bar class="orange-bg">
+        <button class="button button-full button-clear">Забронировать</button>    
+      </ion-footer-bar>
     </ion-content>
 
 <!--      <ion-pane>

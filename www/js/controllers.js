@@ -27,8 +27,9 @@ angular.module('toRest.controllers', [])
 	  $scope.max = 5;
 	  $scope.choice = "A";
 
-	  $scope.gallerySlider = function($index) {
-	  	$ionicSlideBoxDelegate.$getByHandle('gallery').slide($index);
+	  $scope.gallerySlider = function(index) {
+	  	// $ionicSlideBoxDelegate.$getByHandle('gallery').slide($index);
+	  	console.log('index gallerry', index);
 	  }
 	})
 
