@@ -5,8 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox', 'uiSlider'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $ionicSlideBoxDelegate) {
   $ionicPlatform.ready(function() {
+    $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -35,6 +36,13 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
     /*abstract: 'true',*/
     templateUrl: 'templates/tourpage.html',
     controller: 'TourpageCtrl'
+  })
+
+  .state('reserved', {
+    url: '/reserved',
+    /*abstract: 'true',*/
+    templateUrl: 'templates/reserved.html',
+    controller: 'ReservedCtrl'
   })
 
 /*  .state('tourpage.main', {
