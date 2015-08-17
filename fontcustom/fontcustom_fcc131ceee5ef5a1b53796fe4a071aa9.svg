@@ -1,0 +1,65 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2015-8-14: Created.
+-->
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>
+Created by FontForge 20120731 at Fri Aug 14 14:39:05 2015
+ By shaq,,,
+Created by shaq,,, with FontForge 2.0 (http://fontforge.sf.net)
+</metadata>
+<defs>
+<font id="fontcustom" horiz-adv-x="512" >
+  <font-face 
+    font-family="fontcustom"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="512"
+    panose-1="2 0 6 3 0 0 0 0 0 0"
+    ascent="448"
+    descent="-64"
+    bbox="0 0 0 0"
+    underline-thickness="25.6"
+    underline-position="-51.2"
+    unicode-range="U+0020-F110"
+  />
+    <missing-glyph />
+    <glyph glyph-name="space" unicode=" " horiz-adv-x="200" 
+ />
+    <glyph glyph-name="uniF105" unicode="&#xf105;" 
+ />
+    <glyph glyph-name="uniF107" unicode="&#xf107;" 
+ />
+    <glyph glyph-name="uniF100" unicode="&#xf100;" 
+ />
+    <glyph glyph-name="uniF10E" unicode="&#xf10e;" 
+ />
+    <glyph glyph-name="uniF109" unicode="&#xf109;" 
+ />
+    <glyph glyph-name="uniF10F" unicode="&#xf10f;" 
+ />
+    <glyph glyph-name="uniF104" unicode="&#xf104;" 
+ />
+    <glyph glyph-name="uniF108" unicode="&#xf108;" 
+ />
+    <glyph glyph-name="uniF103" unicode="&#xf103;" 
+ />
+    <glyph glyph-name="uniF10B" unicode="&#xf10b;" 
+ />
+    <glyph glyph-name="uniF106" unicode="&#xf106;" 
+ />
+    <glyph glyph-name="uniF102" unicode="&#xf102;" 
+ />
+    <glyph glyph-name="uniF10A" unicode="&#xf10a;" 
+ />
+    <glyph glyph-name="uniF110" unicode="&#xf110;" 
+ />
+    <glyph glyph-name="uniF10D" unicode="&#xf10d;" 
+ />
+    <glyph glyph-name="uniF10C" unicode="&#xf10c;" 
+ />
+    <glyph glyph-name="uniF101" unicode="&#xf101;" 
+ />
+  </font>
+</defs></svg>
