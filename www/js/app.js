@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox'])
+angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox', 'uiSlider'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -53,6 +53,12 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
     url: '/favourites',
     templateUrl: 'templates/favourites.html',
     controller: 'FavouritesCtrl'
+  })
+
+  .state('search', {
+    url: '/search',
+    templateUrl: 'templates/search.html',
+    controller: 'SearchCtrl'
   })
 
 
