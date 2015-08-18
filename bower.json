@@ -5,6 +5,7 @@
     "ionic": "driftyco/ionic-bower#1.0.1"
   },
   "dependencies": {
-    "jquery.herotabs": "~3.0.4"
+    "jquery.herotabs": "~3.0.4",
+    "ionic-datepicker": "~0.7.0"
   }
 }

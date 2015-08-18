@@ -489,9 +489,11 @@ slider span.pointer:after {
 .flyings {
 	text-align: center;
 	font-size: 140%;
+	font-family: "Lato Light";
 }
 
-.blue-bg {
+.blue-card {
+	color:white;
 	margin: 5px;
 	padding: 2px;
 	text-align: center;
@@ -499,6 +501,63 @@ slider span.pointer:after {
 	border-radius: 100px;
 }
 
+.reserved-body {
+	font-family: "Lato Light";
+}
+
+.date-bold {
+	font-family: "Lato Regular"
+}
+
+.card .item {
+	white-space: normal;
+}
+
+.item-icon-right .icon{
+	color:#4e94e1 ;
+}
+
+.ion-ios-plus-outline {
+	color:#4e94e1;
+	font-size: 120%;
+	float:right;
+	padding-right: 15px;
+	padding-bottom: 5px;
+
+}
+
+.reserved {
+	margin: 10px 0px;
+}
+
+
+
+ul.sinie-circle {
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+
+ul.sinie-circle > li { 
+    padding-left: 1em; 
+    text-indent: -.7em;
+}
+
+ul.sinie-circle li:before {
+    content: "• ";
+    color:#4e94e1; /* or whatever color you prefer */
+	font-size: 140%;
+}
+
+
+.item-value {
+	float:right;
+}
+
+.blue-sex {
+	
+	color:#4e94e1; ;
+}
 
 /*@media 
 (-webkit-min-device-pixel-ratio: 2) { 

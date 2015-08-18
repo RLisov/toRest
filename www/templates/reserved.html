@@ -5,7 +5,8 @@
       <!-- <button class="button button-large ion-android-star button-clear favourites"></button> -->
     </ion-nav-buttons>
 
-    <ion-content class="tourpage">
+    <ion-content class="reserved-body">
+      <div class="tourpage">
       <div class="head">
         <div class="row">
           <div class="thumbnail" style="background-image: url(../img/egypt.jpg)"></div>
@@ -30,30 +31,31 @@
           </div>
         </div>
       </div>
+      </div>
       <hr class="horizontal-sep">
       
-       <!-- шрифты надо подключать -->
+       
       <div class="flyings">
         Перелёты
       </div>
      
-    	<div class="list search">
+    	<div class="list">
 
-        <div class="card">
+        <div class="card reserved">
           <div class="list">
-           <div class="blue-bg">
-             Москва - Каир </br> 30.01.2015
+           <div class="blue-card">
+             Москва - Каир </br> <span class="date-bold">30.01.2015</span>
            </div>
             <a class="item item-icon-right">
               Эконом: №45807 (Москва MSK 03:00 - Каир KR 06:50)
-              <i class="icon ion-ios-arrow-right"></i>
+              <i class="icon ion-ios-arrow-right color-ico"></i>
             </a>
-            <div class="blue-bg">
-             Каир - Москва </br> 07.02.2015
+            <div class="blue-card">
+             Каир - Москва </br> <span class="date-bold">07.02.2015</span>
            </div>
             <a class="item item-icon-right">
               Эконом: №45807 (Москва MSK 03:00 - Каир KR 06:50)
-              <i class="icon ion-ios-arrow-right"></i>
+              <i class="icon ion-ios-arrow-right color-ico"></i>
             </a>
           </div>
         </div>
@@ -62,47 +64,41 @@
           Заказанные услуги
         </div>
 
-        <div class="card">
+      <div class="card reserved">
           <div class="list">
-            <a class="item">
-              Вылет, с
-              <span class="item-note">
-                {{search.minDepartureDay}}
-              </span>
-            </a>
-            <a class="item">
-              Вылет, по
-              <span class="item-note">
-                {{search.maxDepartureDay}}
-              </span>
-            </a>
-
-            <div class="item">
-              Количество ночей
-              <span class="item-note">
-                от {{search.minDay}} до {{search.maxDay}}
-              </span>
-              <div>
-                <slider floor="1" ceiling="21" ng-model-low="search.minDay" ng-model-high="search.maxDay"></slider>
-              </div>
-            </div>
-
+            <a class="item item-icon-right">
+              <ul class="sinie-circle">
+                <li>ЕТС "Полное покрытие" (Египет)</li>
+                <li>Групповой трансфер</li>
+                <li>Групповой трансфер</li>
+              </ul>
+              <i class="icon ion-ios-arrow-right color-ico"></i>
+            </a> 
           </div>
         </div>
 
-        <div class="card">
+      <div class="flyings">
+          Турист 1  <i class="icon ion-ios-plus-outline color-ico"></i>
+      </div>
+
+         <div class="card reserved">
           <div class="list">
             <div class="item">
-              Количество туристов:
-              <span class="item-note">
-                {{search.touristsCount}}
-              </span>
-              <div>
-                <slider floor="1" ceiling="10" ng-model="search.touristsCount"></slider>
-              </div>
+              Пол 
+              <span class="blue-sex item-value">Мужской</span> 
             </div>
+            
+
+          <div class="item">
+              Дата рождения  
+              <span class="item-value">
+                <ionic-datepicker input-obj="datepickerObject">
+              <a> <i class="icon ion-ios-calendar-outline"></i> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
+            </ionic-datepicker>
+              </span>  
           </div>
-        </div>
+
+          </div>
 
          <div class="card">
           <div class="list">
@@ -122,7 +118,5 @@
       </div>
 	  </ion-content>
 	
-    <ion-footer-bar class="blue-bg">
-      <button ng-click="" class="button button-full button-clear">&nbsp;Найти подходящий тур</button>
-    </ion-footer-bar>
+    
   </ion-view>
