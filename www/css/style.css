@@ -559,6 +559,10 @@ ul.sinie-circle li:before {
 	color:#4e94e1; ;
 }
 
+.card .item:last-child {
+	padding-top: 20px;
+}
+
 /*@media 
 (-webkit-min-device-pixel-ratio: 2) { 
     .tours .card .thumbnail {

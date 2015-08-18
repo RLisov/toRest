@@ -84,35 +84,63 @@
          <div class="card reserved">
           <div class="list">
             <div class="item">
-              Пол 
+              Пол* 
               <span class="blue-sex item-value">Мужской</span> 
             </div>
             
 
-          <div class="item">
-              Дата рождения  
-              <span class="item-value">
-                <ionic-datepicker input-obj="datepickerObject">
-              <a> <i class="icon ion-ios-calendar-outline"></i> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
-            </ionic-datepicker>
-              </span>  
-          </div>
-
-          </div>
-
-         <div class="card">
-          <div class="list">
             <div class="item">
-              Цена:
-              <span class="item-note">
-                от {{search.minPrice}} до {{search.maxPrice}}
-              </span>
-              <div>
-                <slider floor="10000" ceiling="100000" ng-model-low="search.minPrice" ng-model-high="search.maxPrice"></slider>
-              </div>
+                Дата рождения*  
+                <span class="item-value">
+                  <ionic-datepicker input-obj="datepickerObject">
+                    <a> <i class="icon ion-ios-calendar-outline"></i> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</a>
+                  </ionic-datepicker>
+                </span>  
+            </div>
+
+            <div class="item">
+                Имя по-латински*  
+                <span class="item-value"></span>  
+            </div>
+
+            <div class="item">
+                Фамилия по-латински*  
+                <span class="item-value"></span>  
+            </div>
+            <div class="item">
+                Серия паспорта*  
+                <span class="item-value">-_--_-</span>  
+            </div>
+            <div class="item">
+                Номер паспорта*  
+                <span class="item-value">-_-_:)</span>  
+            </div>
+            <div class="item">
+                Паспорт действителен до*  
+                <span class="item-value"></span>  
+            </div>
+            <div class="item">
+                Когда выдан*  
+                <span class="item-value">
+                <ionic-datepicker input-obj="datepickerObject">
+                    <a> <i class="icon ion-ios-calendar-outline"></i> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</a>
+                </ionic-datepicker></span>  
+            </div>
+            <div class="item">
+                Кем выдан*  
+                <span class="item-value">-_--_-</span>  
+            </div>
+            <div class="item notice">
+                Примечания  
+                <span class="item-value"></span>  
+            </div>
+            <div class="item notice">
+                
+                <span class="item-value"></span>  
             </div>
           </div>
-        </div>
+
+      
 
 
       </div>
