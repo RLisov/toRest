@@ -3,26 +3,28 @@
 
 
 @font-face {
-    font-family: 'Lato Medium';
-    src: url('lato-medium-webfont.eot');
-    src: url('lato-medium-webfont.eot?#iefix') format('embedded-opentype'),
-         url('lato-medium-webfont.woff') format('woff'),
-         url('lato-medium-webfont.ttf') format('truetype');
+    font-family: 'Lato Semibold';
+    src: url('Lato-Semibold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-
 }
-
-
-
 
 @font-face {
     font-family: 'Lato Regular';
-    src: url('lato-regular-webfont.eot');
-    src: url('lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('lato-regular-webfont.woff') format('woff'),
-         url('lato-regular-webfont.ttf') format('truetype');
+    src: url('LatoRegular.eot');
+    src: url('LatoRegular.eot?#iefix') format('embedded-opentype'),
+         url('LatoRegular.woff') format('woff'),
+         url('LatoRegular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+}
 
+@font-face {
+    font-family: 'Lato Light';
+    src: url('LatoLight.eot');
+    src: url('LatoLight.eot?#iefix') format('embedded-opentype'),
+         url('LatoLight.woff') format('woff'),
+         url('LatoLight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }

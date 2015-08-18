@@ -116,7 +116,7 @@ ion-content {
 }
 
 .description .title {
-	font-family: "Lato Medium", sans-serif;
+	font-family: "Lato Semibold", sans-serif;
 	color: #f59e35;
 	font-size: 1.4em;
 	margin-bottom: 0.3em;
@@ -160,14 +160,14 @@ ion-content {
 	line-height: 1.2em;
 	padding: 2px 15px;
 	display: inline-block;
-	font-family: "BebasBold", sans-serif;
+	font-family: "Bebas Bold", sans-serif;
 }
 
 .old-price {
 	padding-top: 2px;
 	font-size: 1em;
 	line-height: 2em;
-	font-family: "BebasRegular", sans-serif;
+	font-family: "Bebas Regular", sans-serif;
 	text-decoration: line-through;
 	text-align: right;
 }
@@ -255,7 +255,7 @@ ion-content {
 }
 
 .blue-badge.small-corners h3 {
-	font-family: "Lato Medium";
+	font-family: "Lato Semibold";
 	font-size: 1em;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -292,7 +292,7 @@ ion-content {
 }
 
 .tourpage .item-radio .price {
-	font-family: "BebasBold";
+	font-family: "Bebas Bold";
 	font-size: 1.2em;
 	line-height: 1em;
 	margin: 0;
