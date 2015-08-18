@@ -1,0 +1,32 @@
+{
+  "name": "jquery.herotabs",
+  "version": "3.0.4",
+  "main": [
+    "dist/jquery.herotabs.js",
+    "dist/jquery.herotabs.min.js"
+  ],
+  "ignore": [
+    "examples",
+    "tests",
+    ".gitignore",
+    "package.json",
+    "README.md",
+    "herotabs.jquery.json",
+    "bower.json",
+    "src",
+    "Gruntfile.js",
+    "gulpfile.js",
+    ".jshintrc",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/simonsmith/jquery.herotabs",
+  "_release": "3.0.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.0.4",
+    "commit": "d910dddf35930ce496aacdc4c3357e13c74d2341"
+  },
+  "_source": "git://github.com/simonsmith/jquery.herotabs.git",
+  "_target": "~3.0.4",
+  "_originalSource": "jquery.herotabs"
+}

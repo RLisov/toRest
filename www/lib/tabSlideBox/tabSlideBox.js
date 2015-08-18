@@ -41,6 +41,7 @@ angular.module('tabSlideBox', [])
 	function($timeout, $window, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 		'use strict';
 
+
 		return {
 			restrict : 'A, E, C',
 			link : function(scope, element, attrs, ngModel) {
@@ -62,9 +63,11 @@ angular.module('tabSlideBox', [])
 				var ionicScrollDelegate = $ionicScrollDelegate;
 				if(handle){
 					ionicScrollDelegate = ionicScrollDelegate.$getByHandle(handle);
+
 				}
 				
 				function renderScrollableTabs(){
+					
 					var iconsDiv = angular.element(ta.querySelector(".tsb-icons")), icons = iconsDiv.find("a"), wrap = iconsDiv[0].querySelector(".tsb-ic-wrp"), totalTabs = icons.length;
 					var scrollDiv = wrap.querySelector(".scroll");
 					
@@ -154,27 +157,34 @@ angular.module('tabSlideBox', [])
 			controller : function($scope, $attrs, $element,$ionicSlideBoxDelegate) {
 				$scope.events = new SimplePubSub();
 				
-				$scope.slideHasChanged = function(index, owner, count){
-					console.log(owner);
-					if (owner == 'tabs') {
-						$scope.events.trigger("slideChange", {"index" : index});
-						if ((index == 1) && (owner=='tabs')) {
-						  $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
-						} else {
-						  $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(true);
-						}
-						$timeout(function(){if($scope.onSlideMove) $scope.onSlideMove({"index" : eval(index)});},100);	
-					}
+				// $scope.slideHasChanged = function(index, owner, count){
+				// 	// console.log(owner);
+				// 	// console.log(index);
+				// 	$ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
+				// 	if (owner == 'tabs') {
+				// 		$scope.events.trigger("slideChange", {"index" : index});
+				// 		if ((index == 1) && (owner=='tabs')) {
+				// 		  $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
+				// 		} else {
+				// 		  $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(true);
+				// 		}
+				// 		$timeout(function(){if($scope.onSlideMove) $scope.onSlideMove({"index" : eval(index)});},100);	
+				// 	}
 					
-					if (owner == 'gallery') {
-						if ((index == count-1) || (index == 0)) {
-							$ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(true);
-						} else {
-							$ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
-						}
-					}
+				// 	if (owner == 'gallery') {
+				// 		if ((index == count-1) || (index == 0)) {
+				// 			$ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(true);
+				// 		} else {
+				// 			$ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
+				// 		}
+				// 	}
 					
 					
+				// };
+
+				$scope.slideHasChanged = function(index){
+					$scope.events.trigger("slideChange", {"index" : index});
+					$timeout(function(){if($scope.onSlideMove) $scope.onSlideMove({"index" : eval(index)});},100);
 				};
 				
 				$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
