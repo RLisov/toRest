@@ -74,7 +74,7 @@
             <div class="item">
               Цена:
               <span class="item-note">
-                от {{search.minPrice}} до {{search.maxPrice}}
+                от {{search.minPrice | currency : '' : 0}} до {{search.maxPrice | currency : '' : 0}}
               </span>
               <div>
                 <slider floor="10000" ceiling="100000" ng-model-low="search.minPrice" ng-model-high="search.maxPrice"></slider>
