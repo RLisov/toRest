@@ -563,6 +563,47 @@ ul.sinie-circle li:before {
 	padding-top: 20px;
 }
 
+.foot {
+	padding: 5px 15px;
+}
+
+.itogo {
+	font-size: 130%;
+}
+
+.anton {
+	font-size: 118%;
+}
+.end-price {
+	font-family: Bebas Bold;
+	font-size: 145%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.red-text {
+	color:red;
+	font-size: 110%;
+}
+
+.buttons-foot {
+	text-align: center;
+}
+
+.blue-clear.button.button-stable {
+	margin: 3px;
+	width: 75%;
+	color:#4e94e1;
+	background-color: transparent;
+	border-radius: 3px;
+	border-color: #4e94e1;
+	font-size: 125%;
+}
+
+.ion-ios-checkmark-outline {
+	font-size: 140%;
+	color:#4e94e1 ;
+}
 /*@media 
 (-webkit-min-device-pixel-ratio: 2) { 
     .tours .card .thumbnail {
