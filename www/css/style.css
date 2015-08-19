@@ -604,6 +604,12 @@ ul.sinie-circle li:before {
 	font-size: 140%;
 	color:#4e94e1 ;
 }
+
+.dogovor {
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 55px;
+}
 /*@media 
 (-webkit-min-device-pixel-ratio: 2) { 
     .tours .card .thumbnail {
