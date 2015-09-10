@@ -83,24 +83,24 @@
 
          <div class="card reserved">
           <div class="list">
-            <div class="item">
-              Пол* 
-              <span class="blue-sex item-value">Мужской</span> 
+            <div class="item" >
+             Пол* 
+            <a ng-click="chooseMale()"><span class="blue-sex item-value">Мужской</span></a>
             </div>
             
 
             <div class="item">
                 Дата рождения*  
                 <span class="item-value">
-                  <ionic-datepicker input-obj="datepickerObject">
-                    <a> <i class="icon ion-ios-calendar-outline"></i> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</a>
+                  <ionic-datepicker input-obj="birthdayDateObject">
+                    <a> <i class="icon ion-ios-calendar-outline"></i> {{birthdayDateObject.inputDate | date:'dd - MMMM - yyyy'}}</a>
                   </ionic-datepicker>
                 </span>  
             </div>
 
             <div class="item">
                 Имя по-латински*  
-                <span class="item-value"></span>  
+               <a ng-click="nameInput()"> <span class="item-value">___</span></a>
             </div>
 
             <div class="item">
@@ -122,8 +122,8 @@
             <div class="item">
                 Когда выдан*  
                 <span class="item-value">
-                <ionic-datepicker input-obj="datepickerObject">
-                    <a> <i class="icon ion-ios-calendar-outline"></i> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</a>
+                <ionic-datepicker input-obj="passportDateObject">
+                    <a> <i class="icon ion-ios-calendar-outline"></i> {{passportDateObject.inputDate | date:'dd - MMMM - yyyy'}}</a>
                 </ionic-datepicker></span>  
             </div>
             <div class="item">

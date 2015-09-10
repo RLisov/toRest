@@ -90,11 +90,12 @@
                 </ion-slide>
               </ion-slide-box>
           </ion-slide>
-          <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); ">
+          <ion-slide disable-scroll="true" style="max-height: calc(100% - 160px); ">
               <!-- MAP -->
-               <div id="map" data-tap-disabled="true" ng-controller="MapCtrl">
+               <div id="map" data-tap-disabled="true" >
                  
                </div>
+                  
                   <ion-footer-bar class="bar-dark">
                       <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate">Find Me</a>
                   </ion-footer-bar>
@@ -141,7 +142,7 @@
           </ion-slide>
           <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); ">
               <!-- GOOGLE -->
-              <a class="button google"> 
+              <a class="button google" onClick="window.open('https://www.google.ru/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#newwindow=1&safe=off&q=azimut','_system','location=no');return false;"> 
               <span class="label-google">Нажмите, чтобы посмотреть дополнительную информацию об отеле в Google</span>
               </a>
           </ion-slide>

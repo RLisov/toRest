@@ -35,7 +35,12 @@ body, .item p {
 	color: white;
 }
 
-.orange-bg button {
+.blue-bg {
+	background-color: #4e94e1;
+	color: white;
+}
+
+.orange-bg button, .blue-bg button {
 	color: white;	
 }
 
@@ -54,6 +59,10 @@ body, .item p {
 
 .bar.bar-header .button.button-clear.back-button {
 	margin-left: 10px;
+}
+
+.bar-footer a {
+	text-align: center;
 }
 
 .bar-footer .button.button-full {
@@ -107,7 +116,7 @@ ion-content {
 }
 
 .description .title {
-	font-family: "Lato Medium", sans-serif;
+	font-family: "Lato Semibold", sans-serif;
 	color: #f59e35;
 	font-size: 1.4em;
 	margin-bottom: 0.3em;
@@ -151,14 +160,14 @@ ion-content {
 	line-height: 1.2em;
 	padding: 2px 15px;
 	display: inline-block;
-	font-family: "BebasBold", sans-serif;
+	font-family: "Bebas Bold", sans-serif;
 }
 
 .old-price {
 	padding-top: 2px;
 	font-size: 1em;
 	line-height: 2em;
-	font-family: "BebasRegular", sans-serif;
+	font-family: "Bebas Regular", sans-serif;
 	text-decoration: line-through;
 	text-align: right;
 }
@@ -246,7 +255,7 @@ ion-content {
 }
 
 .blue-badge.small-corners h3 {
-	font-family: "Lato Medium";
+	font-family: "Lato Semibold";
 	font-size: 1em;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -283,7 +292,7 @@ ion-content {
 }
 
 .tourpage .item-radio .price {
-	font-family: "BebasBold";
+	font-family: "Bebas Bold";
 	font-size: 1.2em;
 	line-height: 1em;
 	margin: 0;
@@ -315,7 +324,50 @@ ion-content {
     content: "\f401";
 }
 
+/*****************************************/
+/*************SEARCH PAGE*****************/
+/*****************************************/
+
+.search .card {
+	margin: 0px 0px 10px;
+	padding: 0 20px;
+}
+
+.search .item {
+	font-size: 1em;
+}
+
+.search .card:first-child {
+	margin-top: 4px;
+}
+
+.search .card .item-note, .search .card .icon {
+	color: #4e94e1;
+}
+
 /*REDEFINE LIBS*/
+slider {
+	margin: 20px 0 10px;
+}
+
+slider span.bar {
+	width: 100%;
+    height: 1px;
+    padding: 0px;
+    background-color: #b6b6b6;
+    z-index: 0;
+    box-shadow: none;
+}
+
+slider span.pointer {
+	background-color: #4e94e1;
+	border: none;
+}
+
+slider span.pointer:after {
+	display: none;
+}
+
 .tabbed-slidebox .tsb-icons {
 	/*background-image: url(../img/background.png);*/
 	background-color: transparent;
@@ -355,6 +407,209 @@ ion-content {
 	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 }
 
+.galery-pic {
+	width: 100%;
+	height: 230px;
+}
+
+.google {
+	line-height: 2;
+	margin-top: 15%;
+	color:white;
+	background-color: #4e94e1;
+	border-radius:3px;
+	font-family: "Lato Regular";
+}
+
+.hotel-wrapper {
+	font-family: "Lato Regular";
+}
+.head-hotel {
+	text-align: left;
+	
+}
+.describe-text {
+	text-align: left;
+	padding: 10px;
+}
+
+.ion-ios-telephone-outline {
+	font-size: 135%;
+	padding: 5px;
+}
+
+.horizontal-sep {
+	width: 95%;
+}
+
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+.align-right {
+	text-align: right;
+}
+
+
+
+/*hide bar*/
+.sample-show-hide {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.sample-show-hide.ng-hide {
+  opacity:0;
+}
+
+
+
+.alignright {
+	color:#4e94e1;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+.label-google {
+	margin: 10px;
+}
+
+.slider-pager .slider-pager-page{
+	position: relative;
+	color: #4e94e1;
+	font-size: 130%;
+}
+
+.flyings {
+	text-align: center;
+	font-size: 140%;
+	font-family: "Lato Light";
+}
+
+.blue-card {
+	color:white;
+	margin: 5px;
+	padding: 2px;
+	text-align: center;
+	background-color: #4e94e1;
+	border-radius: 100px;
+}
+
+.reserved-body {
+	font-family: "Lato Light";
+}
+
+.date-bold {
+	font-family: "Lato Regular"
+}
+
+.card .item {
+	white-space: normal;
+}
+
+.item-icon-right .icon{
+	color:#4e94e1 ;
+}
+
+.ion-ios-plus-outline {
+	color:#4e94e1;
+	font-size: 120%;
+	float:right;
+	padding-right: 15px;
+	padding-bottom: 5px;
+
+}
+
+.reserved {
+	margin: 10px 0px;
+}
+
+
+
+ul.sinie-circle {
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+
+ul.sinie-circle > li { 
+    padding-left: 1em; 
+    text-indent: -.7em;
+}
+
+ul.sinie-circle li:before {
+    content: "• ";
+    color:#4e94e1; /* or whatever color you prefer */
+	font-size: 140%;
+}
+
+
+.item-value {
+	float:right;
+}
+
+.blue-sex {
+	
+	color:#4e94e1; ;
+}
+
+.card .item:last-child {
+	padding-top: 20px;
+}
+
+.foot {
+	padding: 5px 15px;
+}
+
+.itogo {
+	font-size: 130%;
+}
+
+.anton {
+	font-size: 118%;
+}
+.end-price {
+	font-family: Bebas Bold;
+	font-size: 145%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.red-text {
+	color:red;
+	font-size: 110%;
+}
+
+.buttons-foot {
+	text-align: center;
+}
+
+.blue-clear.button.button-stable {
+	margin: 3px;
+	width: 75%;
+	color:#4e94e1;
+	background-color: transparent;
+	border-radius: 3px;
+	border-color: #4e94e1;
+	font-size: 125%;
+}
+
+.ion-ios-checkmark-outline {
+	font-size: 140%;
+	color:#4e94e1 ;
+}
+
+.dogovor {
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 55px;
+}
 /*@media 
 (-webkit-min-device-pixel-ratio: 2) { 
     .tours .card .thumbnail {

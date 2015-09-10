@@ -3,10 +3,11 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox'])
+angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $ionicSlideBoxDelegate) {
   $ionicPlatform.ready(function() {
+    // $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -37,6 +38,13 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
     controller: 'TourpageCtrl'
   })
 
+  .state('reserved', {
+    url: '/reserved',
+    /*abstract: 'true',*/
+    templateUrl: 'templates/reserved.html',
+    controller: 'ReservedCtrl'
+  })
+
 /*  .state('tourpage.main', {
     url: '/main',
     templateUrl: 'templates/tourpage/_main.html',
@@ -53,6 +61,12 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
     url: '/favourites',
     templateUrl: 'templates/favourites.html',
     controller: 'FavouritesCtrl'
+  })
+
+  .state('search', {
+    url: '/search',
+    templateUrl: 'templates/search.html',
+    controller: 'SearchCtrl'
   })
 
 

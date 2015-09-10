@@ -3,11 +3,11 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker'])
+angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova','uiGmapgoogle-maps'])
 
 .run(function($ionicPlatform, $ionicSlideBoxDelegate) {
   $ionicPlatform.ready(function() {
-    $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
+    // $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
