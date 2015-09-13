@@ -160,7 +160,7 @@ angular.module('tabSlideBox', [])
 				// $scope.slideHasChanged = function(index, owner, count){
 				// 	// console.log(owner);
 				// 	// console.log(index);
-				// 	$ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
+				 	// $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
 				// 	if (owner == 'tabs') {
 				// 		$scope.events.trigger("slideChange", {"index" : index});
 				// 		if ((index == 1) && (owner=='tabs')) {

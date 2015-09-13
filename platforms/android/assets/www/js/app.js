@@ -5,8 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova'])
 
-.run(function($ionicPlatform, $ionicSlideBoxDelegate) {
+.run(function($ionicPlatform, $ionicSlideBoxDelegate,$rootScope) {
   $ionicPlatform.ready(function() {
+   
     // $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)

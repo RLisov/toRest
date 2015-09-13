@@ -250,6 +250,9 @@ ion-content {
 	top: -1px;
 }
 
+.rating .ion-android-star-outline {
+	display: none;
+}
 .blue-badge.small-corners {
 	border-radius: 4px;
 }
@@ -327,6 +330,10 @@ ion-content {
 /*****************************************/
 /*************SEARCH PAGE*****************/
 /*****************************************/
+.search {
+	font-family: "Lato Light" ;
+	font-size: 1.3em;
+}
 
 .search .card {
 	margin: 0px 0px 10px;
@@ -335,10 +342,24 @@ ion-content {
 
 .search .item {
 	font-size: 1em;
+	color:inherit;
+}
+
+.search .item-note {
+	font-family: "Lato Regular";
+	font-size: 1em;
 }
 
 .search .card:first-child {
 	margin-top: 4px;
+}
+
+.card.last-search {
+	margin-bottom: 55px;
+}
+
+.angular-google-map-container { 
+  height: 100%; 
 }
 
 .search .card .item-note, .search .card .icon {
@@ -413,8 +434,11 @@ slider span.pointer:after {
 }
 
 .google {
+	padding: 10px;
+	border-color: #4e94e1;
+	max-width: 300px;
 	line-height: 2;
-	margin-top: 15%;
+	margin-top: 25%;
 	color:white;
 	background-color: #4e94e1;
 	border-radius:3px;

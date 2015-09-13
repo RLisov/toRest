@@ -1,0 +1,7 @@
+ <ion-radio ng-repeat="item in sexList"
+                   ng-value="item.value"
+                   ng-model="sexList"
+                   ng-change="sexListChanged(item)"
+                   name="sexList">
+          {{ item.text }}
+        </ion-radio>

@@ -250,6 +250,9 @@ ion-content {
 	top: -1px;
 }
 
+.rating .ion-android-star-outline {
+	display: none;
+}
 .blue-badge.small-corners {
 	border-radius: 4px;
 }

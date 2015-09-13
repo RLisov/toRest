@@ -90,11 +90,12 @@
                 </ion-slide>
               </ion-slide-box>
           </ion-slide>
-          <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); ">
+          <ion-slide disable-scroll="true" style="max-height: calc(100% - 160px); ">
               <!-- MAP -->
-               <div id="map" data-tap-disabled="true" ng-controller="MapCtrl">
+               <div id="map" data-tap-disabled="true" >
                  
                </div>
+                  
                   <ion-footer-bar class="bar-dark">
                       <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate">Find Me</a>
                   </ion-footer-bar>

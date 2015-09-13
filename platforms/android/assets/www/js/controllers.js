@@ -14,20 +14,26 @@ angular.module('toRest.controllers', [])
 	  	touristsCount: 2,
 	  	minPrice: 12990,
 	  	maxPrice: 24990
-	  }
-	})
+	  };
+
+  })
 
 	.controller('FavouritesCtrl', function($scope) {
+
 	  $scope.rate = 3;
 	  $scope.max = 5;
 	})
 
-	.controller('TourpageCtrl', function($scope, $ionicSlideBoxDelegate) {
+	.controller('TourpageCtrl', function($scope,$timeout, $ionicSlideBoxDelegate,$ionicLoading, $compile) {
 	  $scope.rate = 3;
 	  $scope.max = 5;
 	  $scope.choice = "A";
 	  $scope.tabIndex = 0;
 	  
+    $timeout(function() {
+      $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
+    }, 10);
+    
 
 	  $scope.makeFooterVisible = function(index) {
 	  	$scope.tabIndex = index;
@@ -38,65 +44,66 @@ angular.module('toRest.controllers', [])
 	  	// $ionicSlideBoxDelegate.$getByHandle('gallery').slide($index);
 	  	console.log('index gallerry', index);
 	  }
+    
+    // initialize GOOGLE MAP
+ //    function initialize() {
+ //        var myLatlng = new google.maps.LatLng(43.07493,-89.381388);;
+        
+ //        var mapOptions = {
+ //          center: myLatlng,
+ //          zoom: 16,
+ //          mapTypeId: google.maps.MapTypeId.ROADMAP
+ //        };
+ //        var map = new google.maps.Map(document.getElementById("map"),
+ //            mapOptions);
+        
+ //        //Marker + infowindow + angularjs compiled ng-click
+ //        var contentString = "<div><a ng-click='clickTest()'>Click me!</a></div>";
+ //        var compiled = $compile(contentString)($scope);
+
+ //        var infowindow = new google.maps.InfoWindow({
+ //          content: compiled[0]
+ //        });
+
+ //        var marker = new google.maps.Marker({
+ //          position: myLatlng,
+ //          map: map,
+ //          title: 'Uluru (Ayers Rock)'
+ //        });
+
+ //        google.maps.event.addListener(marker, 'click', function() {
+ //          infowindow.open(map,marker);
+ //        });
+
+ //        $scope.map = map;
+ //      }
+ //      google.maps.event.addDomListener(window, 'load', initialize);
+      
+ //      $scope.centerOnMe = function() {
+ //        if(!$scope.map) {
+ //          console.log('me here');
+ //          return;
+ //        }
+
+ //        $scope.loading = $ionicLoading.show({
+ //          content: 'Getting current location...',
+ //          showBackdrop: false
+ //        });
+
+ //        navigator.geolocation.getCurrentPosition(function(pos) {
+ //          $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+ //          $scope.loading.hide();
+ //        }, function(error) {
+ //          alert('Unable to get location: ' + error.message);
+ //        });
+ //      };
+      
+ //      $scope.clickTest = function() {
+ //        alert('Example of infowindow with ng-click')
+ //      };
+
 	})
 
-	.controller('MapCtrl', function($scope, $ionicLoading, $compile) {
-      function initialize() {
-        var myLatlng = new google.maps.LatLng(30.484103,31.236199);
-        
-        var mapOptions = {
-          center: myLatlng,
-          zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map"),
-            mapOptions);
-        
-        //Marker + infowindow + angularjs compiled ng-click
-        var contentString = "<div><a ng-click='clickTest()'>Click me!</a></div>";
-        var compiled = $compile(contentString)($scope);
-
-        var infowindow = new google.maps.InfoWindow({
-          content: compiled[0]
-        });
-
-        var marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title: 'Uluru (Ayers Rock)'
-        });
-
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.open(map,marker);
-        });
-
-        $scope.map = map;
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-      
-      $scope.centerOnMe = function() {
-        if(!$scope.map) {
-          return;
-        }
-
-        $scope.loading = $ionicLoading.show({
-          content: 'Getting current location...',
-          showBackdrop: false
-        });
-
-        navigator.geolocation.getCurrentPosition(function(pos) {
-          $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-          $scope.loading.hide();
-        }, function(error) {
-          alert('Unable to get location: ' + error.message);
-        });
-      };
-      
-      $scope.clickTest = function() {
-        alert('Example of infowindow with ng-click')
-      };
-      
-    })
 	
 	.controller('ReservedCtrl', function($scope,$cordovaDialogs,$ionicPlatform) {
 
@@ -108,6 +115,19 @@ angular.module('toRest.controllers', [])
                 var btnIndex = result.buttonIndex;
               });
         };
+
+        $scope.nameInput = function() { 
+             $cordovaDialogs.prompt('Введите имя', 'title', ['Cancel','Ok'], '')
+              .then(function(result) {
+                var input = result.input1;
+                console.log("input",input);
+                // no button = 0, 'OK' = 1, 'Cancel' = 2
+                var btnIndex = result.buttonIndex;
+
+              });
+        };
+
+
     
     
     //Datepicker
@@ -160,15 +180,13 @@ angular.module('toRest.controllers', [])
 
     var weekDaysList = ["Sun", "Mon", "Tue", "Wed", "thu", "Fri", "Sat"];
 
-    var datePickerCallback = function (val,val2) {
+    var datePickerCallback = function (val) {
       if (typeof(val) === 'undefined') {
         console.log('No date selected');
       } else {
         console.log('Selected date is : ', val);
         $scope.birthdayDateObject.inputDate = val;
-        $scope.passportDateObject.inputDate = val2 ;
-
-        
+              
       }
     };
 
