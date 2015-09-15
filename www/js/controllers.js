@@ -1,25 +1,81 @@
 angular.module('toRest.controllers', [])
 
-	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory) {
+	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory,$http,$state) {
 	  $scope.rate = 3;
 	  $scope.max = 5;
 
-	  $scope.search = {
-	  	country: 0,
-	  	city: 0,
-	  	minDepartureDay: '29.01.2015',
-	  	maxDepartureDay: '29.03.2015',
-	  	minDay: 2,
-	  	maxDay: 9,
-	  	touristsCount: 2,
-	  	minPrice: 12990,
-	  	maxPrice: 24990
-	  };
+    //Datepicker
+    var picked_date = new Date();
 
-    $scope.chooseCountry = function(country) {
-      $rootScope.user.current_country = country;
-      $ionicHistory.goBack();
+    $scope.start_dateObject = {
+      titleLabel: 'Title',  //Optional
+      todayLabel: 'Today',  //Optional
+      closeLabel: 'Close',  //Optional
+      setLabel: 'Set',  //Optional
+      errorMsgLabel : 'Please select time.',    //Optional
+      setButtonType : 'button-assertive',  //Optional
+      inputDate: picked_date,    //Optional
+      mondayFirst: true,    //Optional
+      disabledDates:disabledDates,  //Optional
+      from: new Date(1920, 7, 2),   //Optional
+      to: new Date(2015, 12, 29),    //Optional
+      callback: function (val) {    //Mandatory
+        datePickerCallback(val);
+      }
     };
+
+    
+
+
+
+    var disabledDates = [
+      new Date(1437719836326),
+      new Date(),
+      new Date(2015, 7, 10), //months are 0-based, this is August, 10th!
+      new Date('Wednesday, August 12, 2015'), //Works with any valid Date formats like long format
+      new Date("08-14-2015"), //Short format
+      new Date(1439676000000) //UNIX format
+    ];
+
+    var weekDaysList = ["Sun", "Mon", "Tue", "Wed", "thu", "Fri", "Sat"];
+
+    var datePickerCallback = function (val) {
+      if (typeof(val) === 'undefined') {
+        console.log('No date selected');
+      } else {
+        console.log('Selected date is : ', val);
+        $scope.start_dateObject.inputDate = val;
+              
+      }
+    };
+	
+    $scope.send_search = function() {
+      var data = $rootScope.search;
+      $rootScope.tour = {};
+
+      $http.post('http://onholidays.workplay.in/search/', data).
+          success(function(data, status, headers, config) {
+            $rootScope.tour = data ;
+            console.log($rootScope.tour);
+
+            console.log(status);
+            $state.go('search_results');
+          }).
+          error(function(data, status, headers, config) {
+           console.log(data);
+           
+          });
+      
+    };
+
+
+  })
+
+  .controller('SearchResultsCtrl',function($scope,$rootScope)  {
+    $scope.rate = 3;
+    $scope.max = 5;
+
+    console.log ($rootScope.tour.data[0].pictures[0]);
 
   })
 
@@ -71,9 +127,11 @@ angular.module('toRest.controllers', [])
         };
   })
 
-  .controller('CountryCtrl', function($scope,$http) {
+  .controller('CountryCtrl', function($scope,$http,$rootScope,$ionicHistory) {
 
-    $http.get('http://onholidays.workplay.in/cities/').
+
+
+    $http.get('http://onholidays.workplay.in/countries/').
       success(function(data, status, headers, config) {
          // $scope.countries = $scope.countries.concat(data);
         $scope.countries = data ; 
@@ -83,6 +141,26 @@ angular.module('toRest.controllers', [])
         // called asynchronously if an error occurs
         // or server returns response with an error status.
      });
+
+    $http.get('http://onholidays.workplay.in/cities/').
+      success(function(data, status, headers, config) {
+         // $scope.countries = $scope.countries.concat(data);
+        $scope.cities = data ; 
+      }).
+      error(function(data, status, headers, config) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+     });
+
+    $scope.chooseCountry = function(country) {
+      $rootScope.search.country = country;
+      $ionicHistory.goBack();
+    };
+
+    $scope.chooseCity = function(city) {
+      $rootScope.search.city = city;
+      $ionicHistory.goBack();
+    };
 
     $scope.rate = 3;
     $scope.max = 5;

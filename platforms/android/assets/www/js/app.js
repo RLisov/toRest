@@ -7,6 +7,27 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
 
 .run(function($ionicPlatform, $ionicSlideBoxDelegate,$rootScope) {
   $ionicPlatform.ready(function() {
+
+    $rootScope.reserved = {
+      male:''
+    };
+
+    $rootScope.search = { 
+        country : int,          //индекс страны из базы
+        city: int,              //индекс города из базы
+        start_date : date,      //дата заезда от и
+        end_date : date,        // до
+        days : int ,            //количество ночей
+        tourists :              //количество туристов
+        {
+            adult: int,         //взрослых
+            children: int       //детей до 18 лет
+        },
+        cost : int,             //максимальная цена
+        category : int ,        //уровень отеля, звезды
+        food : int              //качество питания - индекс из базы
+    };
+
    
     // $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -44,6 +65,13 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
     /*abstract: 'true',*/
     templateUrl: 'templates/reserved.html',
     controller: 'ReservedCtrl'
+  })
+
+  .state('country', {
+    url: '/country',
+    /*abstract: 'true',*/
+    templateUrl: 'templates/countries.html',
+    controller: 'CountryCtrl'
   })
 
 /*  .state('tourpage.main', {
