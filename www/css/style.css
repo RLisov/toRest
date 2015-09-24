@@ -28,6 +28,7 @@ body, .item p {
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
+	background-image: url(../img/egypt.jpg)
 }
 
 .orange-bg {
@@ -101,7 +102,7 @@ ion-content {
 }
 
 .tours .card .thumbnail {
-	width: 30vw;
+	width: 30%;
 	padding: 0;
 	border-bottom-left-radius: 2px;
 	border-top-left-radius: 2px;

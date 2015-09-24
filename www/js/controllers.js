@@ -3,162 +3,85 @@ angular.module('toRest.controllers', [])
 	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory,$http,$state) {
 	  $scope.rate = 3;
 	  $scope.max = 5;
-
-    //Datepicker
-    var picked_date = new Date();
-
-    $scope.start_dateObject = {
-      titleLabel: 'Title',  //Optional
-      todayLabel: 'Today',  //Optional
-      closeLabel: 'Close',  //Optional
-      setLabel: 'Set',  //Optional
-      errorMsgLabel : 'Please select time.',    //Optional
-      setButtonType : 'button-assertive',  //Optional
-      inputDate: picked_date,    //Optional
-      mondayFirst: true,    //Optional
-      disabledDates:disabledDates,  //Optional
-      from: new Date(1920, 7, 2),   //Optional
-      to: new Date(2015, 12, 29),    //Optional
-      callback: function (val) {    //Mandatory
-        datePickerCallback(val);
-      }
-    };
-
-    
-
-
-
-    var disabledDates = [
-      new Date(1437719836326),
-      new Date(),
-      new Date(2015, 7, 10), //months are 0-based, this is August, 10th!
-      new Date('Wednesday, August 12, 2015'), //Works with any valid Date formats like long format
-      new Date("08-14-2015"), //Short format
-      new Date(1439676000000) //UNIX format
-    ];
-
-    var weekDaysList = ["Sun", "Mon", "Tue", "Wed", "thu", "Fri", "Sat"];
-
-    var datePickerCallback = function (val) {
-      if (typeof(val) === 'undefined') {
-        console.log('No date selected');
-      } else {
-        console.log('Selected date is : ', val);
-        $scope.start_dateObject.inputDate = val;
-              
-      }
-    };
-	
     $scope.send_search = function() {
       var data = $rootScope.search;
       $rootScope.tour = {};
-
-      $http.post('http://onholidays.workplay.in/search/', data).
-          success(function(data, status, headers, config) {
-            $rootScope.tour = data ;
-            console.log($rootScope.tour);
-
-            console.log(status);
-            $state.go('search_results');
-          }).
-          error(function(data, status, headers, config) {
-           console.log(data);
-           
-          });
-      
+      $http.post($rootScope.baseUrl+'/search/', data).
+        success(function(data, status, headers, config) {
+          $rootScope.tour = data ;
+          /*console.log($rootScope.tour);
+          console.log(status);*/
+          $state.go('search_results');
+        }).
+        error(function(data, status, headers, config) {
+          console.log(data);
+        });
     };
 
+    console.log($rootScope.search.country_origin.id);
 
+    $scope.startDateObject = {
+      titleLabel: 'Дата вылета: с',
+      closeLabel: 'Закрыть',
+      showTodayButton: 'false',
+      setLabel: 'Выбрать',
+      errorMsgLabel : 'Выберите дату',
+      setButtonType : 'button-assertive',
+      mondayFirst: true,
+      callback: function (val) {
+        $rootScope.search.start_date = val;
+      }
+    };
+
+    $scope.endDateObject = {
+      titleLabel: 'Дата вылета: по',
+      closeLabel: 'Закрыть',
+      showTodayButton: 'false',
+      setLabel: 'Выбрать',
+      errorMsgLabel : 'Выберите дату',
+      setButtonType : 'button-assertive',
+      mondayFirst: true,
+      callback: function (val) {
+        $rootScope.search.end_date = val;
+      }
+    };
   })
 
   .controller('SearchResultsCtrl',function($scope,$rootScope)  {
     $scope.rate = 3;
     $scope.max = 5;
-
     console.log ($rootScope.tour.data[0].pictures[0]);
-
   })
 
 	.controller('FavouritesCtrl', function($scope) {
-
 	  $scope.rate = 3;
 	  $scope.max = 5;
 	})
 
-  .directive('ionSearch', function() {
-  var timer;
-        return {
-            restrict: 'E',
-            replace: true,
-            // scope: {
-            //     getData: '&source',
-            //     model: '=?',
-            //     search: '=?filter'
-            // },
-            link: function(scope, element, attrs) {
-                attrs.minLength = attrs.minLength || 0;
-                scope.placeholder = attrs.placeholder || '';
-                scope.search = {value: ''};
-
-                if (attrs.class)
-                    element.addClass(attrs.class);
-
-                if (attrs.source) {
-                    scope.$watch('search.value', function (newValue, oldValue) {
-                        if (newValue.length > attrs.minLength) {
-                            scope.getData({str: newValue}).then(function (results) {
-                                scope.model = results;
-                            });
-                        } else {
-                            scope.model = [];
-                        }
-                    });
-                }
-
-                scope.clearSearch = function() {
-                    scope.search.value = '';
-                };
-            },
-            template: '<div class="item-input-wrapper">' +
-                        '<i class="icon ion-search placeholder-icon"></i>' +
-                        '<input type="search" placeholder="{{placeholder}}" ng-model="search.value" >' +
-                        '<i ng-if="search.value.length > 0" ng-click="clearSearch()" class="icon ion-close-circled placeholder-icon"></i>' +
-                      '</div>'
-        };
-  })
-
   .controller('CountryCtrl', function($scope,$http,$rootScope,$ionicHistory) {
-
-
-
-    $http.get('http://onholidays.workplay.in/countries/').
+    $http.get('http://onholidays.workplay.in/api/countries/').
       success(function(data, status, headers, config) {
-         // $scope.countries = $scope.countries.concat(data);
         $scope.countries = data ; 
         console.log($scope.countries);
       }).
       error(function(data, status, headers, config) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-     });
+    });
 
-    $http.get('http://onholidays.workplay.in/cities/').
+    $http.get('http://onholidays.workplay.in/api/cities/').
       success(function(data, status, headers, config) {
          // $scope.countries = $scope.countries.concat(data);
         $scope.cities = data ; 
       }).
       error(function(data, status, headers, config) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-     });
+    });
 
     $scope.chooseCountry = function(country) {
-      $rootScope.search.country = country;
+      $rootScope.search.country_origin = country; 
       $ionicHistory.goBack();
     };
 
     $scope.chooseCity = function(city) {
-      $rootScope.search.city = city;
+      $rootScope.search.city_origin = city;
       $ionicHistory.goBack();
     };
 
@@ -218,122 +141,66 @@ angular.module('toRest.controllers', [])
 	
 	.controller('ReservedCtrl', function($scope,$rootScope, $cordovaDialogs,$ionicPlatform,$ionicPopup) {
 
-        // $scope.chooseMale = function() { 
-        //      $cordovaDialogs.prompt('msg', 'title', ['btn 1','btn 2'], 'default text')
-        //       .then(function(result) {
-        //         var input = result.input1;
-        //         // no button = 0, 'OK' = 1, 'Cancel' = 2
-        //         var btnIndex = result.buttonIndex;
-        //       });
-        // };
+    $scope.chooseMale = function() {
+      $scope.sexList = [
+        { text: "male", value: "m" },
+        { text: "female", value: "f"}
+      ];
 
-        $scope.chooseMale = function() {
+      $scope.sexListChange = function(item) {
+        console.log("Selected Serverside, text:", item.text, "value:", item.value);
+      };  
+             
+      var myPopup = $ionicPopup.show({
+        templateUrl: 'templates/popup_male.html',
+        title: 'Choose your male',
+        subTitle: 'Please use normal things',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel' },
+          {
+            text: '<b>Ok</b>',
+            type: 'button-positive',
+          }
+        ]
+      });
 
-          $scope.sexList = [
-            { text: "male", value: "m" },
-            { text: "female", value: "f"}
-          ];
+      myPopup.then(function(res) {
+        console.log('Tapped!', res);
+        $rootScope.reserved.male = res;
+      });
+    };
 
-         $scope.sexListChange = function(item) {
-            console.log("Selected Serverside, text:", item.text, "value:", item.value);
-          };  
-                 
+    $scope.nameInput = function() { 
+         $cordovaDialogs.prompt('Введите имя', 'title', ['Cancel','Ok'], '')
+          .then(function(result) {
+            var input = result.input1;
+            console.log("input",input);
+            // no button = 0, 'OK' = 1, 'Cancel' = 2
+            var btnIndex = result.buttonIndex;
 
-          // An elaborate, custom popup
-          var myPopup = $ionicPopup.show({
-
-            templateUrl: 'templates/popup_male.html',
-            title: 'Choose your male',
-            subTitle: 'Please use normal things',
-            scope: $scope,
-            buttons: [
-              { text: 'Cancel' },
-              {
-                text: '<b>Ok</b>',
-                type: 'button-positive',
-              }
-            ]
           });
-
-          myPopup.then(function(res) {
-            console.log('Tapped!', res);
-            $rootScope.reserved.male = res;
-          });
-          
-         };
-
-
-        $scope.nameInput = function() { 
-             $cordovaDialogs.prompt('Введите имя', 'title', ['Cancel','Ok'], '')
-              .then(function(result) {
-                var input = result.input1;
-                console.log("input",input);
-                // no button = 0, 'OK' = 1, 'Cancel' = 2
-                var btnIndex = result.buttonIndex;
-
-              });
-        };
-
-
-    
-    
-    //Datepicker
-    var picked_date = new Date();
+    };
 
 	  $scope.birthdayDateObject = {
-      titleLabel: 'Title',  //Optional
-      todayLabel: 'Today',  //Optional
-      closeLabel: 'Close',  //Optional
-      setLabel: 'Set',  //Optional
-      errorMsgLabel : 'Please select time.',    //Optional
-      setButtonType : 'button-assertive',  //Optional
-      inputDate: picked_date,    //Optional
-      mondayFirst: true,    //Optional
-      disabledDates:disabledDates,  //Optional
-      from: new Date(1920, 7, 2),   //Optional
-      to: new Date(2015, 12, 29),    //Optional
-      callback: function (val) {    //Mandatory
-        datePickerCallback(val);
-      }
-    };
-
-    $scope.passportDateObject = {
-      titleLabel: 'Title',  //Optional
-      todayLabel: 'Today',  //Optional
-      closeLabel: 'Close',  //Optional
-      setLabel: 'Set',  //Optional
-      errorMsgLabel : 'Please select time.',    //Optional
-      setButtonType : 'button-assertive',  //Optional
-      inputDate: picked_date,    //Optional
-      mondayFirst: true,    //Optional
-      disabledDates:disabledDates,  //Optional
-      from: new Date(1920, 7, 2),   //Optional
-      to: new Date(2015, 12, 29),    //Optional
-      callback: function (val) {    //Mandatory
-        datePickerCallback(val);
+      titleLabel: 'День рождения',
+      closeLabel: 'Закрыть',
+      showTodayButton: 'false',
+      setLabel: 'Выбрать',
+      errorMsgLabel : 'Выберите дату',
+      setButtonType : 'button-assertive',
+      mondayFirst: true,
+      callback: function (val) {
+        DatepickerCallback(val);
       }
     };
 
 
-
-    var disabledDates = [
-      new Date(1437719836326),
-      new Date(),
-      new Date(2015, 7, 10), //months are 0-based, this is August, 10th!
-      new Date('Wednesday, August 12, 2015'), //Works with any valid Date formats like long format
-      new Date("08-14-2015"), //Short format
-      new Date(1439676000000) //UNIX format
-    ];
-
-    var weekDaysList = ["Sun", "Mon", "Tue", "Wed", "thu", "Fri", "Sat"];
-
-    var datePickerCallback = function (val) {
+    var DatepickerCallback = function (val) {
       if (typeof(val) === 'undefined') {
-        console.log('No date selected');
+        
       } else {
-        console.log('Selected date is : ', val);
-        $scope.birthdayDateObject.inputDate = val;
-              
+        console.log(val);
       }
     };
 
@@ -342,4 +209,46 @@ angular.module('toRest.controllers', [])
 	.controller('MainCtrl', function($scope) {
 	  $scope.rate = 3;
 	  $scope.max = 5;
-	});
+	})
+
+  .directive('ionSearch', function() {
+    var timer;
+    return {
+        restrict: 'E',
+        replace: true,
+        // scope: {
+        //     getData: '&source',
+        //     model: '=?',
+        //     search: '=?filter'
+        // },
+        link: function(scope, element, attrs) {
+            attrs.minLength = attrs.minLength || 0;
+            scope.placeholder = attrs.placeholder || '';
+            scope.search = {value: ''};
+
+            if (attrs.class)
+                element.addClass(attrs.class);
+
+            if (attrs.source) {
+                scope.$watch('search.value', function (newValue, oldValue) {
+                    if (newValue.length > attrs.minLength) {
+                        scope.getData({str: newValue}).then(function (results) {
+                            scope.model = results;
+                        });
+                    } else {
+                        scope.model = [];
+                    }
+                });
+            }
+
+            scope.clearSearch = function() {
+                scope.search.value = '';
+            };
+        },
+        template: '<div class="item-input-wrapper">' +
+                    '<i class="icon ion-search placeholder-icon"></i>' +
+                    '<input type="search" placeholder="{{placeholder}}" ng-model="search.value" >' +
+                    '<i ng-if="search.value.length > 0" ng-click="clearSearch()" class="icon ion-close-circled placeholder-icon"></i>' +
+                  '</div>'
+    };
+  });

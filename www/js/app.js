@@ -12,24 +12,44 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
       male:''
     };
 
+    $rootScope.baseUrl = 'http://onholidays.workplay.in/api';
+
     $rootScope.search = { 
-        country : "Любая",          //индекс страны из базы
-        city: "Любой",              //индекс города из базы
-        start_date : '29.01.2015',      //дата заезда от и
-        end_date : '15.02.2015',        // до
-        minDays : 3 ,
-        maxDays: 9,            //количество ночей
-        tourists :              //количество туристов
+        country_origin : 
         {
-            adult: 2,         //взрослых
-            children: 1       //детей до 18 лет
+          name: "Выберите страну отправления",
+          id: 0
+        },
+        city_origin :
+        {
+          name: "Выберите город отправления",
+          id: 0
+        },
+        country_destination :
+        {
+          name: "Выберите страну назначения",
+          id: -1
+        },
+        city_destination :
+        {
+          name: "Выберите город назначения",
+          id: -1
+        },
+        start_date : "23.09.2015",
+        end_date : "24.09.2015",
+        minDays : 3,
+        maxDays: 9,
+        tourists :
+        {
+            adult: 2,
+            children: 1
         },
         minCost: 12000,
-        maxCost : 130000,             //максимальная цена
-        category : 3 ,        //уровень отеля, звезды
-        food : 1              //качество питания - индекс из базы
+        maxCost : 130000,
+        cost : 1200,
+        category : 3,
+        food : 1
     };
-
    
     // $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

@@ -12,17 +12,11 @@
         <div class="card">
           <div class="list">
             <a class="item item-icon-right" href="#/country">
-              Выбор страны
-              <span class="item-note">
-               {{search.country.name}}
-              </span>
+              {{search.country_origin.name}}
               <i class="icon ion-ios-arrow-right"></i>
             </a>
-            <a class="item item-icon-right" href="#/city">
-              Выбор города
-              <span class="item-note">
-                {{search.city.name}}
-              </span>
+            <a ng-if="search.country_origin.id > 0" class="item item-icon-right" href="#/city">
+              {{search.city_origin.name}}
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           </div>
@@ -30,21 +24,35 @@
 
         <div class="card">
           <div class="list">
-            <a class="item">
+            <a class="item item-icon-right" href="#/country">
+              {{search.country_destination.name}}
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+            <a ng-if="search.country_destination.id > 0" class="item item-icon-right" href="#/city">
+              {{search.city_destination.name}}
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="list">
+            <div class="item">
               Вылет, с
               <span class="item-note">
-             
-                  <ionic-datepicker input-obj="start_dateObject">
-                    <a> <i class="icon ion-ios-calendar-outline"></i> {{start_dateObject.inputDate | date:'dd - M - yyyy'}}</a>
-                  </ionic-datepicker>
+                <ionic-datepicker input-obj="startDateObject">
+                  <a> <i class="icon ion-ios-calendar-outline"></i> {{search.start_date | date:'dd.MM.yyyy'}}</a>
+                </ionic-datepicker>
               </span>
-            </a>
-            <a class="item">
+            </div>
+            <div class="item">
               Вылет, по
               <span class="item-note">
-                {{search.end_date}}
+                <ionic-datepicker input-obj="endDateObject">
+                  <a> <i class="icon ion-ios-calendar-outline"></i> {{search.end_date | date:'dd.MM.yyyy'}}</a>
+                </ionic-datepicker>
               </span>
-            </a>
+            </div>
 
             <div class="item">
               Количество ночей
@@ -95,12 +103,12 @@
                 {{search.category}}+
               </span>
             </a>
-            <a class="item">
+            <!-- <a class="item">
               Питание:
               <span class="item-note">
                 {{search.food}}
               </span>
-            </a>
+            </a> -->
           </div>
         </div>
         

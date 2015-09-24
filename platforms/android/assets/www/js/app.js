@@ -13,19 +13,41 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
     };
 
     $rootScope.search = { 
-        country : int,          //индекс страны из базы
-        city: int,              //индекс города из базы
-        start_date : date,      //дата заезда от и
-        end_date : date,        // до
-        days : int ,            //количество ночей
+        country_origin : 0,
+        /*{
+          name: "Выберите страну",
+          id: 0
+        },*/
+        city_origin: 0,
+        /*{
+          name: "Выберите город",
+          id: 0
+        },*/
+        country_destination: 0,
+        /*{
+          name: "Выберите страну",
+          id: 0
+        },*/
+        city_destination: 0,
+        /*{
+          name: "Выберите город",
+          id: 0
+        },*/
+        start_date : '29.01.2015',      //дата заезда от и
+        end_date : '15.02.2015',        // до
+        /*minDays : 3,
+        maxDays: 9,*/
+        days: 10,
         tourists :              //количество туристов
         {
-            adult: int,         //взрослых
-            children: int       //детей до 18 лет
+            adult: 2,         //взрослых
+            children: 1       //детей до 18 лет
         },
-        cost : int,             //максимальная цена
-        category : int ,        //уровень отеля, звезды
-        food : int              //качество питания - индекс из базы
+        /*minCost: 12000,
+        maxCost : 130000,  */           
+        cost : 1200,
+        category : 3,        //уровень отеля, звезды
+        food : 1              //качество питания - индекс из базы
     };
 
    
@@ -74,6 +96,13 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
     controller: 'CountryCtrl'
   })
 
+   .state('city', {
+    url: '/city',
+    /*abstract: 'true',*/
+    templateUrl: 'templates/cities.html',
+    controller: 'CountryCtrl'
+  })
+
 /*  .state('tourpage.main', {
     url: '/main',
     templateUrl: 'templates/tourpage/_main.html',
@@ -96,6 +125,12 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
     url: '/search',
     templateUrl: 'templates/search.html',
     controller: 'SearchCtrl'
+  })
+
+  .state('search_results', {
+    url: '/search_results',
+    templateUrl: 'templates/search_results.html',
+    controller: 'SearchResultsCtrl'
   })
 
 

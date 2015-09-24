@@ -93,14 +93,14 @@
                 Дата рождения*  
                 <span class="item-value">
                   <ionic-datepicker input-obj="birthdayDateObject">
-                    <a> <i class="icon ion-ios-calendar-outline"></i> {{birthdayDateObject.inputDate | date:'dd - MMMM - yyyy'}}</a>
+                    <a> <i class="icon ion-ios-calendar-outline"></i> {{birthdayDateObject.inputDate | date:'dd.MM.yyyy'}}</a>
                   </ionic-datepicker>
                 </span>  
             </div>
 
             <div class="item" ng-click="nameInput()">
                 Имя по-латински*  
-               <span class="item-value" ng-model="">Anton</span>
+               <span class="item-value">Anton</span>
             </div>
 
             <div class="item" ng-click="lastnameInput()">
