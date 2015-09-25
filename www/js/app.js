@@ -99,8 +99,8 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
    .state('city', {
     url: '/city',
     /*abstract: 'true',*/
-    templateUrl: 'templates/cities.html',
-    controller: 'CountryCtrl'
+    templateUrl: 'templates/countries.html',
+    controller: 'CitiesCtrl'
   })
 
 /*  .state('tourpage.main', {
