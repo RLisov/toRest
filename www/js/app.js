@@ -18,7 +18,7 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
         country_origin : 
         {
           name: "Выберите страну отправления",
-          id: 0
+          id: 4
         },
         city_origin :
         {
@@ -99,7 +99,7 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
    .state('city', {
     url: '/city',
     /*abstract: 'true',*/
-    templateUrl: 'templates/countries.html',
+    templateUrl: 'templates/cities.html',
     controller: 'CitiesCtrl'
   })
 

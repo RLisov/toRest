@@ -20,9 +20,10 @@ angular.module('toRest.controllers', [])
 
     $scope.cities_href = function() {
       $state.go('city');
+       console.log($rootScope.search.country_origin.id);
     }
 
-    console.log($rootScope.search.country_origin.id);
+    // console.log($rootScope.search.country_origin.id);
 
     $scope.startDateObject = {
       titleLabel: 'Дата вылета: с',
@@ -73,13 +74,11 @@ angular.module('toRest.controllers', [])
 
     $scope.chooseCountry = function(country) {
       $rootScope.search.country_origin = country; 
+
       $ionicHistory.goBack();
     };
 
-    $scope.chooseCity = function(city) {
-      $rootScope.search.city_origin = city;
-      $ionicHistory.goBack();
-    };
+    
 
     $scope.rate = 3;
     $scope.max = 5;
@@ -87,7 +86,7 @@ angular.module('toRest.controllers', [])
 
   .controller('CitiesCtrl', function($scope,$http,$rootScope,$ionicHistory){
 
-    $http.get('http://onholidays.workplay.in/api/cities/', {params: {id:4}}).
+    $http.get('http://onholidays.workplay.in/api/cities/', {params: {country:$rootScope.search.country_origin.id}}).
       success(function(data, status, headers, config) {
          // $scope.countries = $scope.countries.concat(data);
         $scope.cities = data ;
@@ -95,6 +94,11 @@ angular.module('toRest.controllers', [])
       }).
       error(function(data, status, headers, config) {
     });
+
+    $scope.chooseCity = function(city) {
+      $rootScope.search.city_origin = city;
+      $ionicHistory.goBack();
+    };
   })
 
 	.controller('TourpageCtrl', function($scope,$timeout, $ionicSlideBoxDelegate,$ionicLoading, $compile) {

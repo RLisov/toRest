@@ -36,7 +36,7 @@
                 <a href="javascript:;" class="ion-social-google-outline"></a>
             </div>
         </div>
-        <ion-slide-box show-pager="false" delegate-handle="main-tabs" on-slide-changed="slideHasChanged($index, 'tabs'); makeFooterVisible($index);">
+        <ion-slide-box show-pager="false" delegate-handle="main-tabs" on-slide-changed="slideHasChanged($index); makeFooterVisible($index);">
           <ion-slide disable-scroll="true" style="max-height: calc(100% - 200px); ">
             <!-- MAIN PAGE -->
             <ion-scroll style="height: 100%">
@@ -72,7 +72,7 @@
           </ion-slide>
           <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); " >
               <!-- GALLERY -->
-              <ion-slide-box delegate-handle="gallery" class="my-pager" on-slide-changed="slideHasChanged($index, 'gallery', 4)">
+              <ion-slide-box  class="my-pager" >
                 <ion-slide>
                   <img class="galery-pic" src="../img/slide1.jpg" >
                   <div class="label-pic">Standart rest room</div>
