@@ -14,11 +14,12 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
 
     $rootScope.baseUrl = 'http://onholidays.workplay.in/api';
 
+
     $rootScope.search = { 
         country_origin : 
         {
           name: "Выберите страну отправления",
-          id: 4
+          id: 0
         },
         city_origin :
         {
@@ -89,14 +90,28 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
     controller: 'ReservedCtrl'
   })
 
-  .state('country', {
+  .state('countryOrigin', {
     url: '/country',
     /*abstract: 'true',*/
     templateUrl: 'templates/countries.html',
     controller: 'CountryCtrl'
   })
 
-   .state('city', {
+  .state('countryDestination', {
+    url: '/country',
+    /*abstract: 'true',*/
+    templateUrl: 'templates/countries.html',
+    controller: 'CountryCtrl'
+  })
+
+  .state('cityOrigin', {
+    url: '/city',
+    /*abstract: 'true',*/
+    templateUrl: 'templates/cities.html',
+    controller: 'CitiesCtrl'
+  })
+
+   .state('cityDestination', {
     url: '/city',
     /*abstract: 'true',*/
     templateUrl: 'templates/cities.html',

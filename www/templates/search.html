@@ -11,11 +11,11 @@
 
         <div class="card">
           <div class="list">
-            <a class="item item-icon-right" href="#/country">
+            <a class="item item-icon-right" ui-sref="countryOrigin">
               {{search.country_origin.name}}
               <i class="icon ion-ios-arrow-right"></i>
             </a>
-            <a ng-if="search.country_origin.id > 0" class="item item-icon-right" href="#/city">
+            <a ng-if="search.country_origin.id > 0" class="item item-icon-right" ui-sref="cityOrigin">
               {{search.city_origin.name}}
               <i class="icon ion-ios-arrow-right"></i>
             </a>
@@ -24,11 +24,11 @@
 
         <div class="card">
           <div class="list">
-            <a class="item item-icon-right" href="#/country">
+            <a class="item item-icon-right" ui-sref="countryDestination">
               {{search.country_destination.name}}
               <i class="icon ion-ios-arrow-right"></i>
             </a>
-            <a ng-if="search.country_destination.id > -1" class="item item-icon-right" href="#/city">
+            <a ng-if="search.country_destination.id > -1" class="item item-icon-right" ui-sref="cityDestination">
               {{search.city_destination.name}}
               <i class="icon ion-ios-arrow-right"></i>
             </a>
@@ -94,6 +94,17 @@
             </div>
           </div>
         </div>
+        
+        <div class="card">
+          <div class="list">
+            <div class="item" ng-click="chooseFood()">
+              Питание:
+              <span class="item-note">
+               {{search.food}}
+              </span>
+            </div>
+          </div>
+        </div>
 
         <div class="card last-search">
           <div class="list">
@@ -102,6 +113,10 @@
               <span class="item-note">
                 {{search.category}}+
               </span>
+
+              <div>
+                <slider floor="1" ceiling="5" ng-model="search.category"></slider>
+              </div>
             </a>
             <!-- <a class="item">
               Питание:

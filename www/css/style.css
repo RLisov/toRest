@@ -490,7 +490,9 @@ slider span.pointer:after {
   opacity:0;
 }
 
-
+.popup-container .popup {
+	width: 90%;
+}
 
 .alignright {
 	color:#4e94e1;
