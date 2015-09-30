@@ -1,36 +1,56 @@
 angular.module('toRest.controllers', [])
 
-	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory,$http,$state,$ionicPopup) {
+	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory,$http,$state,$ionicPopup,$filter) {
 	  $scope.rate = 3;
 	  $scope.max = 5;
 
     $scope.send_search = function() {
       var data = {
-        country_origin : $rootScope.search.country_origin.id,          //индекс страны из базы
-        city_origin: $rootScope.search.city_origin.id,              //индекс города из базы
-        country_destination : $rootScope.search.country_destination.id,          //индекс страны из базы
-        city_destination: $rootScope.search.city_destination.id,              //индекс города из базы
-        start_date : $rootScope.search.start_date,      //дата заезда от и
-        end_date : $rootScope.search.end_date,        // до
-        minDays : $rootScope.search.minDays,
-        maxDays : $rootScope.search.maxDays,
-        tourists :              //количество туристов
+        country_origin : 4,          
+        city_origin: 1104,              
+        country_destination : 6,          
+        city_destination: -1,              
+        start_date : $scope.format_date($rootScope.search.start_date),      
+        end_date : $scope.format_date($rootScope.search.end_date),        
+        minDays : $rootScope.search.minDays*1,
+        maxDays : $rootScope.search.maxDays*1,
+        tourists :             
         [
-            18           //0..18
+            18           
         ],
-        minCost : $rootScope.search.minCost,
-        maxCost : $rootScope.search.maxCost,             //максимальная цена
-        category : $rootScope.search.category ,        //уровень отеля, звезды, количество звёзд не ниже чем
-        food : 2              //качество питания - индекс из базы
-      }
+        minCost : $rootScope.search.minCost*1,
+        maxCost : $rootScope.search.maxCost*1,             
+        category : $rootScope.search.category*1 ,        
+        food : 2              
+      };
+
+      // var data = {
+      //   country_origin : $rootScope.search.country_origin.id,          
+      //   city_origin: $rootScope.search.city_origin.id,              
+      //   country_destination : $rootScope.search.country_destination.id,          
+      //   city_destination: $rootScope.search.city_destination.id,              
+      //   start_date : $scope.format_date($rootScope.search.start_date),      
+      //   end_date : $scope.format_date($rootScope.search.end_date),        
+      //   minDays : $rootScope.search.minDays*1,
+      //   maxDays : $rootScope.search.maxDays*1,
+      //   tourists :             
+      //   [
+      //       18           
+      //   ],
+      //   minCost : $rootScope.search.minCost*1,
+      //   maxCost : $rootScope.search.maxCost*1,             
+      //   category : $rootScope.search.category*1 ,        
+      //   food : 2              
+      // }
 
      
-      $rootScope.tour = {};
-     
+      $rootScope.tours = {};
+      console.log(data);
+
       $http.post($rootScope.baseUrl+'/search/', data).
         success(function(data, status, headers, config) {
-          $rootScope.tour = data ;
-          console.log($rootScope.tour);
+          $rootScope.tours = data;
+          console.log($rootScope.tours);
           console.log(status);
           $state.go('search_results');
         }).
@@ -72,7 +92,16 @@ angular.module('toRest.controllers', [])
         console.log('Tapped!', item);
       });
     };
-    // console.log($rootScope.search.country_origin.id);
+    
+
+
+    $scope.format_date = function(date) {
+      console.log(date);
+        var curr_date = date.getDate();
+        var curr_month = date.getMonth();
+        var curr_year = date.getFullYear();
+        return (('0' + curr_date).slice(-2))+"."+(('0'+(curr_month*1+1)).slice(-2)) + "." + curr_year ;
+    };
 
     $scope.startDateObject = {
       titleLabel: 'Дата вылета: с',
@@ -104,6 +133,8 @@ angular.module('toRest.controllers', [])
   .controller('SearchResultsCtrl',function($scope,$rootScope)  {
     $scope.rate = 3;
     $scope.max = 5;
+
+
     
   })
 
@@ -173,8 +204,7 @@ angular.module('toRest.controllers', [])
     //google initialize
 
     $scope.map;
-        $scope.markers = [];
-        $scope.markerId = 1;
+       
 
         //Map initialization  
         $timeout(function(){

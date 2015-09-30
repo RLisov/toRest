@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova'])
+angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova','uiGmapgoogle-maps'])
 
 .run(function($ionicPlatform, $ionicSlideBoxDelegate,$rootScope) {
   $ionicPlatform.ready(function() {
@@ -12,44 +12,45 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
       male:''
     };
 
-    $rootScope.search = { 
-        country_origin : 0,
-        /*{
-          name: "Выберите страну",
-          id: 0
-        },*/
-        city_origin: 0,
-        /*{
-          name: "Выберите город",
-          id: 0
-        },*/
-        country_destination: 0,
-        /*{
-          name: "Выберите страну",
-          id: 0
-        },*/
-        city_destination: 0,
-        /*{
-          name: "Выберите город",
-          id: 0
-        },*/
-        start_date : '29.01.2015',      //дата заезда от и
-        end_date : '15.02.2015',        // до
-        /*minDays : 3,
-        maxDays: 9,*/
-        days: 10,
-        tourists :              //количество туристов
-        {
-            adult: 2,         //взрослых
-            children: 1       //детей до 18 лет
-        },
-        /*minCost: 12000,
-        maxCost : 130000,  */           
-        cost : 1200,
-        category : 3,        //уровень отеля, звезды
-        food : 1              //качество питания - индекс из базы
-    };
+    $rootScope.baseUrl = 'http://onholidays.workplay.in/api';
 
+
+    $rootScope.search = { 
+        country_origin : 
+        {
+          name: "Выберите страну отправления",
+          id: 0
+        },
+        city_origin :
+        {
+          name: "Выберите город отправления",
+          id: 0
+        },
+        country_destination :
+        {
+          name: "Выберите страну назначения",
+          id: -1
+        },
+        city_destination :
+        {
+          name: "Выберите город назначения",
+          id: -1
+        },
+        start_date : new Date(),
+        end_date : new Date(),
+        minDays : 3,
+        maxDays: 9,
+        tourists :
+        {
+            adult: 2,
+            children: 1
+        },
+        minCost: 12000,
+        maxCost : 100000,
+        cost : 1200,
+        category : 3,
+        food : 1
+    };
    
     // $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -89,18 +90,32 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
     controller: 'ReservedCtrl'
   })
 
-  .state('country', {
+  .state('countryOrigin', {
     url: '/country',
     /*abstract: 'true',*/
     templateUrl: 'templates/countries.html',
     controller: 'CountryCtrl'
   })
 
-   .state('city', {
+  .state('countryDestination', {
+    url: '/country',
+    /*abstract: 'true',*/
+    templateUrl: 'templates/countries.html',
+    controller: 'CountryCtrl'
+  })
+
+  .state('cityOrigin', {
     url: '/city',
     /*abstract: 'true',*/
     templateUrl: 'templates/cities.html',
-    controller: 'CountryCtrl'
+    controller: 'CitiesCtrl'
+  })
+
+   .state('cityDestination', {
+    url: '/city',
+    /*abstract: 'true',*/
+    templateUrl: 'templates/cities.html',
+    controller: 'CitiesCtrl'
   })
 
 /*  .state('tourpage.main', {

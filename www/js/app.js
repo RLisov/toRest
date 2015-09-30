@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova'])
+angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova','uiGmapgoogle-maps'])
 
 .run(function($ionicPlatform, $ionicSlideBoxDelegate,$rootScope) {
   $ionicPlatform.ready(function() {
@@ -36,8 +36,8 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
           name: "Выберите город назначения",
           id: -1
         },
-        start_date : "23.09.2015",
-        end_date : "24.09.2015",
+        start_date : new Date(),
+        end_date : new Date(),
         minDays : 3,
         maxDays: 9,
         tourists :
@@ -46,7 +46,7 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
             children: 1
         },
         minCost: 12000,
-        maxCost : 130000,
+        maxCost : 100000,
         cost : 1200,
         category : 3,
         food : 1

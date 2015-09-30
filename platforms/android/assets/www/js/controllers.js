@@ -1,28 +1,141 @@
 angular.module('toRest.controllers', [])
 
-	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory,$http,$state) {
+	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory,$http,$state,$ionicPopup,$filter) {
 	  $scope.rate = 3;
 	  $scope.max = 5;
+
     $scope.send_search = function() {
-      var data = $rootScope.search;
-      $rootScope.tour = {};
-      $http.post('http://onholidays.workplay.in/api/search/', data).
+      var data = {
+        country_origin : 4,          
+        city_origin: 1104,              
+        country_destination : 6,          
+        city_destination: -1,              
+        start_date : $scope.format_date($rootScope.search.start_date),      
+        end_date : $scope.format_date($rootScope.search.end_date),        
+        minDays : $rootScope.search.minDays*1,
+        maxDays : $rootScope.search.maxDays*1,
+        tourists :             
+        [
+            18           
+        ],
+        minCost : $rootScope.search.minCost*1,
+        maxCost : $rootScope.search.maxCost*1,             
+        category : $rootScope.search.category*1 ,        
+        food : 2              
+      };
+
+      // var data = {
+      //   country_origin : $rootScope.search.country_origin.id,          
+      //   city_origin: $rootScope.search.city_origin.id,              
+      //   country_destination : $rootScope.search.country_destination.id,          
+      //   city_destination: $rootScope.search.city_destination.id,              
+      //   start_date : $scope.format_date($rootScope.search.start_date),      
+      //   end_date : $scope.format_date($rootScope.search.end_date),        
+      //   minDays : $rootScope.search.minDays*1,
+      //   maxDays : $rootScope.search.maxDays*1,
+      //   tourists :             
+      //   [
+      //       18           
+      //   ],
+      //   minCost : $rootScope.search.minCost*1,
+      //   maxCost : $rootScope.search.maxCost*1,             
+      //   category : $rootScope.search.category*1 ,        
+      //   food : 2              
+      // }
+
+     
+      $rootScope.tours = {};
+      console.log(data);
+
+      $http.post($rootScope.baseUrl+'/search/', data).
         success(function(data, status, headers, config) {
-          $rootScope.tour = data ;
-          /*console.log($rootScope.tour);
-          console.log(status);*/
+          $rootScope.tours = data;
+          console.log($rootScope.tours);
+          console.log(status);
           $state.go('search_results');
         }).
         error(function(data, status, headers, config) {
-          alert(data);
+          console.log(data);
         });
+    };
+
+    $http.get($rootScope.baseUrl+'/food/').
+      success(function(data, status, headers, config) {
+          $rootScope.food = data ;
+          
+        }).
+        error(function(data, status, headers, config) {
+          console.log(data);
+    });
+
+     $scope.chooseFood = function() {
+      
+      $scope.foodListChange = function(item) {
+        console.log("Selected Serverside, text:", item.name, "value:", item.id);
+      };  
+             
+      var myPopup = $ionicPopup.show({
+        templateUrl: 'templates/popup_food.html',
+        title: 'Choose your male',
+        subTitle: 'Please use normal things',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel' },
+          {
+            text: '<b>Ok</b>',
+            type: 'button-positive',
+          }
+        ]
+      });
+
+      myPopup.then(function(item) {
+        console.log('Tapped!', item);
+      });
+    };
+    
+
+
+    $scope.format_date = function(date) {
+      console.log(date);
+        var curr_date = date.getDate();
+        var curr_month = date.getMonth();
+        var curr_year = date.getFullYear();
+        return (('0' + curr_date).slice(-2))+"."+(('0'+(curr_month*1+1)).slice(-2)) + "." + curr_year ;
+    };
+
+    $scope.startDateObject = {
+      titleLabel: 'Дата вылета: с',
+      closeLabel: 'Закрыть',
+      showTodayButton: 'false',
+      setLabel: 'Выбрать',
+      errorMsgLabel : 'Выберите дату',
+      setButtonType : 'button-assertive',
+      mondayFirst: true,
+      callback: function (val) {
+        $rootScope.search.start_date = val;
+      }
+    };
+
+    $scope.endDateObject = {
+      titleLabel: 'Дата вылета: по',
+      closeLabel: 'Закрыть',
+      showTodayButton: 'false',
+      setLabel: 'Выбрать',
+      errorMsgLabel : 'Выберите дату',
+      setButtonType : 'button-assertive',
+      mondayFirst: true,
+      callback: function (val) {
+        $rootScope.search.end_date = val;
+      }
     };
   })
 
   .controller('SearchResultsCtrl',function($scope,$rootScope)  {
     $scope.rate = 3;
     $scope.max = 5;
-    console.log ($rootScope.tour.data[0].pictures[0]);
+
+
+    
   })
 
 	.controller('FavouritesCtrl', function($scope) {
@@ -30,7 +143,7 @@ angular.module('toRest.controllers', [])
 	  $scope.max = 5;
 	})
 
-  .controller('CountryCtrl', function($scope,$http,$rootScope,$ionicHistory) {
+  .controller('CountryCtrl', function($scope,$http,$rootScope,$ionicHistory,$state) {
     $http.get('http://onholidays.workplay.in/api/countries/').
       success(function(data, status, headers, config) {
         $scope.countries = data ; 
@@ -39,29 +152,48 @@ angular.module('toRest.controllers', [])
       error(function(data, status, headers, config) {
     });
 
-    $http.get('http://onholidays.workplay.in/api/cities/').
-      success(function(data, status, headers, config) {
-         // $scope.countries = $scope.countries.concat(data);
-        $scope.cities = data ; 
-      }).
-      error(function(data, status, headers, config) {
-    });
-
     $scope.chooseCountry = function(country) {
-      $rootScope.search.country_destination = country;
-      $rootScope.$apply();
+      // var countryToChange;
+      console.log($state.current.name);
+      if ($state.current.name == 'countryOrigin') {
+        $rootScope.search.country_origin = country;
+      } else {
+        $rootScope.search.country_destination = country;
+      }
+      console.log($rootScope.search);
+      // countryToChange = country; 
       $ionicHistory.goBack();
-    };
-
-    $scope.chooseCity = function(city) {
-      $rootScope.search.city_destination = city;
-      $rootScope.$apply();
-      $ionicHistory.goBack();
-    };
+    };    
 
     $scope.rate = 3;
     $scope.max = 5;
   })
+
+  .controller('CitiesCtrl', function($scope,$http,$rootScope,$ionicHistory,$state){
+    var countryId = ($state.current.name == 'cityOrigin') ? $rootScope.search.country_origin.id : $rootScope.search.country_destination.id
+    $http.get('http://onholidays.workplay.in/api/cities/', {params: {country:countryId}}).
+      success(function(data, status, headers, config) {
+         // $scope.countries = $scope.countries.concat(data);
+        $scope.cities = data ;
+        console.log($scope.cities) 
+      }).
+      error(function(data, status, headers, config) {
+    });
+
+    $scope.chooseCity = function(city) {
+      // var countryToChange;
+      console.log($state.current.name);
+      if ($state.current.name == 'cityOrigin') {
+        $rootScope.search.city_origin = city;
+      } else {
+        $rootScope.search.city_destination = city;
+      }
+      console.log($rootScope.search);
+      // countryToChange = country; 
+      $ionicHistory.goBack();
+    }; 
+
+  })   
 
 	.controller('TourpageCtrl', function($scope,$timeout, $ionicSlideBoxDelegate,$ionicLoading, $compile) {
 	  $scope.rate = 3;
@@ -72,8 +204,7 @@ angular.module('toRest.controllers', [])
     //google initialize
 
     $scope.map;
-        $scope.markers = [];
-        $scope.markerId = 1;
+       
 
         //Map initialization  
         $timeout(function(){
@@ -102,7 +233,7 @@ angular.module('toRest.controllers', [])
 	  $scope.makeFooterVisible = function(index) {
 	  	$scope.tabIndex = index;
 	  	console.log($scope.tabIndex);
-	  }
+	  };
 
 	  $scope.gallerySlider = function(index) {
 	  	// $ionicSlideBoxDelegate.$getByHandle('gallery').slide($index);
