@@ -4,13 +4,13 @@
     <ion-content has-subheader="false" class="tourpage" scroll="false">
       <div class="head">
         <div class="row">
-          <div class="thumbnail" style="background-image: url(../img/egypt.jpg)"></div>
+          <div class="thumbnail" ng-style="{'background-image':'url({{tour.pictures[0]}})'}"></div>
           <div class="col description">
             <div class="item">
               <div class="row">
                 <div class="col col-66">
                   <p class="title">Египет</p>
-                  <p class="hotel">Hotel Azimut</p>
+                  <p class="hotel">{{tour.general.hotel}}</p>
                   <rating readOnly="true" ng-model="rate" max="5"></rating>
                 </div>
                 <div class="col col-33">
@@ -53,41 +53,23 @@
                   </div>
                 </div>
               </a>
-              <ion-radio ng-model="choice" ng-value="'A'">
-                <div class="price">39.900 RUB</div>
-                <p class="description food">Питание: All Inclusive</p>
-                <p class="description room">Standart Room (2 взр.)</p>
+              <ion-radio ng-model="choice" ng-value="'A'" ng-repeat="tour in tours.data | orderBy:'variants[0].cost'">
+                <div class="price">{{tour.variants[0].cost}} RUB</div>
+                <p class="description food">Питание: {{tour.variants[0].food}}</p>
+                <p class="description room">{{tour.variants[0].room}}</p>
               </ion-radio>
-              <ion-radio ng-model="choice" ng-value="'B'">
-                <div class="price">39.900 RUB</div>
-                <p class="description food">Питание: All Inclusive</p>
-                <p class="description room">Standart Room (2 взр.)</p>
-              </ion-radio>
-              <ion-radio ng-model="choice" ng-value="'C'">
-                <div class="price">39.900 RUB</div>
-                <p class="description food">Питание: All Inclusive</p>
-                <p class="description room">Standart Room (2 взр.)</p>
-              </ion-radio>
+             
             </ion-scroll>
           </ion-slide>
           <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); " >
               <!-- GALLERY -->
-              <ion-slide-box  class="my-galery" >
-                <ion-slide>
-                  <img class="galery-pic" src="../img/slide1.jpg" >
+              <ion-slide-box  class="my-galery" show-pager="false">
+                <ion-slide ng-repeat="pic in tour.pictures">
+                  <div class="galery-conteiner" ng-style="{'background-image':'url({{pic}})'}"></div>
                   <div class="label-pic">Standart rest room</div>
                 </ion-slide>
                 <ion-slide >
-                  <img src="../img/slide2.jpg" class="galery-pic" >
-                 <div class="label-pic">Standart rest room</div>
-                </ion-slide>
-                <ion-slide>
-                  <img src="../img/slide3.jpg" class="galery-pic" >
-                  <div class="label-pic">Standart rest room</div>
-                </ion-slide>
-                <ion-slide>
-                  <div class="label-pic">Standart rest room</div>
-                </ion-slide>
+                  
               </ion-slide-box>
           </ion-slide>
           <ion-slide disable-scroll="true" style="max-height: calc(100% - 160px); ">
@@ -106,7 +88,7 @@
                   Описание отеля:
                 </div>
                 <div class="describe-text">
-                  Небольшой отель, расположен в 50 м от моря, в 700 м от центра города Каир. Отель состоит из одного 7-ми этажного здания.Внимание! Отель не размещает одиноких мужчин.
+                  {{tour.general.descritption}}
                 </div>
 
                 <hr class="horizontal-sep">
@@ -118,7 +100,7 @@
 
                 <div class="padding align-right ">
                   <p class="alignleft">Тел.:</br>Факс:</br>Web:</p>
-                  <p class="alignright">+90(252)412-38-29</br>+90(252)412-38-29</br>www.sonnenhotelmarmaris.com</p>
+                  <p class="alignright">{{tour.contacts.phone[0]}}</br>{{tour.contacts.fax[0]}}</br>{{tour.contacts.site[0]}}</p>
                 </div>
 
                 <hr class="horizontal-sep">

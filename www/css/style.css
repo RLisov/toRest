@@ -31,6 +31,13 @@ body, .item p {
 	background-image: url(../img/egypt.jpg)
 }
 
+.galery-conteiner {
+	height: 250px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
 .orange-bg {
 	background-color: #e8a765;
 	color: white;
@@ -473,8 +480,8 @@ slider span.pointer:after {
 }
 
 .horizontal-sep {
-	width: 90%;
-	margin-top: -13px;
+	width: 95%;
+	
 }
 
 .alignleft {

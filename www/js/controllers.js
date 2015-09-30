@@ -62,34 +62,32 @@ angular.module('toRest.controllers', [])
     $http.get($rootScope.baseUrl+'/food/').
       success(function(data, status, headers, config) {
           $rootScope.food = data ;
+          console.log($rootScope.food);
           
         }).
         error(function(data, status, headers, config) {
           console.log(data);
     });
 
+     
      $scope.chooseFood = function() {
-      
-      $scope.foodListChange = function(item) {
-        console.log("Selected Serverside, text:", item.name, "value:", item.id);
-      };  
              
       var myPopup = $ionicPopup.show({
         templateUrl: 'templates/popup_food.html',
-        title: 'Choose your male',
-        subTitle: 'Please use normal things',
+        title: '<h4>Выберите питание</h4>',
         scope: $scope,
         buttons: [
-          { text: 'Cancel' },
+          { text: 'Отмена' },
           {
-            text: '<b>Ok</b>',
+            text: '<b>Ок</b>',
             type: 'button-positive',
           }
         ]
       });
 
       myPopup.then(function(item) {
-        console.log('Tapped!', item);
+        console.log($scope.search);
+         console.log("picked "+item);
       });
     };
     
@@ -134,8 +132,14 @@ angular.module('toRest.controllers', [])
     $scope.rate = 3;
     $scope.max = 5;
 
-
     
+    var ko = Math.floor(Math.random() *(20-10 + 1) + 10); 
+
+    $scope.high_cost = function(cost) {
+      var result = (cost/100)*ko + cost*1;
+      return Math.floor(result);
+    };
+
   })
 
 	.controller('FavouritesCtrl', function($scope) {
@@ -195,7 +199,7 @@ angular.module('toRest.controllers', [])
 
   })   
 
-	.controller('TourpageCtrl', function($scope,$timeout, $ionicSlideBoxDelegate,$ionicLoading, $compile) {
+	.controller('TourpageCtrl', function($scope,$timeout, $ionicSlideBoxDelegate,$ionicLoading, $compile,$stateParams,$rootScope) {
 	  $scope.rate = 3;
 	  $scope.max = 5;
 	  $scope.choice = "A";
@@ -238,7 +242,9 @@ angular.module('toRest.controllers', [])
 	  $scope.gallerySlider = function(index) {
 	  	// $ionicSlideBoxDelegate.$getByHandle('gallery').slide($index);
 	  	console.log('index gallerry', index);
-	  }
+	  };
+
+    $scope.tour = $rootScope.tours.data[$stateParams.tourId];
     
    
 	})
@@ -248,8 +254,8 @@ angular.module('toRest.controllers', [])
 
     $scope.chooseMale = function() {
       $scope.sexList = [
-        { text: "male", value: "m" },
-        { text: "female", value: "f"}
+        { text: "Мужской", value: "m" },
+        { text: "Женский", value: "f"}
       ];
 
       $scope.sexListChange = function(item) {

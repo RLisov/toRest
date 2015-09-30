@@ -77,7 +77,7 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
   })
 
   .state('tourpage', {
-    url: '/tourpage',
+    url: '/tourpage/:tourId',
     /*abstract: 'true',*/
     templateUrl: 'templates/tourpage.html',
     controller: 'TourpageCtrl'
@@ -117,6 +117,8 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
     templateUrl: 'templates/cities.html',
     controller: 'CitiesCtrl'
   })
+
+
 
 /*  .state('tourpage.main', {
     url: '/main',

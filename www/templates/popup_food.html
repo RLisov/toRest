@@ -1,7 +1,6 @@
  <ion-radio ng-repeat="item in food"
-                   ng-value="item.value"
-                   ng-model="sexList"
-                   ng-change="foodListChanged(item)"
+                   ng-value="item.id"
+                   ng-model="search.food"
                    name="sexList">
           {{ item.name }}
         </ion-radio>
