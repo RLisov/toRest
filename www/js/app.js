@@ -49,8 +49,11 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
         maxCost : 100000,
         cost : 1200,
         category : 3,
-        food : 1
+        food : "Не выбрано"
     };
+
+    $rootScope.tour = { 
+    }
    
     // $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

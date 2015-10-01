@@ -6,7 +6,7 @@
       		<p class="title">{{tour.city}}</p>
       		<p class="hotel">{{tour.general.hotel}}</p>
       		<rating readOnly="true" ng-model="tour.general.category" max="5"></rating>
-      		<p class="during-time">с {{tour.date}} на 5 ночей</p>
+      		<p class="during-time">с {{tour.date}} на {{tour.duration}} ночей</p>
       		<span class="row prices">
       			<span class="col col-66">
       				<div class="blue-badge new-price">{{tour.variants[0].cost}} РУБ</div>

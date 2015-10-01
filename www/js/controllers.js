@@ -86,6 +86,7 @@ angular.module('toRest.controllers', [])
       });
 
       myPopup.then(function(item) {
+        
         console.log($scope.search);
          console.log("picked "+item);
       });
@@ -204,6 +205,19 @@ angular.module('toRest.controllers', [])
 	  $scope.max = 5;
 	  $scope.choice = "A";
 	  $scope.tabIndex = 0;
+
+    $scope.startDateObject = {
+      titleLabel: 'Дата вылета: с',
+      closeLabel: 'Закрыть',
+      showTodayButton: 'false',
+      setLabel: 'Выбрать',
+      errorMsgLabel : 'Выберите дату',
+      setButtonType : 'button-assertive',
+      mondayFirst: true,
+      callback: function (val) {
+        $rootScope.search.start_date = val;
+      }
+    };
 	  
     //google initialize
 

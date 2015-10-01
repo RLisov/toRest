@@ -147,9 +147,22 @@ ion-content {
 }
 
 .description ul.rating li i {
-	font-size: 1.2em;
+	font-size: 0.9em;
+	color:#e8a765;
 }
 
+.icon-suit {
+	width: 40px;
+	height: 40px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: url(../img/suit.png);
+}
+
+.tourpage .item-radio input:checked ~ .radio-icon.ion-checkmark:before {
+	content: "\f10c";
+}
 
 
 .tours .card .description .prices {
@@ -216,7 +229,7 @@ ion-content {
 }
 
 .tourpage .head .description ul.rating li i {
-	font-size: 1.3em;
+	font-size: 0.9em;
 }
 
 .tourpage .head .item {
@@ -493,6 +506,10 @@ slider span.pointer:after {
 
 .align-right {
 	text-align: right;
+}
+
+.icon-star40 .favourites {
+	font-size: 2em;
 }
 
 

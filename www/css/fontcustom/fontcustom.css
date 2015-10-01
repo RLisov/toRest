@@ -1,0 +1,65 @@
+/*
+  Icon Font: fontcustom
+*/
+
+@font-face {
+  font-family: "fontcustom";
+  src: url("./fontcustom_e6ebb69a18009fa8176c1e169c22d835.eot");
+  src: url("./fontcustom_e6ebb69a18009fa8176c1e169c22d835.eot?#iefix") format("embedded-opentype"),
+       url("./fontcustom_e6ebb69a18009fa8176c1e169c22d835.woff") format("woff"),
+       url("./fontcustom_e6ebb69a18009fa8176c1e169c22d835.ttf") format("truetype"),
+       url("./fontcustom_e6ebb69a18009fa8176c1e169c22d835.svg#fontcustom") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "fontcustom";
+    src: url("./fontcustom_e6ebb69a18009fa8176c1e169c22d835.svg#fontcustom") format("svg");
+  }
+}
+
+[data-icon]:before { content: attr(data-icon); }
+
+[data-icon]:before,
+.icon-bitcoin4:before,
+.icon-check22:before,
+.icon-cinema2:before,
+.icon-event5:before,
+.icon-favourite24:before,
+.icon-google20:before,
+.icon-map_location:before,
+.icon-photo26:before,
+.icon-sleeping:before,
+.icon-squares112:before,
+.icon-star40:before,
+.icon-telephone60:before,
+.icon-trip4:before {
+  display: inline-block;
+  font-family: "fontcustom";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+.icon-bitcoin4:before { content: "\f10b"; }
+.icon-check22:before { content: "\f10c"; }
+.icon-cinema2:before { content: "\f100"; }
+.icon-event5:before { content: "\f101"; }
+.icon-favourite24:before { content: "\f102"; }
+.icon-google20:before { content: "\f103"; }
+.icon-map_location:before { content: "\f104"; }
+.icon-photo26:before { content: "\f105"; }
+.icon-sleeping:before { content: "\f106"; }
+.icon-squares112:before { content: "\f107"; }
+.icon-star40:before { content: "\f108"; }
+.icon-telephone60:before { content: "\f109"; }
+.icon-trip4:before { content: "\f10a"; }
