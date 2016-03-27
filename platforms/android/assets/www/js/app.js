@@ -3,7 +3,8 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova','uiGmapgoogle-maps'])
+angular.module('toRest', ['ionic', 'toRest.controllers', 
+                          'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova'])
 
 .run(function($ionicPlatform, $ionicSlideBoxDelegate,$rootScope) {
   $ionicPlatform.ready(function() {
@@ -49,8 +50,11 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
         maxCost : 100000,
         cost : 1200,
         category : 3,
-        food : 1
+        food : "Не выбрано"
     };
+
+    $rootScope.tour = { 
+    }
    
     // $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -77,7 +81,7 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
   })
 
   .state('tourpage', {
-    url: '/tourpage',
+    url: '/tourpage/:tourId',
     /*abstract: 'true',*/
     templateUrl: 'templates/tourpage.html',
     controller: 'TourpageCtrl'
@@ -117,6 +121,8 @@ angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSli
     templateUrl: 'templates/cities.html',
     controller: 'CitiesCtrl'
   })
+
+
 
 /*  .state('tourpage.main', {
     url: '/main',

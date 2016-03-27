@@ -3,7 +3,8 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('toRest', ['ionic', 'toRest.controllers', 'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova','uiGmapgoogle-maps'])
+angular.module('toRest', ['ionic', 'toRest.controllers', 
+                          'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova'])
 
 .run(function($ionicPlatform, $ionicSlideBoxDelegate,$rootScope) {
   $ionicPlatform.ready(function() {

@@ -25,8 +25,7 @@ module.exports = (grunt) ->
     'grunt-verbosity'
     'grunt-webpack'
     'grunt-angular-architecture-graph'
-    ].forEach (gruntLib) ->
-      grunt.loadNpmTasks gruntLib
+    ].forEach (gruntLib) -> grunt.loadNpmTasks gruntLib
 
   #squishing this file done by moving grunt options out to its own file. This way we can focus on tasks!
   options = require('./grunt/options')(grunt)
@@ -110,9 +109,7 @@ module.exports = (grunt) ->
     grunt.registerTask key, ["fast", "clean:example", "connect:server", basicTask, "watch:all"]
     exampleOpenTasks.push basicTask
 
-  #  allExamplesTaskToRun = ["clean:example", "connect:server"].concat(['open:free-draw-polygons','open:example']).concat ['watch:all']
   allExamplesTaskToRun = ["fast", "clean:example", "connect:server"].concat(exampleOpenTasks).concat ['watch:all']
-
 
   listWithQuotes = (collection, doLog = true) ->
     last = collection.length - 1
@@ -132,5 +129,6 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'allExamples', allExamplesTaskToRun
 
-
+  grunt.registerTask 'server', ["connect:server", "watch:all"]
+  grunt.registerTask 's', 'server'
 #to see all tasks available don't forget "grunt --help" !!!

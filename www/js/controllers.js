@@ -205,6 +205,7 @@ angular.module('toRest.controllers', [])
 	  $scope.max = 5;
 	  $scope.choice = "A";
 	  $scope.tabIndex = 0;
+    $scope.tour = $rootScope.tours.data[$stateParams.tourId];
 
     $scope.startDateObject = {
       titleLabel: 'Дата вылета: с',
@@ -220,27 +221,23 @@ angular.module('toRest.controllers', [])
     };
 	  
     //google initialize
-
     $scope.map;
-       
-
-        //Map initialization  
-        $timeout(function(){
-
-            var latlng = new google.maps.LatLng(35.7042995, 139.7597564);
-            var myOptions = {
-                zoom: 8,
-                center: latlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            $scope.map = new google.maps.Map(document.getElementById("map_canvas"), myOptions); 
-            $scope.overlay = new google.maps.OverlayView();
-            $scope.overlay.draw = function() {}; // empty function required
-            $scope.overlay.setMap($scope.map);
-            $scope.element = document.getElementById('map_canvas');
-            
-
-        },100);
+    console.error('MAP!');
+    //Map initialization  
+    $timeout(function(){
+        var latlng = new google.maps.LatLng(35.7042995, 139.7597564);
+        var myOptions = {
+            zoom: 8,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        $scope.map = new google.maps.Map(document.getElementById("map_canvas"), myOptions); 
+        console.error('MAP: ',$scope.map);
+        $scope.overlay = new google.maps.OverlayView();
+        $scope.overlay.draw = function() {}; // empty function required
+        $scope.overlay.setMap($scope.map);
+        $scope.element = document.getElementById('map_canvas');
+    },100);
 
 
     $timeout(function() {
@@ -252,15 +249,6 @@ angular.module('toRest.controllers', [])
 	  	$scope.tabIndex = index;
 	  	console.log($scope.tabIndex);
 	  };
-
-	  $scope.gallerySlider = function(index) {
-	  	// $ionicSlideBoxDelegate.$getByHandle('gallery').slide($index);
-	  	console.log('index gallerry', index);
-	  };
-
-    $scope.tour = $rootScope.tours.data[$stateParams.tourId];
-    
-   
 	})
 
 	

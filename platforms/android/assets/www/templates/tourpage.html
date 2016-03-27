@@ -4,13 +4,13 @@
     <ion-content has-subheader="false" class="tourpage" scroll="false">
       <div class="head">
         <div class="row">
-          <div class="thumbnail" style="background-image: url(../img/egypt.jpg)"></div>
+          <div class="thumbnail" ng-style="{'background-image':'url({{tour.pictures[0]}})'}"></div>
           <div class="col description">
             <div class="item">
               <div class="row">
                 <div class="col col-66">
                   <p class="title">Египет</p>
-                  <p class="hotel">Hotel Azimut</p>
+                  <p class="hotel">{{tour.general.hotel}}</p>
                   <rating readOnly="true" ng-model="rate" max="5"></rating>
                 </div>
                 <div class="col col-33">
@@ -29,65 +29,50 @@
       <tab-slide-box tab="0">
         <div class="tsb-icons">
             <div class="tsb-ic-wrp ">
-                <a href="javascript:;" class="ion-clipboard"></a>
-                <a href="javascript:;" class="ion-images"></a>
-                <a href="javascript:;" class="ion-map"></a>
-                <a href="javascript:;" class="ion-model-s"></a>
-                <a href="javascript:;" class="ion-social-google-outline"></a>
+                <a href="javascript:;" class="icon-bitcoin4"></a>
+                <a href="javascript:;" class="icon-photo26"></a>
+                <a href="javascript:;" class="icon-map_location"></a>
+                <a href="javascript:;" class="icon-sleeping"></a>
+                <a href="javascript:;" class="icon-google20"></a>
             </div>
         </div>
         <ion-slide-box show-pager="false" delegate-handle="main-tabs" on-slide-changed="slideHasChanged($index); makeFooterVisible($index);">
           <ion-slide disable-scroll="true" style="max-height: calc(100% - 200px); ">
             <!-- MAIN PAGE -->
             <ion-scroll style="height: 100%">
-              <a class="no-decoration" href="#">
+            <ionic-datepicker  input-obj="startDateObject">
+
+                
                 <div class="blue-badge small-corners">
                   <div class="row">
                     <div class="col col-80">
-                      <h3>Заезд 30.01.2015 на 9 ночей</h3>
+                      <h3>Заезд {{search.start_date | date:'dd.MM.yyyy'}} на 9 ночей</h3>
                       <p>нажмите, чтобы изменить дату заезда</p>
                     </div>
                     <div class="col col-20">
-                      <p class="ion-calendar icon"></p>
+                       <p class="icon-event5 icon"></p>
                     </div>
                   </div>
                 </div>
-              </a>
-              <ion-radio ng-model="choice" ng-value="'A'">
-                <div class="price">39.900 RUB</div>
-                <p class="description food">Питание: All Inclusive</p>
-                <p class="description room">Standart Room (2 взр.)</p>
+
+              </ionic-datepicker>
+              <ion-radio ng-model="choice" ng-value="'A'" ng-repeat="tour in tours.data | orderBy:'variants[0].cost'">
+                <div class="price">{{tour.variants[0].cost}} RUB</div>
+                <p class="description food">Питание: {{tour.variants[0].food}}</p>
+                <p class="description room">{{tour.variants[0].room}}</p>
               </ion-radio>
-              <ion-radio ng-model="choice" ng-value="'B'">
-                <div class="price">39.900 RUB</div>
-                <p class="description food">Питание: All Inclusive</p>
-                <p class="description room">Standart Room (2 взр.)</p>
-              </ion-radio>
-              <ion-radio ng-model="choice" ng-value="'C'">
-                <div class="price">39.900 RUB</div>
-                <p class="description food">Питание: All Inclusive</p>
-                <p class="description room">Standart Room (2 взр.)</p>
-              </ion-radio>
+             
             </ion-scroll>
           </ion-slide>
           <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); " >
               <!-- GALLERY -->
-              <ion-slide-box  class="my-galery" >
-                <ion-slide>
-                  <img class="galery-pic" src="../img/slide1.jpg" >
+              <ion-slide-box  class="my-galery" show-pager="false">
+                <ion-slide ng-repeat="pic in tour.pictures">
+                  <div class="galery-conteiner" ng-style="{'background-image':'url({{pic}})'}"></div>
                   <div class="label-pic">Standart rest room</div>
                 </ion-slide>
                 <ion-slide >
-                  <img src="../img/slide2.jpg" class="galery-pic" >
-                 <div class="label-pic">Standart rest room</div>
-                </ion-slide>
-                <ion-slide>
-                  <img src="../img/slide3.jpg" class="galery-pic" >
-                  <div class="label-pic">Standart rest room</div>
-                </ion-slide>
-                <ion-slide>
-                  <div class="label-pic">Standart rest room</div>
-                </ion-slide>
+                  
               </ion-slide-box>
           </ion-slide>
           <ion-slide disable-scroll="true" style="max-height: calc(100% - 160px); ">
@@ -102,29 +87,29 @@
               <ion-scroll style="height: 100%">
               <div class="hotel-wrapper">
                 <div class="head-hotel">
-                  <i class="ion-ios-telephone-outline"></i>
+                  <i class="ion-ios-information-outline"></i>
                   Описание отеля:
                 </div>
                 <div class="describe-text">
-                  Небольшой отель, расположен в 50 м от моря, в 700 м от центра города Каир. Отель состоит из одного 7-ми этажного здания.Внимание! Отель не размещает одиноких мужчин.
+                  {{tour.general.description}}
                 </div>
 
                 <hr class="horizontal-sep">
 
                 <div class="head-hotel">
-                  <i class="ion-ios-telephone-outline"></i>
+                  <i class="icon-telephone60"></i>
                   Контактная информация:
                 </div>
 
                 <div class="padding align-right ">
                   <p class="alignleft">Тел.:</br>Факс:</br>Web:</p>
-                  <p class="alignright">+90(252)412-38-29</br>+90(252)412-38-29</br>www.sonnenhotelmarmaris.com</p>
+                  <p class="alignright">{{tour.contacts.phone[0]}}</br>{{tour.contacts.fax[0]}}</br>{{tour.contacts.site[0]}}</p>
                 </div>
 
                 <hr class="horizontal-sep">
                 
                 <div class="head-hotel">
-                   <i class="ion-ios-telephone-outline"></i>
+                   <i class="icon-squares112"></i>
                   Дополнительная информация:
                 </div>
         

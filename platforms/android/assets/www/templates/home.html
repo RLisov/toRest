@@ -2,13 +2,14 @@
   <!-- The title of the ion-view will be shown on the navbar -->
   <ion-view view-title="Горячие туры">
   	<ion-nav-buttons side="right">
-      <a class="button button-large ion-android-star button-clear favourites" href="#/favourites"></a>
+      <a class="button button-large icon-star40 button-clear favourites" href="#/favourites"></a>
     </ion-nav-buttons>
 
     <ion-content>
     	<div ng-include src="'templates/_tourslist.html'"></div>
   	</ion-content>
   	<ion-footer-bar class="orange-bg">
-  		<button ui-sref="search" class="button ion-home button-full button-clear">&nbsp;Поиск других туров</button>
+
+  		<button ui-sref="search" class="button button-full button-clear"><span class="icon-suit"></span>&nbsp;Поиск других туров</button>
   	</ion-footer-bar>
   </ion-view>

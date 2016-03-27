@@ -74,7 +74,7 @@
         onLeave: '&'
       },
       controller: 'RatingController',
-      template: '<ul class="rating" ng-mouseleave="reset()" ng-keydown="onKeydown($event)">' + '<li ng-repeat="r in range track by $index" ng-click="rate($index + 1)"><i class="icon" ng-class="$index < value && (r.stateOn || \'ion-android-star\') || (r.stateOff || \'ion-android-star-outline\')"></i></li>' + '</ul>',
+      template: '<ul class="rating" ng-mouseleave="reset()" ng-keydown="onKeydown($event)">' + '<li ng-repeat="r in range track by $index" ng-click="rate($index + 1)"><i class="icon" ng-class="$index < value && (r.stateOn || \'icon-star40\') || (r.stateOff || \'ion-android-star-outline\')"></i></li>' + '</ul>',
       replace: true,
       link: function(scope, element, attrs, ctrls) {
         var ngModelCtrl, ratingCtrl;
