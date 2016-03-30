@@ -13,7 +13,8 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
       male:''
     };
 
-    $rootScope.baseUrl = 'http://onholidays.workplay.in/api';
+    //$rootScope.baseUrl = 'http://onholidays.workplay.in/api';
+    $rootScope.baseUrl = 'http://185.43.5.29/api';
 
 
     $rootScope.search = { 

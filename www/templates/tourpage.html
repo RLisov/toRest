@@ -9,7 +9,7 @@
             <div class="item">
               <div class="row">
                 <div class="col col-66">
-                  <p class="title">Египет</p>
+                  <p class="title">{{tour.general.country}}</p>
                   <p class="hotel">{{tour.general.hotel}}</p>
                   <rating readOnly="true" ng-model="rate" max="5"></rating>
                 </div>
@@ -90,8 +90,8 @@
                   <i class="ion-ios-information-outline"></i>
                   Описание отеля:
                 </div>
-                <div class="describe-text">
-                  {{tour.general.description}}
+                <div class="describe-text" ng-bind-html="tour.general.description">
+                  
                 </div>
 
                 <hr class="horizontal-sep">
@@ -123,8 +123,8 @@
           </ion-slide>
           <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); ">
               <!-- GOOGLE -->
-              <a class="button google" onClick="window.open('https://www.google.ru/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#newwindow=1&safe=off&q=azimut','_system','location=no');return false;"> 
-              <span class="label-google">Нажмите, чтобы посмотреть дополнительную информацию об отеле в Google</span>
+              <a class="button google" ng-click="searchGoogle(tour.general.hotel)">
+                <span class="label-google">Нажмите, чтобы посмотреть дополнительную информацию об отеле в Google</span>
               </a>
           </ion-slide>
         </ion-slide-box>

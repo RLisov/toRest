@@ -5,11 +5,30 @@ angular.module('toRest.controllers', [])
 	  $scope.max = 5;
 
     $scope.send_search = function() {
+      // var data = {
+      //   country_origin : 4,          
+      //   city_origin: 1104,              
+      //   country_destination : 6,          
+      //   city_destination: -1,              
+      //   start_date : $scope.format_date($rootScope.search.start_date),
+      //   end_date : $scope.format_date($rootScope.search.end_date),        
+      //   minDays : $rootScope.search.minDays*1,
+      //   maxDays : $rootScope.search.maxDays*1,
+      //   tourists :             
+      //   [
+      //       18           
+      //   ],
+      //   minCost : $rootScope.search.minCost*1,
+      //   maxCost : $rootScope.search.maxCost*1,             
+      //   category : $rootScope.search.category*1 ,        
+      //   food : 2              
+      // };
+
       var data = {
-        country_origin : 4,          
-        city_origin: 1104,              
-        country_destination : 6,          
-        city_destination: -1,              
+        country_origin : $rootScope.search.country_origin.id,          
+        city_origin: $rootScope.search.city_origin.id,              
+        country_destination : $rootScope.search.country_destination.id,          
+        city_destination: $rootScope.search.city_destination.id,              
         start_date : $scope.format_date($rootScope.search.start_date),      
         end_date : $scope.format_date($rootScope.search.end_date),        
         minDays : $rootScope.search.minDays*1,
@@ -22,26 +41,7 @@ angular.module('toRest.controllers', [])
         maxCost : $rootScope.search.maxCost*1,             
         category : $rootScope.search.category*1 ,        
         food : 2              
-      };
-
-      // var data = {
-      //   country_origin : $rootScope.search.country_origin.id,          
-      //   city_origin: $rootScope.search.city_origin.id,              
-      //   country_destination : $rootScope.search.country_destination.id,          
-      //   city_destination: $rootScope.search.city_destination.id,              
-      //   start_date : $scope.format_date($rootScope.search.start_date),      
-      //   end_date : $scope.format_date($rootScope.search.end_date),        
-      //   minDays : $rootScope.search.minDays*1,
-      //   maxDays : $rootScope.search.maxDays*1,
-      //   tourists :             
-      //   [
-      //       18           
-      //   ],
-      //   minCost : $rootScope.search.minCost*1,
-      //   maxCost : $rootScope.search.maxCost*1,             
-      //   category : $rootScope.search.category*1 ,        
-      //   food : 2              
-      // }
+      }
 
      
       $rootScope.tours = {};
@@ -149,7 +149,7 @@ angular.module('toRest.controllers', [])
 	})
 
   .controller('CountryCtrl', function($scope,$http,$rootScope,$ionicHistory,$state) {
-    $http.get('http://onholidays.workplay.in/api/countries/').
+    $http.get($rootScope.baseUrl+'/countries/').
       success(function(data, status, headers, config) {
         $scope.countries = data ; 
         console.log($scope.countries);
@@ -176,7 +176,7 @@ angular.module('toRest.controllers', [])
 
   .controller('CitiesCtrl', function($scope,$http,$rootScope,$ionicHistory,$state){
     var countryId = ($state.current.name == 'cityOrigin') ? $rootScope.search.country_origin.id : $rootScope.search.country_destination.id
-    $http.get('http://onholidays.workplay.in/api/cities/', {params: {country:countryId}}).
+    $http.get($rootScope.baseUrl+'/cities/', {params: {country:countryId}}).
       success(function(data, status, headers, config) {
          // $scope.countries = $scope.countries.concat(data);
         $scope.cities = data ;
@@ -206,6 +206,7 @@ angular.module('toRest.controllers', [])
 	  $scope.choice = "A";
 	  $scope.tabIndex = 0;
     $scope.tour = $rootScope.tours.data[$stateParams.tourId];
+    console.log($scope.tour);
 
     $scope.startDateObject = {
       titleLabel: 'Дата вылета: с',
@@ -249,6 +250,10 @@ angular.module('toRest.controllers', [])
 	  	$scope.tabIndex = index;
 	  	console.log($scope.tabIndex);
 	  };
+
+    $scope.searchGoogle = function(request) {
+      window.open('https://www.google.ru/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#newwindow=1&safe=off&q='+request,'_system','location=no');
+    }
 	})
 
 	
