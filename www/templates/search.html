@@ -74,9 +74,7 @@
               <span class="item-note">
                 {{search.tourists.adult}}
               </span>
-             
-                <slider floor="1" ceiling="10" ng-model="search.tourists.adult"></slider>
-           
+              <slider floor="1" ceiling="10" ng-model="search.tourists.adult"></slider>
             </div>
           </div>
         </div>
@@ -89,7 +87,7 @@
                 от {{search.minCost | currency : '' : 0}} до {{search.maxCost | currency : '' : 0}}
               </span>
               <div>
-                <slider floor="10000" ceiling="100000" ng-model-low="search.minCost" ng-model-high="search.maxCost"></slider>
+                <slider floor="10000" ceiling="300000" ng-model-low="search.minCost" ng-model-high="search.maxCost"></slider>
               </div>
             </div>
           </div>

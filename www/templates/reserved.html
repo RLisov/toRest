@@ -1,10 +1,4 @@
-
-  <!-- The title of the ion-view will be shown on the navbar -->
   <ion-view view-title="Забронировать">
-  	<ion-nav-buttons side="right">
-      <!-- <button class="button button-large ion-android-star button-clear favourites"></button> -->
-    </ion-nav-buttons>
-
     <ion-content class="reserved-body">
       <div class="tourpage">
       <div class="head">
@@ -13,18 +7,10 @@
           <div class="col description">
             <div class="item">
               <div class="row">
-                <div class="col col-66">
+                <div class="col">
                   <p class="title">Египет</p>
                   <p class="hotel">Hotel Azimut</p>
                   <rating readOnly="true" ng-model="rate" max="5"></rating>
-                </div>
-                <div class="col col-33">
-                  <div class="tabs tabs-icon-top">
-                    <a class="tab-item">
-                      <i class="icon ion-android-star-outline"></i>
-                      В избранное
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>
@@ -83,57 +69,60 @@
 
          <div class="card reserved">
           <div class="list">
-            <div class="item" >
-             Пол* 
-            <a ng-click="chooseMale()"><span class="blue-sex item-value">Мужской</span></a>
-            </div>
-            
+            <a class="item item-icon-right" ui-sref="citizenship">
+              {{reserved.citizenship.name || "Выберите страну гражданства"}}
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
 
             <div class="item">
-                Дата рождения*  
-                <span class="item-value">
-                  <ionic-datepicker input-obj="birthdayDateObject">
-                    <a> <i class="icon ion-ios-calendar-outline"></i> {{birthdayDateObject.inputDate | date:'dd.MM.yyyy'}}</a>
-                  </ionic-datepicker>
-                </span>  
+              Пол* 
+              <a ng-click="chooseMale()">
+                <span class="blue-sex item-value"> {{ sexLabel[reserved.male] || "Выберите пол" }}</span>
+              </a>
             </div>
 
-            <div class="item" ng-click="nameInput()">
-                Имя по-латински*  
-               <span class="item-value">Anton</span>
+            <div class="item">
+              Имя по-латински*  
+              <span class="item-value">
+                <input class="item-input" type="text" ng-model="reserved.first_name">
+              </span>
             </div>
 
             <div class="item" ng-click="lastnameInput()">
-                Фамилия по-латински*  
-                <span class="item-value">Kuzan</span>  
+              Фамилия по-латински*  
+              <span class="item-value">
+                <input class="item-input" type="text" ng-model="reserved.last_name">
+              </span>  
             </div>
+
             <div class="item">
                 Серия паспорта*  
-                <span class="item-value">3304</span>  
+                <span class="item-value">
+                  <input class="item-input" type="text" ng-model="reserved.passport_serial">
+                </span>  
             </div>
             <div class="item">
                 Номер паспорта*  
-                <span class="item-value">511239</span>  
+                <span class="item-value">
+                  <input class="item-input" type="text" ng-model="reserved.passport_number">
+                </span>  
             </div>
             <div class="item">
                 Паспорт действителен до*  
-                <span class="item-value">25.05.2016</span>  
+                <span class="item-value">
+                <ionic-datepicker input-obj="passportTillObject">
+                  <a> <i class="icon ion-ios-calendar-outline"></i> {{reserved.passport_till | date:'dd.MM.yyyy'}}</a>
+                </ionic-datepicker>
+              </span>
             </div>
+
             <div class="item">
-                Когда выдан*  
-                <span class="item-value">25.05.2010</span>
-            </div>
-            <div class="item">
-                Кем выдан*  
-                <span class="item-value">МФРФР</span>  
-            </div>
-            <div class="item notice">
-                Примечания  
-                <span class="item-value"></span>  
-            </div>
-            <div class="item notice">
-                
-                <span class="item-value"></span>  
+              Дата рождения*  
+              <span class="item-value">
+                <ionic-datepicker input-obj="birthdayDateObject">
+                  <a> <i class="icon ion-ios-calendar-outline"></i> {{reserved.birthday | date:'dd.MM.yyyy'}}</a>
+                </ionic-datepicker>
+              </span>  
             </div>
           </div>
       </div>
@@ -165,7 +154,7 @@
 
 	  </ion-content>
 	  <ion-footer-bar class="blue-bg">
-            <button ng-click="" class="button button-full button-clear">Забронировать</button>
+      <button ng-click="" class="button button-full button-clear">Забронировать</button>
     </ion-footer-bar>
     
   </ion-view>

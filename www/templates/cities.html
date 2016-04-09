@@ -1,21 +1,13 @@
-
 <ion-view view-title="Выберите город">
-    <ion-nav-buttons side="right">
-      <!-- <a class="button button-large ion-android-star button-clear favourites" href="#/favourites"></a> -->
-    </ion-nav-buttons>
-
-	
 	<ion-content>
-
     <div class="bar bar-header item-input-inset">
       <ion-search class="search_input" placeholder="Поиск" filter="search"></ion-search>
     </div>
 
     <ion-list>
-          <ion-item ng-repeat="city in cities | filter:search.value" ng-click="chooseCity(city)">
-           {{city.name}}
-        </ion-item>
-      </ion-list>
-  
+      <ion-item ng-repeat="city in cities | filter:search.value" ng-click="chooseCity(city)">
+        {{city.name}}
+      </ion-item>
+    </ion-list>
 	</ion-content>
 </ion-view>

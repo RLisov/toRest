@@ -6,8 +6,17 @@
 angular.module('toRest', ['ionic', 'toRest.controllers', 
                           'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova'])
 
-.run(function($ionicPlatform, $ionicSlideBoxDelegate,$rootScope) {
+.run(function($ionicPlatform, $ionicSlideBoxDelegate,$rootScope,$ionicPopup) {
   $ionicPlatform.ready(function() {
+
+    $rootScope.showAlert = function(title, message) {
+      $ionicPopup.alert({
+        title: title,
+        content: message
+      }).then(function(res) {
+        
+      });
+    };
 
     $rootScope.reserved = {
       male:''
@@ -17,7 +26,7 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
     $rootScope.baseUrl = 'http://185.43.5.29/api';
 
 
-    $rootScope.search = { 
+    $rootScope.reset_search = { 
         country_origin : 
         {
           name: "Выберите страну отправления",
@@ -53,13 +62,11 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
         category : 3,
         food : "Не выбрано"
     };
+    $rootScope.search = $rootScope.reset_search;
 
     $rootScope.tour = { 
     }
    
-    // $ionicSlideBoxDelegate.$getByHandle('main-tabs').enableSlide(false);
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -83,64 +90,44 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
 
   .state('tourpage', {
     url: '/tourpage/:tourId',
-    /*abstract: 'true',*/
     templateUrl: 'templates/tourpage.html',
     controller: 'TourpageCtrl'
   })
 
   .state('reserved', {
     url: '/reserved',
-    /*abstract: 'true',*/
     templateUrl: 'templates/reserved.html',
     controller: 'ReservedCtrl'
   })
 
+  .state('citizenship', {
+    url: '/country',
+    templateUrl: 'templates/countries.html',
+    controller: 'CountryCtrl'
+  })
+
   .state('countryOrigin', {
     url: '/country',
-    /*abstract: 'true',*/
     templateUrl: 'templates/countries.html',
     controller: 'CountryCtrl'
   })
 
   .state('countryDestination', {
     url: '/country',
-    /*abstract: 'true',*/
     templateUrl: 'templates/countries.html',
     controller: 'CountryCtrl'
   })
 
   .state('cityOrigin', {
     url: '/city',
-    /*abstract: 'true',*/
     templateUrl: 'templates/cities.html',
     controller: 'CitiesCtrl'
   })
 
    .state('cityDestination', {
     url: '/city',
-    /*abstract: 'true',*/
     templateUrl: 'templates/cities.html',
     controller: 'CitiesCtrl'
-  })
-
-
-
-/*  .state('tourpage.main', {
-    url: '/main',
-    templateUrl: 'templates/tourpage/_main.html',
-    controller: 'TourpageCtrl'
-  })
-
-  .state('tourpage.gallery', {
-    url: '/gallery',
-    templateUrl: 'templates/tourpage/_gallery.html',
-    controller: 'TourpageCtrl'
-  })*/
-
-  .state('favourites', {
-    url: '/favourites',
-    templateUrl: 'templates/favourites.html',
-    controller: 'FavouritesCtrl'
   })
 
   .state('search', {

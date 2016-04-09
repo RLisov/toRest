@@ -596,6 +596,13 @@ slider span.pointer:after {
 	margin: 10px 0px;
 }
 
+.item-input {
+  text-align: right;
+  height: 20px !important;
+  font-size: 16px !important;
+  font-weight: 100;
+  font-family: "Lato Light";
+}
 
 
 ul.sinie-circle {

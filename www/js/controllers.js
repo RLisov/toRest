@@ -1,10 +1,13 @@
 angular.module('toRest.controllers', [])
 
-	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory,$http,$state,$ionicPopup,$filter) {
+	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory,$http,$state,$ionicPopup,$filter,$ionicLoading) {
 	  $scope.rate = 3;
 	  $scope.max = 5;
 
     $scope.send_search = function() {
+      $ionicLoading.show({
+        showBackdrop: false
+      });
       // var data = {
       //   country_origin : 4,          
       //   city_origin: 1104,              
@@ -35,7 +38,7 @@ angular.module('toRest.controllers', [])
         maxDays : $rootScope.search.maxDays*1,
         tourists :             
         [
-            18           
+          18           
         ],
         minCost : $rootScope.search.minCost*1,
         maxCost : $rootScope.search.maxCost*1,             
@@ -49,29 +52,33 @@ angular.module('toRest.controllers', [])
 
       $http.post($rootScope.baseUrl+'/search/', data).
         success(function(data, status, headers, config) {
+          $ionicLoading.hide();
           $rootScope.tours = data;
           console.log($rootScope.tours);
           console.log(status);
-          $state.go('search_results');
+          if ($rootScope.tours.status != 'fail') {
+            $state.go('search_results');
+          } else {
+            $rootScope.showAlert('Неудачно!', $rootScope.tours.data.text);
+          }
         }).
         error(function(data, status, headers, config) {
+          $rootScope.showAlert('Неудачно!','Ошибка в ответе сервера');
           console.log(data);
         });
     };
 
     $http.get($rootScope.baseUrl+'/food/').
-      success(function(data, status, headers, config) {
-          $rootScope.food = data ;
-          console.log($rootScope.food);
-          
-        }).
-        error(function(data, status, headers, config) {
-          console.log(data);
+    success(function(data, status, headers, config) {
+      $rootScope.food = data ;
+      console.log($rootScope.food);
+    }).
+    error(function(data, status, headers, config) {
+      console.log(data);
     });
 
      
-     $scope.chooseFood = function() {
-             
+    $scope.chooseFood = function() {
       var myPopup = $ionicPopup.show({
         templateUrl: 'templates/popup_food.html',
         title: '<h4>Выберите питание</h4>',
@@ -86,20 +93,17 @@ angular.module('toRest.controllers', [])
       });
 
       myPopup.then(function(item) {
-        
         console.log($scope.search);
-         console.log("picked "+item);
+        console.log("picked "+item);
       });
     };
     
-
-
     $scope.format_date = function(date) {
       console.log(date);
-        var curr_date = date.getDate();
-        var curr_month = date.getMonth();
-        var curr_year = date.getFullYear();
-        return (('0' + curr_date).slice(-2))+"."+(('0'+(curr_month*1+1)).slice(-2)) + "." + curr_year ;
+      var curr_date = date.getDate();
+      var curr_month = date.getMonth();
+      var curr_year = date.getFullYear();
+      return (('0' + curr_date).slice(-2))+"."+(('0'+(curr_month*1+1)).slice(-2)) + "." + curr_year ;
     };
 
     $scope.startDateObject = {
@@ -158,15 +162,18 @@ angular.module('toRest.controllers', [])
     });
 
     $scope.chooseCountry = function(country) {
-      // var countryToChange;
-      console.log($state.current.name);
-      if ($state.current.name == 'countryOrigin') {
-        $rootScope.search.country_origin = country;
-      } else {
-        $rootScope.search.country_destination = country;
+      switch ($state.current.name) {
+        case 'countryOrigin':
+          $rootScope.search.country_origin = country;
+          $rootScope.search.city_origin = $rootScope.reset_search.city_origin;
+          break
+        case 'countryDestination':
+          $rootScope.search.country_destination = country;
+          $rootScope.search.city_destination = $rootScope.reset_search.city_destination;
+          break
+        case 'citizenship':
+          $rootScope.reserved.citizenship = country;
       }
-      console.log($rootScope.search);
-      // countryToChange = country; 
       $ionicHistory.goBack();
     };    
 
@@ -178,7 +185,6 @@ angular.module('toRest.controllers', [])
     var countryId = ($state.current.name == 'cityOrigin') ? $rootScope.search.country_origin.id : $rootScope.search.country_destination.id
     $http.get($rootScope.baseUrl+'/cities/', {params: {country:countryId}}).
       success(function(data, status, headers, config) {
-         // $scope.countries = $scope.countries.concat(data);
         $scope.cities = data ;
         console.log($scope.cities) 
       }).
@@ -259,45 +265,45 @@ angular.module('toRest.controllers', [])
 	
 	.controller('ReservedCtrl', function($scope,$rootScope, $cordovaDialogs,$ionicPlatform,$ionicPopup) {
 
-    $scope.chooseMale = function() {
-      $scope.sexList = [
-        { text: "Мужской", value: "m" },
-        { text: "Женский", value: "f"}
-      ];
+    $scope.sexList = [
+      { text: "Мужской", value: "male" },
+      { text: "Женский", value: "female"}
+    ];
 
+    $scope.sexLabel = {
+      "male": "Мужской",
+      "female": "Женский"
+    };
+
+    $scope.chooseMale = function() {
       $scope.sexListChange = function(item) {
-        console.log("Selected Serverside, text:", item.text, "value:", item.value);
+        $rootScope.reserved.male = item.value;
       };  
              
       var myPopup = $ionicPopup.show({
         templateUrl: 'templates/popup_male.html',
-        title: 'Choose your male',
-        subTitle: 'Please use normal things',
+        title: 'Выберите пол',
         scope: $scope,
         buttons: [
-          { text: 'Cancel' },
           {
             text: '<b>Ok</b>',
             type: 'button-positive',
           }
         ]
       });
-
-      myPopup.then(function(res) {
-        console.log('Tapped!', res);
-        $rootScope.reserved.male = res;
-      });
     };
 
-    $scope.nameInput = function() { 
-         $cordovaDialogs.prompt('Введите имя', 'title', ['Cancel','Ok'], '')
-          .then(function(result) {
-            var input = result.input1;
-            console.log("input",input);
-            // no button = 0, 'OK' = 1, 'Cancel' = 2
-            var btnIndex = result.buttonIndex;
-
-          });
+    $scope.passportTillObject = {
+      titleLabel: 'Срок действия паспорта',
+      closeLabel: 'Закрыть',
+      showTodayButton: 'false',
+      setLabel: 'Выбрать',
+      errorMsgLabel : 'Выберите дату',
+      setButtonType : 'button-assertive',
+      mondayFirst: true,
+      callback: function (val) {
+        DatepickerCallback("passport_till", val);
+      }
     };
 
 	  $scope.birthdayDateObject = {
@@ -309,16 +315,13 @@ angular.module('toRest.controllers', [])
       setButtonType : 'button-assertive',
       mondayFirst: true,
       callback: function (val) {
-        DatepickerCallback(val);
+        DatepickerCallback("birthday", val);
       }
     };
 
-
-    var DatepickerCallback = function (val) {
-      if (typeof(val) === 'undefined') {
-        
-      } else {
-        console.log(val);
+    var DatepickerCallback = function (field, val) {
+      if (typeof(val) != 'undefined') {
+        $rootScope.reserved[field] = val;
       }
     };
 
