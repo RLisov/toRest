@@ -56,7 +56,7 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
             adult: 2,
             children: 1
         },
-        minCost: 12000,
+        minCost: 1000,
         maxCost : 100000,
         cost : 1200,
         category : 3,

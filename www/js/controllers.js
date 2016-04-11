@@ -38,7 +38,7 @@ angular.module('toRest.controllers', [])
         maxDays : $rootScope.search.maxDays*1,
         tourists :             
         [
-          18           
+          1           
         ],
         minCost : $rootScope.search.minCost*1,
         maxCost : $rootScope.search.maxCost*1,             
