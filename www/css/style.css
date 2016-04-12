@@ -28,7 +28,48 @@ body, .item p {
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
-	background-image: url(../img/egypt.jpg)
+	background-image: url(../img/egypt.jpg);
+}
+
+.mask.kipr {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: url(../img/kipr.jpg);
+}
+
+.mask.italy {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: url(../img/italy.jpg);
+}
+
+.mask.malta {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: url(../img/malta.jpg);
+}
+
+.tours .card.mask {
+	padding: 20px;
+}
+
+.mask h1 {
+	color: white;
+	font-family: "Lato Regular";
+	font-size: 48px;
+	margin-bottom: 20px;
+}
+
+.mask .price {
+	color: white;
+	background-color: #4E94E1;
+	padding: 5px 10px;
+	border-radius: 100px;
+	font-family: 'Lato Semibold';
+	font-size: 18px;
 }
 
 .galery-conteiner {

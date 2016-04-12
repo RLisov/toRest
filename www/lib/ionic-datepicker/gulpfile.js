@@ -20,7 +20,7 @@ gulp.task('html2js', function () {
 gulp.task('css2js', function () {
   return gulp.src("./src/*.css")
     .pipe(css2js())
-    //.pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest("./dist/"));
 });
 
@@ -32,7 +32,7 @@ gulp.task('make-bundle', ['del', 'html2js', 'css2js'], function () {
 });
 
 gulp.task('del-temp-files', ['make-bundle'], function () {
-  del(['dist/templates.js', 'dist/style.js']);
+  del(['dist/templates.js', 'dist/ionic-datepicker.styles.js']);
 });
 
 gulp.task('del', function () {

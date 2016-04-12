@@ -1,6 +1,16 @@
   <ion-view view-title="Сезонные предложения">
     <ion-content>
-    	<div ng-include src="'templates/_tourslist.html'"></div>
+
+    	<div ng-if="need_search_mask">
+
+        <div class="list tours">
+          <a class="card item mask" ng-repeat="mask in search_masks" ng-click="search_mask(mask)" ng-class="mask.id">
+            <h1 ng-bind="mask.name"></h1>
+            <span class="price">от {{mask.price_label}} РУБ</span>
+          </a>
+        </div>
+
+      </div>
   	</ion-content>
   	<ion-footer-bar class="orange-bg">
   		<button ui-sref="search" class="button button-full button-clear"><span class="icon-suit"></span>&nbsp;Поиск других туров</button>

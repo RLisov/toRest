@@ -40,17 +40,13 @@
             <div class="item">
               Вылет, с
               <span class="item-note">
-                <ionic-datepicker input-obj="startDateObject">
-                  <a> <i class="icon ion-ios-calendar-outline"></i> {{search.start_date | date:'dd.MM.yyyy'}}</a>
-                </ionic-datepicker>
+                <a ng-click="openDatePicker(startDatePicker)"> <i class="icon ion-ios-calendar-outline"></i> {{search.start_date | date:'dd.MM.yyyy'}}</a>
               </span>
             </div>
             <div class="item">
               Вылет, по
               <span class="item-note">
-                <ionic-datepicker input-obj="endDateObject">
-                  <a> <i class="icon ion-ios-calendar-outline"></i> {{search.end_date | date:'dd.MM.yyyy'}}</a>
-                </ionic-datepicker>
+                <a ng-click="openDatePicker(endDatePicker)"> <i class="icon ion-ios-calendar-outline"></i> {{search.end_date | date:'dd.MM.yyyy'}}</a>
               </span>
             </div>
 

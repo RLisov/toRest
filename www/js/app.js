@@ -6,8 +6,12 @@
 angular.module('toRest', ['ionic', 'toRest.controllers', 
                           'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova'])
 
-.run(function($ionicPlatform, $ionicSlideBoxDelegate,$rootScope,$ionicPopup) {
+.run(function($ionicPlatform, $ionicSlideBoxDelegate,$rootScope,$ionicPopup,ionicDatePicker) {
   $ionicPlatform.ready(function() {
+
+    $rootScope.openDatePicker = function(picker){
+      ionicDatePicker.openDatePicker(picker);
+    };
 
     $rootScope.showAlert = function(title, message) {
       $ionicPopup.alert({
@@ -22,8 +26,10 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
       male:''
     };
 
-    //$rootScope.baseUrl = 'http://onholidays.workplay.in/api';
-    $rootScope.baseUrl = 'http://185.43.5.29/api';
+    //dev
+    $rootScope.baseUrl = '/api';
+    //production
+    //$rootScope.baseUrl = 'http://185.43.5.29/api';
 
 
     $rootScope.reset_search = { 
@@ -76,7 +82,23 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, ionicDatePickerProvider) {
+
+  var datePickerObj = {
+      inputDate: new Date(),
+      setLabel: 'Выбрать',
+      todayLabel: 'Сегодня',
+      closeLabel: 'Закрыть',
+      mondayFirst: true,
+      weeksList: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+      monthsList: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+      templateType: 'popup',
+      showTodayButton: true,
+      dateFormat: 'dd.MM.yyyy',
+      closeOnSelect: false,
+      errorMsgLabel : 'Выберите дату'
+  };
+  ionicDatePickerProvider.configDatePicker(datePickerObj);
 
   $ionicConfigProvider.backButton.previousTitleText(false).text('');
 

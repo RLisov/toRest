@@ -1,4 +1,10 @@
 {
   "name": "toRest",
-  "app_id": "6febe1f1"
+  "app_id": "6febe1f1",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://185.43.5.29/api"
+    }
+  ]
 }

@@ -1,5 +1,26 @@
 angular.module('toRest.controllers', [])
 
+  .controller('MainCtrl', function($scope,$rootScope,$http) {
+
+    $http.get($rootScope.baseUrl+'/search_masks/').
+    success(function(data, status, headers, config) {
+      set_search_masks(data);
+    }).
+    error(function(data, status, headers, config) {
+      $scope.need_search_mask = true; 
+      $http.get('/js/search_masks.json').
+      success(function(data, status, headers, config) {
+        set_search_masks(data);
+      });
+    });
+
+    function set_search_masks(data) {
+      $scope.search_masks = data;
+      console.log($scope.search_masks);
+    }
+    
+  })
+
 	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory,$http,$state,$ionicPopup,$filter,$ionicLoading) {
 	  $scope.rate = 3;
 	  $scope.max = 5;
@@ -8,24 +29,6 @@ angular.module('toRest.controllers', [])
       $ionicLoading.show({
         showBackdrop: false
       });
-      // var data = {
-      //   country_origin : 4,          
-      //   city_origin: 1104,              
-      //   country_destination : 6,          
-      //   city_destination: -1,              
-      //   start_date : $scope.format_date($rootScope.search.start_date),
-      //   end_date : $scope.format_date($rootScope.search.end_date),        
-      //   minDays : $rootScope.search.minDays*1,
-      //   maxDays : $rootScope.search.maxDays*1,
-      //   tourists :             
-      //   [
-      //       18           
-      //   ],
-      //   minCost : $rootScope.search.minCost*1,
-      //   maxCost : $rootScope.search.maxCost*1,             
-      //   category : $rootScope.search.category*1 ,        
-      //   food : 2              
-      // };
 
       var data = {
         country_origin : $rootScope.search.country_origin.id,          
@@ -98,37 +101,31 @@ angular.module('toRest.controllers', [])
       });
     };
     
-    $scope.format_date = function(date) {
-      console.log(date);
+    $scope.format_date = function(source_date) {
+      var date = new Date(source_date);
       var curr_date = date.getDate();
       var curr_month = date.getMonth();
       var curr_year = date.getFullYear();
       return (('0' + curr_date).slice(-2))+"."+(('0'+(curr_month*1+1)).slice(-2)) + "." + curr_year ;
     };
 
-    $scope.startDateObject = {
+    $scope.startDatePicker = {
       titleLabel: 'Дата вылета: с',
-      closeLabel: 'Закрыть',
-      showTodayButton: 'false',
-      setLabel: 'Выбрать',
-      errorMsgLabel : 'Выберите дату',
-      setButtonType : 'button-assertive',
-      mondayFirst: true,
       callback: function (val) {
-        $rootScope.search.start_date = val;
+        DatepickerCallback("start_date", val);
       }
     };
 
-    $scope.endDateObject = {
+    $scope.endDatePicker = {
       titleLabel: 'Дата вылета: по',
-      closeLabel: 'Закрыть',
-      showTodayButton: 'false',
-      setLabel: 'Выбрать',
-      errorMsgLabel : 'Выберите дату',
-      setButtonType : 'button-assertive',
-      mondayFirst: true,
       callback: function (val) {
-        $rootScope.search.end_date = val;
+        DatepickerCallback("end_date", val);
+      }
+    };
+
+    var DatepickerCallback = function (field, val) {
+      if (typeof(val) != 'undefined') {
+        $rootScope.search[field] = val;
       }
     };
   })
@@ -156,7 +153,6 @@ angular.module('toRest.controllers', [])
     $http.get($rootScope.baseUrl+'/countries/').
       success(function(data, status, headers, config) {
         $scope.countries = data ; 
-        console.log($scope.countries);
       }).
       error(function(data, status, headers, config) {
     });
@@ -293,27 +289,20 @@ angular.module('toRest.controllers', [])
       });
     };
 
-    $scope.passportTillObject = {
+    $scope.passportPicker = {
       titleLabel: 'Срок действия паспорта',
-      closeLabel: 'Закрыть',
-      showTodayButton: 'false',
-      setLabel: 'Выбрать',
-      errorMsgLabel : 'Выберите дату',
+      showTodayButton: false,
       setButtonType : 'button-assertive',
-      mondayFirst: true,
       callback: function (val) {
         DatepickerCallback("passport_till", val);
       }
     };
 
-	  $scope.birthdayDateObject = {
+	  $scope.birthdayPicker = {
       titleLabel: 'День рождения',
       closeLabel: 'Закрыть',
-      showTodayButton: 'false',
-      setLabel: 'Выбрать',
-      errorMsgLabel : 'Выберите дату',
+      showTodayButton: false,
       setButtonType : 'button-assertive',
-      mondayFirst: true,
       callback: function (val) {
         DatepickerCallback("birthday", val);
       }
@@ -325,11 +314,6 @@ angular.module('toRest.controllers', [])
       }
     };
 
-	})
-
-	.controller('MainCtrl', function($scope) {
-	  $scope.rate = 3;
-	  $scope.max = 5;
 	})
 
   .directive('ionSearch', function() {

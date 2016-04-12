@@ -48,32 +48,30 @@
                 </div>
 
               </ionic-datepicker>
-              <ion-radio ng-model="choice" ng-value="'A'" ng-repeat="tour in tours.data | orderBy:'variants[0].cost'">
-                <div class="price">{{tour.variants[0].cost}} RUB</div>
-                <p class="description food">Питание: {{tour.variants[0].food}}</p>
-                <p class="description room">{{tour.variants[0].room}}</p>
+              <ion-radio ng-model="choice" ng-repeat="variant in tour.variants">
+                <div class="price">{{variant.cost}} RUB</div>
+                <p class="description food">Питание: {{variant.food}}</p>
+                <p class="description room">{{variant.room}}</p>
               </ion-radio>
              
             </ion-scroll>
           </ion-slide>
+          
           <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); " >
-              <!-- GALLERY -->
-              <ion-slide-box  class="my-galery" show-pager="false">
-                <ion-slide ng-repeat="pic in tour.pictures">
-                  <div class="galery-conteiner" ng-style="{'background-image':'url({{pic}})'}"></div>
-                  <div class="label-pic">Standart rest room</div>
-                </ion-slide>
-                <ion-slide >
-                  
-              </ion-slide-box>
+            <!-- GALLERY -->
+            <ion-slide-box  class="my-galery" show-pager="false">
+              <ion-slide ng-repeat="pic in tour.pictures">
+                <div class="galery-conteiner" ng-style="{'background-image':'url({{pic}})'}"></div>
+              </ion-slide>
+              <ion-slide >
+            </ion-slide-box>
           </ion-slide>
+          
           <ion-slide disable-scroll="true" style="max-height: calc(100% - 160px); ">
-              <!-- MAP -->
-               <div id="map_canvas" ng-init="initialize()"></div>
-                  
-                  
-
+            <!-- MAP -->
+            <div id="map_canvas" ng-init="initialize()"></div>
           </ion-slide>
+
           <ion-slide disable-scroll="false" style="max-height: calc(100% - 160px); ">
               <!-- HOTEL INFO -->
               <ion-scroll style="height: 100%">

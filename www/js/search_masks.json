@@ -1,0 +1,17 @@
+[
+  {
+    "id": "kipr",
+    "name": "Кипр",
+    "price_label": "24.550"
+  },
+  {
+    "id": "italy",
+    "name": "Италия",
+    "price_label": "29.950"
+  },
+  {
+    "id": "malta",
+    "name": "Мальта",
+    "price_label": "38.140"
+  }
+]
