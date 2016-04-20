@@ -24,6 +24,18 @@ angular.module('toRest.controllers', [])
 	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory,$http,$state,$ionicPopup,$filter,$ionicLoading) {
 	  $scope.rate = 3;
 	  $scope.max = 5;
+    $scope.range_tourists = _.range(17);
+    $scope.tourists_count = {
+      "adults": 0,
+      "children": 0
+    }
+    $scope.children_age = [];
+    $scope.change_children_count = function() {
+      $scope.children_age = [];
+      for (var i = 0; i < $scope.tourists_count.children; i++) {
+        $scope.children_age.push({"age": 5})
+      }
+    }
 
     $scope.send_search = function() {
       $ionicLoading.show({
@@ -39,16 +51,22 @@ angular.module('toRest.controllers', [])
         end_date : $scope.format_date($rootScope.search.end_date),        
         minDays : $rootScope.search.minDays*1,
         maxDays : $rootScope.search.maxDays*1,
-        tourists :             
-        [
-          1           
-        ],
         minCost : $rootScope.search.minCost*1,
         maxCost : $rootScope.search.maxCost*1,             
         category : $rootScope.search.category*1 ,        
-        food : 2              
+        food : 2,
+        tourists: []
       }
 
+      for (var i = 0; i < $scope.tourists_count.adults; i++) {
+        data.tourists.push(18)
+      }
+      for (var i = 0; i < $scope.tourists_count.children; i++) {
+        data.tourists.push($scope.children_age[i].age*1)
+      }
+      if (data.tourists.length < 1) {
+        data.tourists = [0]
+      }
      
       $rootScope.tours = {};
       console.log(data);
@@ -73,8 +91,11 @@ angular.module('toRest.controllers', [])
 
     $http.get($rootScope.baseUrl+'/food/').
     success(function(data, status, headers, config) {
-      $rootScope.food = data ;
-      console.log($rootScope.food);
+      $scope.food = data ;
+      $scope.food_labels = data.map(function(item) {
+        return item.name
+      })
+      console.log($scope.food_labels)
     }).
     error(function(data, status, headers, config) {
       console.log(data);
@@ -93,11 +114,6 @@ angular.module('toRest.controllers', [])
             type: 'button-positive',
           }
         ]
-      });
-
-      myPopup.then(function(item) {
-        console.log($scope.search);
-        console.log("picked "+item);
       });
     };
     

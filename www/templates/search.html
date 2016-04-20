@@ -68,9 +68,25 @@
             <div class="item">
               Туристов:
               <span class="item-note">
-                {{search.tourists.adult}}
+                <i class="icon ion-person-stalker"></i>
+                <select ng-model="tourists_count.adults">
+                  <option ng-repeat="count in range_tourists" ng-value="count" ng-bind="count"></option>
+                </select>
+                <i class="icon ion-android-happy"></i>
+                <select ng-model="tourists_count.children" ng-change="change_children_count()">
+                  <option ng-repeat="count in range_tourists" ng-value="count" ng-bind="count"></option>
+                </select>
               </span>
-              <slider floor="1" ceiling="10" ng-model="search.tourists.adult"></slider>
+            </div>
+            <div class="item" ng-repeat="child in children_age">
+              Возраст ребёнка #{{$index+1}}
+              <span class="item-note">
+                {{child.age}}
+              </span>
+              <div class="range range-positive">
+                <input type="range" min="1" max="18" ng-model="children_age[$index].age">
+              </div>
+              
             </div>
           </div>
         </div>
@@ -94,15 +110,15 @@
             <div class="item" ng-click="chooseFood()">
               Питание:
               <span class="item-note">
-               {{search.food}}
+               {{food_labels[search.food-1]}}
               </span>
             </div>
           </div>
         </div>
 
-        <div class="card last-search">
+        <div class="card">
           <div class="list">
-            <a class="item">
+            <div class="item">
               Категория:
               <span class="item-note">
                 {{search.category}}+
@@ -111,17 +127,9 @@
               <div>
                 <slider floor="1" ceiling="5" ng-model="search.category"></slider>
               </div>
-            </a>
-            <!-- <a class="item">
-              Питание:
-              <span class="item-note">
-                {{search.food}}
-              </span>
-            </a> -->
+            </div>
           </div>
         </div>
-        
-    
       </div>
      
 	  </ion-content>

@@ -7,72 +7,65 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
                           'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova'])
 
 .run(function($ionicPlatform, $ionicSlideBoxDelegate,$rootScope,$ionicPopup,ionicDatePicker) {
+
+  $rootScope.openDatePicker = function(picker){
+    ionicDatePicker.openDatePicker(picker);
+  };
+
+  $rootScope.showAlert = function(title, message) {
+    $ionicPopup.alert({
+      title: title,
+      content: message
+    }).then(function(res) {
+      
+    });
+  };
+
+  $rootScope.reserved = {}
+
+  //dev
+  $rootScope.baseUrl = '/api';
+  //production
+  //$rootScope.baseUrl = 'http://185.43.5.29/api';
+
+
+  $rootScope.reset_search = { 
+      "country_origin" : 
+      {
+        "name": "Выберите страну отправления",
+        "id": 0
+      },
+      "city_origin" :
+      {
+        "name": "Выберите город отправления",
+        "id": 0
+      },
+      "country_destination" :
+      {
+        "name": "Выберите страну назначения",
+        "id": -1
+      },
+      "city_destination" :
+      {
+        "name": "Выберите город назначения",
+        "id": -1
+      },
+      "start_date" : new Date(),
+      "end_date" : new Date(),
+      "minDays" : 3,
+      "maxDays" : 9,
+      "tourists" : [0],
+      "minCost" : 1000,
+      "maxCost" : 100000,
+      "category" : 1,
+      "food" : 1
+  };
+  $rootScope.search = $rootScope.reset_search;
+
+  $rootScope.tour = { 
+  }
+
   $ionicPlatform.ready(function() {
-
-    $rootScope.openDatePicker = function(picker){
-      ionicDatePicker.openDatePicker(picker);
-    };
-
-    $rootScope.showAlert = function(title, message) {
-      $ionicPopup.alert({
-        title: title,
-        content: message
-      }).then(function(res) {
-        
-      });
-    };
-
-    $rootScope.reserved = {
-      male:''
-    };
-
-    //dev
-    $rootScope.baseUrl = '/api';
-    //production
-    //$rootScope.baseUrl = 'http://185.43.5.29/api';
-
-
-    $rootScope.reset_search = { 
-        country_origin : 
-        {
-          name: "Выберите страну отправления",
-          id: 0
-        },
-        city_origin :
-        {
-          name: "Выберите город отправления",
-          id: 0
-        },
-        country_destination :
-        {
-          name: "Выберите страну назначения",
-          id: -1
-        },
-        city_destination :
-        {
-          name: "Выберите город назначения",
-          id: -1
-        },
-        start_date : new Date(),
-        end_date : new Date(),
-        minDays : 3,
-        maxDays: 9,
-        tourists :
-        {
-            adult: 2,
-            children: 1
-        },
-        minCost: 1000,
-        maxCost : 100000,
-        cost : 1200,
-        category : 3,
-        food : "Не выбрано"
-    };
-    $rootScope.search = $rootScope.reset_search;
-
-    $rootScope.tour = { 
-    }
-   
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
