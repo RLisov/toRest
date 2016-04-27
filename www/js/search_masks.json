@@ -2,16 +2,31 @@
   {
     "id": "kipr",
     "name": "Кипр",
-    "price_label": "24.550"
+    "mask": {
+      "minCost": 33703,
+      "country_destination": {
+        "id": 6
+      }
+    }
   },
   {
     "id": "italy",
     "name": "Италия",
-    "price_label": "29.950"
+    "mask": {
+      "minCost": 29950,
+      "country_destination": {
+        "id": 236
+      }
+    }
   },
   {
     "id": "malta",
     "name": "Мальта",
-    "price_label": "38.140"
+    "mask": {
+      "minCost": 38140,
+      "country_destination": {
+        "id": 242
+      }
+    }
   }
 ]

@@ -1,25 +1,23 @@
   <ion-view view-title="Забронировать">
     <ion-content class="reserved-body">
       <div class="tourpage">
-      <div class="head">
-        <div class="row">
-          <div class="thumbnail" style="background-image: url(../img/egypt.jpg)"></div>
-          <div class="col description">
-            <div class="item">
-              <div class="row">
-                <div class="col">
-                  <p class="title">Египет</p>
-                  <p class="hotel">Hotel Azimut</p>
-                  <rating readOnly="true" ng-model="rate" max="5"></rating>
+        <div class="head">
+          <div class="row">
+            <div class="col col-25 thumbnail" ng-style="{'background-image':'url({{tour.pictures[0]}})'}"></div>
+            <div class="col col-75 description">
+              <div class="item">
+                <div class="row">
+                  <div class="col">
+                    <p class="title">{{tour.general.country}}</p>
+                    <p class="hotel">{{tour.general.hotel}}</p>
+                    <rating readOnly="true" ng-model="tour.general.category" max="5"></rating>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
-      <hr class="horizontal-sep">
-      
        
       <div class="flyings">
         Перелёты
@@ -29,20 +27,20 @@
 
         <div class="card reserved">
           <div class="list">
-           <div class="blue-card">
-             Москва - Каир </br> <span class="date-bold">30.01.2015</span>
-           </div>
-            <a class="item item-icon-right">
-              Эконом: №45807 (Москва MSK 03:00 - Каир KR 06:50)
-              <i class="icon ion-ios-arrow-right color-ico"></i>
-            </a>
             <div class="blue-card">
-             Каир - Москва </br> <span class="date-bold">07.02.2015</span>
-           </div>
-            <a class="item item-icon-right">
-              Эконом: №45807 (Москва MSK 03:00 - Каир KR 06:50)
-              <i class="icon ion-ios-arrow-right color-ico"></i>
-            </a>
+              {{search.city_origin.name}} - {{tour.general.city}} </br> 
+              <span class="date-bold">{{tour.date}}</span>
+            </div>
+            <div class="item" ng-if="tour.flight">
+              {{tour.flight.departure_information}}
+            </div>
+            <div class="blue-card">
+              {{tour.general.city}} - {{search.city_origin.name}} </br> 
+              <span class="date-bold">{{arrive_date}}</span>
+            </div>
+            <div class="item" ng-if="tour.flight">
+              {{tour.flight.return_information}}
+            </div>
           </div>
         </div>
         
@@ -50,107 +48,41 @@
           Заказанные услуги
         </div>
 
-      <div class="card reserved">
+        <div class="card reserved">
           <div class="list">
-            <a class="item item-icon-right">
+            <div class="item">
               <ul class="sinie-circle">
-                <li>ЕТС "Полное покрытие" (Египет)</li>
-                <li>Групповой трансфер</li>
-                <li>Групповой трансфер</li>
+                <li>Тип питания: {{reserved.choice.food}}</li>
+                <li>Тип проживания: {{reserved.choice.room}}</li>
               </ul>
-              <i class="icon ion-ios-arrow-right color-ico"></i>
-            </a> 
+            </div> 
           </div>
         </div>
 
-      <div class="flyings">
-          Турист 1  <i class="icon ion-ios-plus-outline color-ico"></i>
-      </div>
+        <div class="flyings">
+            Данные о туристах
+        </div>
 
-         <div class="card reserved">
+        <div class="card reserved">
           <div class="list">
-            <a class="item item-icon-right" ui-sref="citizenship">
-              {{reserved.citizenship.name || "Выберите страну гражданства"}}
+            <a class="item item-icon-right" ng-repeat="tourist in reserved.tourists" ui-sref="tourist({touristIndex: $index})">
+              {{tourist_name(tourist) || age_label(tourist.age)}}
               <i class="icon ion-ios-arrow-right"></i>
             </a>
-
-            <div class="item">
-              Пол* 
-              <a ng-click="chooseMale()">
-                <span class="blue-sex item-value"> {{ sexLabel[reserved.male] || "Выберите пол" }}</span>
-              </a>
-            </div>
-
-            <div class="item">
-              Имя по-латински*  
-              <span class="item-value">
-                <input class="item-input" type="text" ng-model="reserved.first_name">
-              </span>
-            </div>
-
-            <div class="item" ng-click="lastnameInput()">
-              Фамилия по-латински*  
-              <span class="item-value">
-                <input class="item-input" type="text" ng-model="reserved.last_name">
-              </span>  
-            </div>
-
-            <div class="item">
-                Серия паспорта*  
-                <span class="item-value">
-                  <input class="item-input" type="text" ng-model="reserved.passport_serial">
-                </span>  
-            </div>
-            <div class="item">
-                Номер паспорта*  
-                <span class="item-value">
-                  <input class="item-input" type="text" ng-model="reserved.passport_number">
-                </span>  
-            </div>
-            <div class="item">
-                Паспорт действителен до*  
-                <span class="item-value">
-                  <a ng-click="openDatePicker(passportPicker)"> <i class="icon ion-ios-calendar-outline"></i> {{reserved.passport_till | date:'dd.MM.yyyy'}}</a>
-              </span>
-            </div>
-
-            <div class="item">
-              Дата рождения*  
-              <span class="item-value">
-                <a ng-click="openDatePicker(birthdayPicker)"> <i class="icon ion-ios-calendar-outline"></i> {{reserved.birthday | date:'dd.MM.yyyy'}}</a>
-              </span>  
-            </div>
           </div>
+        </div>
+
+        <div class="foot">
+          <p class="itogo">Итоговая стоимость</p>
+          <p class="anton">С учетом доплат и сборов</p>
+          <p class="end-price">{{reserved.choice.cost | currency:"":0}} руб</p>
+          <span class="red-text" ng-if="tourists_invalid()">Пожалуйста, проверьте введённые данные о туристах</span>
+        </div>
       </div>
-
-
-          <div class="foot">
-            <p class="itogo">Итоговая стоимость</p>
-            <p class="anton">С учетом доплат и сборов</p>
-            <p class="end-price">780.21 USD (49153,23 RUR)</p>
-            <span class="red-text">Пожалуйста, заполните все поля</span>
-          </div>
-
-          <div class="buttons-foot">
-            <button class="blue-clear button button-stable">Пересчитать</button>
-          </div>
-
-          <div class="buttons-foot">
-            <button class="blue-clear button button-stable">Договор</button>
-          </div>
-          
-          <div class="dogovor">
-            <i class="icon ion-ios-checkmark-outline"></i> Согласен с договором
-          </div>
-
-
-          <!-- <ion-footer-bar class="blue-bg reserving">
-            <button ng-click="" class="button button-full button-clear">Забронировать</button>
-          </ion-footer-bar> -->
-
 	  </ion-content>
 	  <ion-footer-bar class="blue-bg">
-      <button ng-click="" class="button button-full button-clear">Забронировать</button>
+      <button ng-if="tourists_invalid()" ng-click="" disabled="disabled" class="button button-full button-clear">Забронировать</button>
+      <button ng-if="!tourists_invalid()" ng-click="start_reserved()" class="button button-full button-clear">Забронировать</button>
     </ion-footer-bar>
     
   </ion-view>

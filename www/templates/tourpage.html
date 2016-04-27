@@ -4,14 +4,14 @@
     <ion-content has-subheader="false" class="tourpage" scroll="false">
       <div class="head">
         <div class="row">
-          <div class="thumbnail" ng-style="{'background-image':'url({{tour.pictures[0]}})'}"></div>
-          <div class="col description">
+          <div class="col col-25 thumbnail" ng-style="{'background-image':'url({{tour.pictures[0]}})'}"></div>
+          <div class="col col-75 description">
             <div class="item">
               <div class="row">
                 <div class="col">
                   <p class="title">{{tour.general.country}}</p>
                   <p class="hotel">{{tour.general.hotel}}</p>
-                  <rating readOnly="true" ng-model="rate" max="5"></rating>
+                  <rating readOnly="true" ng-model="tour.general.category" max="5"></rating>
                 </div>
               </div>
             </div>
@@ -32,23 +32,20 @@
           <ion-slide disable-scroll="true" style="max-height: calc(100% - 200px); ">
             <!-- MAIN PAGE -->
             <ion-scroll style="height: 100%">
-            <ionic-datepicker  input-obj="startDateObject">
-
-                
+              <ionic-datepicker>
                 <div class="blue-badge small-corners">
                   <div class="row">
                     <div class="col col-80">
-                      <h3>Заезд {{search.start_date | date:'dd.MM.yyyy'}} на 9 ночей</h3>
-                      <p>нажмите, чтобы изменить дату заезда</p>
+                      <h3>Заезд {{tour.date}} на {{tour.duration}} ночей</h3>
+                      <p>Отъезд {{arrive_date}}</p>
                     </div>
                     <div class="col col-20">
                        <p class="icon-event5 icon"></p>
                     </div>
                   </div>
                 </div>
-
               </ionic-datepicker>
-              <ion-radio ng-model="choice" ng-repeat="variant in tour.variants">
+              <ion-radio ng-click="setChoice(variant)" ng-repeat="variant in tour.variants">
                 <div class="price">{{variant.cost}} RUB</div>
                 <p class="description food">Питание: {{variant.food}}</p>
                 <p class="description room">{{variant.room}}</p>
@@ -120,35 +117,9 @@
         </ion-slide-box>
       </tab-slide-box>
       <ion-footer-bar class="orange-bg sample-show-hide" ng-show="tabIndex == 0">
-        <button ui-sref="reserved" class="button button-full button-clear">Забронировать</button>    
+        <button ng-click="go_reserved()" class="button button-full button-clear">Забронировать</button>    
       </ion-footer-bar>
     </ion-content>
-
-<!--      <ion-pane>
-        <ion-tabs class="">
-            
-            <ion-tab href="#/tourpage/main" icon="ion-home">
-                <ion-nav-view name="main">
-                    <ion-content>
-                        <div ng-include src="'templates/tourpage/_main.html'"></div>
-                    </ion-content>
-                    <ion-footer-bar class="orange-bg">
-                      <button class="button button-full button-clear">Забронировать</button>    
-                    </ion-footer-bar>
-                </ion-nav-view>
-            </ion-tab>
-
-            
-            <ion-tab href="#/tourpage/gallery" icon="ion-images">
-                <ion-nav-view name="gallery">
-                    <ion-content>
-                        <div ng-include src="'templates/tourpage/_gallery.html'"></div>
-                    </ion-content>
-                </ion-nav-view>
-            </ion-tab>
-        </ion-tabs>
-
-    </ion-pane> -->
   </ion-view>
 
  

@@ -1,0 +1,59 @@
+<ion-view view-title="Персональные данные">
+  <ion-content>
+    <ion-list>
+      <div class="card reserved">
+        <div class="list">
+          <a class="item item-icon-right" ui-sref="citizenship({touristIndex: tourist_id})">
+            {{tourist.citizenship.name || "Выберите страну гражданства"}}
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+
+          <div class="item" ng-click="chooseMale()">
+            Пол* 
+            <a><span class="blue-sex item-value"> {{ sexLabel[tourist.gender] || "Выберите пол" }}</span></a>
+          </div>
+
+          <div class="item">
+            Имя по-латински*  
+            <span class="item-value">
+              <input class="item-input" type="text" ng-model="tourist.first_name">
+            </span>
+          </div>
+
+          <div class="item">
+            Фамилия по-латински*  
+            <span class="item-value">
+              <input class="item-input" type="text" ng-model="tourist.last_name">
+            </span>  
+          </div>
+
+          <div class="item">
+              Серия паспорта*  
+              <span class="item-value">
+                <input class="item-input" type="text" ng-model="tourist.passport_serial">
+              </span>  
+          </div>
+          <div class="item">
+              Номер паспорта*  
+              <span class="item-value">
+                <input class="item-input" type="text" ng-model="tourist.passport_number">
+              </span>  
+          </div>
+          <div class="item" ng-click="openDatePicker(passportPicker)">
+              Паспорт действителен до*  
+              <span class="item-value">
+                <a> <i class="icon ion-ios-calendar-outline"></i> {{tourist.passport_till | date:'dd.MM.yyyy'}}</a>
+            </span>
+          </div>
+
+          <div class="item" ng-click="openDatePicker(birthdayPicker)">
+            Дата рождения*  
+            <span class="item-value">
+              <a> <i class="icon ion-ios-calendar-outline"></i> {{tourist.birthday | date:'dd.MM.yyyy'}}</a>
+            </span>  
+          </div>
+        </div>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

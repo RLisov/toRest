@@ -678,7 +678,8 @@ ul.sinie-circle li:before {
 }
 
 .foot {
-	padding: 5px 15px;
+	padding: 5px 15px 5px;
+	text-align: center;
 }
 
 .itogo {
@@ -689,8 +690,8 @@ ul.sinie-circle li:before {
 	font-size: 118%;
 }
 .end-price {
+	font-size: 36px;
 	font-family: Bebas Bold;
-	font-size: 145%;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
@@ -724,6 +725,12 @@ ul.sinie-circle li:before {
 	padding-top: 5px;
 	padding-bottom: 55px;
 }
+
+.spinner svg {
+  width: 64px;
+  height: 64px;
+}
+
 /*@media 
 (-webkit-min-device-pixel-ratio: 2) { 
     .tours .card .thumbnail {

@@ -18,12 +18,21 @@ angular.module('toRest.controllers', [])
       $scope.search_masks = data;
       console.log($scope.search_masks);
     }
+
+    $scope.search_mask = function(mask) {
+      $rootScope.tourists_scope = [18,18]
+      for(key in mask.mask){
+          $rootScope.search[key] = mask.mask[key]
+      }
+      $rootScope.search.city_destination = {
+        "id": -1
+      }
+      $rootScope.send_search();
+    }
     
   })
 
-	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory,$http,$state,$ionicPopup,$filter,$ionicLoading) {
-	  $scope.rate = 3;
-	  $scope.max = 5;
+	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory,$http,$state,$ionicPopup) {
     $scope.range_tourists = _.range(17);
     $scope.tourists_count = {
       "adults": 0,
@@ -37,74 +46,37 @@ angular.module('toRest.controllers', [])
       }
     }
 
-    $scope.send_search = function() {
-      $ionicLoading.show({
-        showBackdrop: false
-      });
-
-      var data = {
-        country_origin : $rootScope.search.country_origin.id,          
-        city_origin: $rootScope.search.city_origin.id,              
-        country_destination : $rootScope.search.country_destination.id,          
-        city_destination: $rootScope.search.city_destination.id,              
-        start_date : $scope.format_date($rootScope.search.start_date),      
-        end_date : $scope.format_date($rootScope.search.end_date),        
-        minDays : $rootScope.search.minDays*1,
-        maxDays : $rootScope.search.maxDays*1,
-        minCost : $rootScope.search.minCost*1,
-        maxCost : $rootScope.search.maxCost*1,             
-        category : $rootScope.search.category*1 ,        
-        food : 2,
-        tourists: []
-      }
-
+    $scope.process_search = function() {
+      var tourists = []
       for (var i = 0; i < $scope.tourists_count.adults; i++) {
-        data.tourists.push(18)
+        tourists.push(18)
       }
       for (var i = 0; i < $scope.tourists_count.children; i++) {
-        data.tourists.push($scope.children_age[i].age*1)
+        tourists.push($scope.children_age[i].age*1)
       }
-      if (data.tourists.length < 1) {
-        data.tourists = [0]
+      if (tourists.length < 1) {
+        tourists = [0]
       }
-     
-      $rootScope.tours = {};
-      console.log(data);
-
-      $http.post($rootScope.baseUrl+'/search/', data).
-        success(function(data, status, headers, config) {
-          $ionicLoading.hide();
-          $rootScope.tours = data;
-          console.log($rootScope.tours);
-          console.log(status);
-          if ($rootScope.tours.status != 'fail') {
-            $state.go('search_results');
-          } else {
-            $rootScope.showAlert('Неудачно!', $rootScope.tours.data.text);
-          }
-        }).
-        error(function(data, status, headers, config) {
-          $rootScope.showAlert('Неудачно!','Ошибка в ответе сервера');
-          console.log(data);
-        });
-    };
+      $rootScope.tourists_scope = tourists;
+      $rootScope.send_search();
+    }
 
     $http.get($rootScope.baseUrl+'/food/').
-    success(function(data, status, headers, config) {
-      $scope.food = data ;
-      $scope.food_labels = data.map(function(item) {
-        return item.name
-      })
-      console.log($scope.food_labels)
-    }).
-    error(function(data, status, headers, config) {
-      console.log(data);
-    });
+      success(function(data, status, headers, config) {
+        $scope.food = data ;
+        $scope.food_labels = data.map(function(item) {
+          return item.name
+        })
+        console.log($scope.food_labels)
+      }).
+      error(function(data, status, headers, config) {
+        console.log(data);
+      });
 
      
     $scope.chooseFood = function() {
       var myPopup = $ionicPopup.show({
-        templateUrl: 'templates/popup_food.html',
+        templateUrl: 'templates/partials/popup_food.html',
         title: '<h4>Выберите питание</h4>',
         scope: $scope,
         buttons: [
@@ -115,14 +87,6 @@ angular.module('toRest.controllers', [])
           }
         ]
       });
-    };
-    
-    $scope.format_date = function(source_date) {
-      var date = new Date(source_date);
-      var curr_date = date.getDate();
-      var curr_month = date.getMonth();
-      var curr_year = date.getFullYear();
-      return (('0' + curr_date).slice(-2))+"."+(('0'+(curr_month*1+1)).slice(-2)) + "." + curr_year ;
     };
 
     $scope.startDatePicker = {
@@ -147,11 +111,7 @@ angular.module('toRest.controllers', [])
   })
 
   .controller('SearchResultsCtrl',function($scope,$rootScope)  {
-    $scope.rate = 3;
-    $scope.max = 5;
-
-    
-    var ko = Math.floor(Math.random() *(20-10 + 1) + 10); 
+    var ko = Math.floor(Math.random() *(20 - 10 + 1) + 10); 
 
     $scope.high_cost = function(cost) {
       var result = (cost/100)*ko + cost*1;
@@ -160,17 +120,17 @@ angular.module('toRest.controllers', [])
 
   })
 
-	.controller('FavouritesCtrl', function($scope) {
-	  $scope.rate = 3;
-	  $scope.max = 5;
-	})
-
-  .controller('CountryCtrl', function($scope,$http,$rootScope,$ionicHistory,$state) {
+  .controller('CountryCtrl', function($scope,$http,$rootScope,$ionicHistory,$state,$stateParams,$ionicLoading) {
+    $ionicLoading.show({
+      noBackdrop: false
+    });
     $http.get($rootScope.baseUrl+'/countries/').
       success(function(data, status, headers, config) {
-        $scope.countries = data ; 
+        $ionicLoading.hide();
+        $scope.countries = data; 
       }).
       error(function(data, status, headers, config) {
+        $rootScope.showAlert('Неудачно!', 'Ошибка загрузки');
     });
 
     $scope.chooseCountry = function(country) {
@@ -184,7 +144,7 @@ angular.module('toRest.controllers', [])
           $rootScope.search.city_destination = $rootScope.reset_search.city_destination;
           break
         case 'citizenship':
-          $rootScope.reserved.citizenship = country;
+          $rootScope.reserved.tourists[$stateParams.touristIndex].citizenship = country;
       }
       $ionicHistory.goBack();
     };    
@@ -193,14 +153,19 @@ angular.module('toRest.controllers', [])
     $scope.max = 5;
   })
 
-  .controller('CitiesCtrl', function($scope,$http,$rootScope,$ionicHistory,$state){
+  .controller('CitiesCtrl', function($scope,$http,$rootScope,$ionicHistory,$state,$ionicLoading){
+    $ionicLoading.show({
+      noBackdrop: false
+    });
     var countryId = ($state.current.name == 'cityOrigin') ? $rootScope.search.country_origin.id : $rootScope.search.country_destination.id
     $http.get($rootScope.baseUrl+'/cities/', {params: {country:countryId}}).
       success(function(data, status, headers, config) {
+        $ionicLoading.hide();
         $scope.cities = data ;
         console.log($scope.cities) 
       }).
       error(function(data, status, headers, config) {
+        $rootScope.showAlert('Неудачно!', 'Ошибка загрузки');
     });
 
     $scope.chooseCity = function(city) {
@@ -218,40 +183,47 @@ angular.module('toRest.controllers', [])
 
   })   
 
-	.controller('TourpageCtrl', function($scope,$timeout, $ionicSlideBoxDelegate,$ionicLoading, $compile,$stateParams,$rootScope) {
-	  $scope.rate = 3;
+	.controller('TourpageCtrl', function($scope,$timeout,$ionicSlideBoxDelegate,$stateParams,$rootScope,$state) {
 	  $scope.max = 5;
-	  $scope.choice = "A";
+	  $scope.choice = null;
 	  $scope.tabIndex = 0;
-    $scope.tour = $rootScope.tours.data[$stateParams.tourId];
+    var tour_id = $stateParams.tourId;
+    $scope.tour = $rootScope.tours.data[tour_id];
+    $scope.arrive_date = $rootScope.get_arrive_date($scope.tour.date, $scope.tour.duration)
     console.log($scope.tour);
-
-    $scope.startDateObject = {
-      titleLabel: 'Дата вылета: с',
-      closeLabel: 'Закрыть',
-      showTodayButton: 'false',
-      setLabel: 'Выбрать',
-      errorMsgLabel : 'Выберите дату',
-      setButtonType : 'button-assertive',
-      mondayFirst: true,
-      callback: function (val) {
-        $rootScope.search.start_date = val;
+    $rootScope.reserved = {};
+    $rootScope.reserved.technical_info = $scope.tour.technical_info;
+    $rootScope.reserved.tourists = $rootScope.tourists_scope.map(function(age) {
+      return {
+        "age": age
       }
+    })
+
+    $scope.setChoice = function(variant) {
+      $rootScope.reserved.choice = variant;
     };
+
+    $scope.go_reserved = function() {
+      if ($rootScope.reserved.choice) {
+        $state.go('reserved',
+          {tourId: tour_id}
+        );  
+      } else {
+        $rootScope.showAlert('Ошибка бронирования','Сначала выберите вариант размещения выше');
+      }
+    }
 	  
     //google initialize
     $scope.map;
-    console.error('MAP!');
     //Map initialization  
     $timeout(function(){
-        var latlng = new google.maps.LatLng(35.7042995, 139.7597564);
+        var latlng = new google.maps.LatLng($scope.tour.general.position.lat || 0, $scope.tour.general.position.lon || 0);
         var myOptions = {
             zoom: 8,
             center: latlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         $scope.map = new google.maps.Map(document.getElementById("map_canvas"), myOptions); 
-        console.error('MAP: ',$scope.map);
         $scope.overlay = new google.maps.OverlayView();
         $scope.overlay.draw = function() {}; // empty function required
         $scope.overlay.setMap($scope.map);
@@ -275,7 +247,108 @@ angular.module('toRest.controllers', [])
 	})
 
 	
-	.controller('ReservedCtrl', function($scope,$rootScope, $cordovaDialogs,$ionicPlatform,$ionicPopup) {
+	.controller('ReservedCtrl', function($scope,$rootScope,$stateParams,$ionicPopup,$http,$ionicLoading,$state,$ionicHistory) {
+    console.log($rootScope.reserved);
+    $scope.tour = $rootScope.tours.data[$stateParams.tourId];
+    $scope.arrive_date = $rootScope.get_arrive_date($scope.tour.date, $scope.tour.duration)
+
+    $scope.age_label = function(age) {
+      return age > 17 ? "Турист" : "Ребёнок"
+    }
+
+    $scope.tourist_name = function(tourist) {
+      if (tourist.first_name && tourist.last_name) {
+        return tourist.first_name + ' ' + tourist.last_name
+      } else {
+        return false;
+      }
+    }
+
+    $scope.start_reserved = function() {
+      $rootScope.reserved.contact = {};
+      $scope.contact = $rootScope.reserved.contact;
+      $scope.contact_error = false;
+             
+      var myPopup = $ionicPopup.show({
+        templateUrl: 'templates/partials/popup_reserve.html',
+        title: 'Укажите контактные данные для связи',
+        scope: $scope,
+        buttons: [
+          {
+            text: '<b>Завершить бронирование</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+              console.log($rootScope.reserved.contact);
+              if (!$scope.contact.email || !$scope.contact.phone || !$scope.contact.name) {
+                e.preventDefault();
+                $scope.contact_error = true;
+              } else {
+                $scope.contact_error = false;
+                $scope.process_reserved();
+                return true;
+              }
+            }
+          }
+        ]
+      });
+    };
+
+    $scope.process_reserved = function() {
+      $ionicLoading.show({
+        noBackdrop: false
+      });
+      var data = {
+        "technical_info": $rootScope.reserved.technical_info,
+        "choice": $rootScope.reserved.choice,
+        "tourists": $rootScope.reserved.tourists.map(function(tourist) {
+          tourist.citizenship = tourist.citizenship.id;
+          tourist.birthday = $rootScope.format_date(tourist.birthday);
+          tourist.passport_till = $rootScope.format_date(tourist.passport_till);
+          return tourist
+        })
+      }
+      console.log(data);
+      $http.post($rootScope.baseUrl+'/book/', data).
+        success(function(response, status, headers, config) {
+          $ionicLoading.hide();
+          if (response.status == "fail") {
+            $rootScope.showAlert('Неудачно!',response.data.text);
+            $ionicHistory.nextViewOptions({
+              disableBack: true
+            });
+            $state.go('home');
+          } else {
+            $rootScope.showAlert('Бронирование завершено!','Наш менеджер обработает ваш заказ и свяжется с вами');  
+            $ionicHistory.nextViewOptions({
+              disableBack: true
+            });
+            $state.go('home', {location: 'replace'});
+          }
+          console.log(data);
+        }).
+        error(function(data, status, headers, config) {
+          $ionicLoading.hide();
+          $rootScope.showAlert('Неудачно!','Ошибка в ответе сервера');
+          console.log(data);
+        })
+
+    }
+
+    var fields = ["citizenship", "gender", "first_name", "last_name", "passport_serial", "passport_number", "passport_till", "birthday"]
+    $rootScope.tourists_invalid = function() {
+      var valid = true;
+      $rootScope.reserved.tourists.forEach(function(tourist) {
+        valid = valid && fields.every(function(field) {
+          return tourist[field];
+        })
+      });
+      return !valid
+    }
+	})
+
+  .controller('TouristCtrl', function($scope,$rootScope,$stateParams,$ionicPopup,$ionicHistory) {
+    $scope.tourist_id = $stateParams.touristIndex;
+    $scope.tourist = $rootScope.reserved.tourists[$stateParams.touristIndex];
 
     $scope.sexList = [
       { text: "Мужской", value: "male" },
@@ -287,13 +360,18 @@ angular.module('toRest.controllers', [])
       "female": "Женский"
     };
 
+    $scope.saveTourist = function() {
+      $rootScope.check_validation();
+      $ionicHistory.goBack();
+    }
+
     $scope.chooseMale = function() {
       $scope.sexListChange = function(item) {
-        $rootScope.reserved.male = item.value;
+        $scope.tourist.gender = item.value;
       };  
              
       var myPopup = $ionicPopup.show({
-        templateUrl: 'templates/popup_male.html',
+        templateUrl: 'templates/partials/popup_male.html',
         title: 'Выберите пол',
         scope: $scope,
         buttons: [
@@ -314,7 +392,7 @@ angular.module('toRest.controllers', [])
       }
     };
 
-	  $scope.birthdayPicker = {
+    $scope.birthdayPicker = {
       titleLabel: 'День рождения',
       closeLabel: 'Закрыть',
       showTodayButton: false,
@@ -326,11 +404,10 @@ angular.module('toRest.controllers', [])
 
     var DatepickerCallback = function (field, val) {
       if (typeof(val) != 'undefined') {
-        $rootScope.reserved[field] = val;
+        $scope.tourist[field] = val;
       }
     };
-
-	})
+  })
 
   .directive('ionSearch', function() {
     var timer;

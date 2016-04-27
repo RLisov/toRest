@@ -1,0 +1,23 @@
+<div class="list">
+  <div class="item">
+    <input
+       ng-model="contact.name"
+       type="text"
+       placeholder="Ваше имя"/>    
+  </div>
+  <div class="item">
+    <input
+       ng-model="contact.email"
+       type="email"
+       placeholder="Ваш email"/>    
+  </div>
+  <div class="item">
+    <input
+       ng-model="contact.phone"
+       type="text"
+       placeholder="Номер телефона"/>
+  </div>
+  <div class="item" ng-if="contact_error">
+    <p>Введите все данные</p>
+  </div>
+</div>
