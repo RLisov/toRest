@@ -24,32 +24,10 @@ body, .item p {
 	background-size: inherit;
 }
 
-.thumbnail {
+.thumbnail, .mask {
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
-	background-image: url(../img/egypt.jpg);
-}
-
-.mask.kipr {
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-image: url(../img/kipr.jpg);
-}
-
-.mask.italy {
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-image: url(../img/italy.jpg);
-}
-
-.mask.malta {
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-image: url(../img/malta.jpg);
 }
 
 .tours .card.mask {

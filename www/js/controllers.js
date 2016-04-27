@@ -1,18 +1,17 @@
 angular.module('toRest.controllers', [])
 
-  .controller('MainCtrl', function($scope,$rootScope,$http) {
+  .controller('MainCtrl', function($scope,$rootScope,$http,$state) {
 
     $http.get($rootScope.baseUrl+'/search_masks/').
-    success(function(data, status, headers, config) {
-      set_search_masks(data);
-    }).
-    error(function(data, status, headers, config) {
-      $scope.need_search_mask = true; 
-      $http.get('/js/search_masks.json').
       success(function(data, status, headers, config) {
         set_search_masks(data);
+      }).
+      error(function(data, status, headers, config) {
+        $http.get('js/search_masks.json').
+          success(function(data, status, headers, config) {
+            set_search_masks(data);
+          });
       });
-    });
 
     function set_search_masks(data) {
       $scope.search_masks = data;
@@ -28,6 +27,12 @@ angular.module('toRest.controllers', [])
         "id": -1
       }
       $rootScope.send_search();
+    }
+
+    $scope.new_search = function() {
+      $rootScope.search = angular.copy($rootScope.reset_search);
+      console.log($rootScope.search);
+      $state.go('search');
     }
     
   })

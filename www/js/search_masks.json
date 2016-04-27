@@ -1,7 +1,7 @@
 [
   {
-    "id": "kipr",
     "name": "Кипр",
+    "img": "img/kipr.jpg",
     "mask": {
       "minCost": 33703,
       "country_destination": {
@@ -10,8 +10,8 @@
     }
   },
   {
-    "id": "italy",
     "name": "Италия",
+    "img": "img/italy.jpg",
     "mask": {
       "minCost": 29950,
       "country_destination": {
@@ -20,8 +20,8 @@
     }
   },
   {
-    "id": "malta",
     "name": "Мальта",
+    "img": "img/malta.jpg",
     "mask": {
       "minCost": 38140,
       "country_destination": {

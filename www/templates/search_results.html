@@ -17,10 +17,10 @@
               <p class="during-time">с {{tour.date}} на {{tour.duration}} ночей</p>
               <span class="row prices">
                 <span class="col col-66">
-                  <div class="blue-badge new-price">{{tour.variants[0].cost}} РУБ</div>
+                  <div class="blue-badge new-price">{{tour.variants[0].cost | currency:"":0}} РУБ</div>
                 </span>
                 <span class="col col-33">
-                  <div class="old-price">{{high_cost(tour.variants[0].cost)}} РУБ</div>
+                  <div class="old-price">{{high_cost(tour.variants[0].cost) | currency:"":0}} РУБ</div>
                 </span>
               </span>
             </span>

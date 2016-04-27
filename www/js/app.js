@@ -58,7 +58,7 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
       "category" : 3,
       "food" : 2
   };
-  $rootScope.search = $rootScope.reset_search;
+  $rootScope.search = angular.copy($rootScope.reset_search);
 
   $rootScope.get_arrive_date = function(depart_date, duration) {
     var arrive_date = new Date( depart_date.replace( /(\d{2}).(\d{2}).(\d{4})/, "$2/$1/$3"));
