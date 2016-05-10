@@ -40,7 +40,7 @@ angular.module('toRest.controllers', [])
 	.controller('SearchCtrl', function($scope,$rootScope,$ionicHistory,$http,$state,$ionicPopup) {
     $scope.range_tourists = _.range(17);
     $scope.tourists_count = {
-      "adults": 0,
+      "adults": 2,
       "children": 0
     }
     $scope.children_age = [];
@@ -197,7 +197,6 @@ angular.module('toRest.controllers', [])
     $scope.arrive_date = $rootScope.get_arrive_date($scope.tour.date, $scope.tour.duration)
     console.log($scope.tour);
     $rootScope.reserved = {};
-    $rootScope.reserved.technical_info = $scope.tour.technical_info;
     $rootScope.reserved.tourists = $rootScope.tourists_scope.map(function(age) {
       return {
         "age": age
@@ -303,8 +302,7 @@ angular.module('toRest.controllers', [])
         noBackdrop: false
       });
       var data = {
-        "technical_info": $rootScope.reserved.technical_info,
-        "choice": $rootScope.reserved.choice,
+        "technical_info": $rootScope.reserved.choice.technical_info,
         "tourists": $rootScope.reserved.tourists.map(function(tourist) {
           tourist.citizenship = tourist.citizenship.id;
           tourist.birthday = $rootScope.format_date(tourist.birthday);

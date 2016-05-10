@@ -69,13 +69,9 @@
               Туристов:
               <span class="item-note">
                 <i class="icon ion-person-stalker"></i>
-                <select ng-model="tourists_count.adults">
-                  <option ng-repeat="count in range_tourists" ng-value="count" ng-bind="count"></option>
-                </select>
+                <select ng-model="tourists_count.adults" ng-change="adults()" ng-options="count as count for count in range_tourists"></select>
                 <i class="icon ion-android-happy"></i>
-                <select ng-model="tourists_count.children" ng-change="change_children_count()">
-                  <option ng-repeat="count in range_tourists" ng-value="count" ng-bind="count"></option>
-                </select>
+                <select ng-model="tourists_count.children" ng-change="change_children_count()" ng-options="count as count for count in range_tourists"></select>
               </span>
             </div>
             <div class="item" ng-repeat="child in children_age">
