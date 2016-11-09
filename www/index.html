@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <meta http-equiv="Content-Security-Policy" content="script-src &apos;self&apos; http://maps.googleapis.com/ https://maps.googleapis.com/ https://maps.gstatic.com/ https://mts0.googleapis.com/ http://185.43.5.29/api/ &apos;unsafe-inline&apos; &apos;unsafe-eval&apos;">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval' http://maps.googleapis.com/ https://maps.googleapis.com/ https://maps.gstatic.com/ https://mts0.googleapis.com/ http://185.43.5.29/v1/ 192.168.8.100:35729">
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
@@ -33,7 +33,14 @@
     
     <!-- your app's js -->
     <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
+    <script src="js/controllers/main.js"></script>
+    <script src="js/controllers/search.js"></script>
+    <script src="js/controllers/search_results.js"></script>
+    <script src="js/controllers/country.js"></script>
+    <script src="js/controllers/city.js"></script>
+    <script src="js/controllers/tourpage.js"></script>
+    <script src="js/controllers/booking.js"></script>
+    <script src="js/controllers/tourist.js"></script>
    
   </head>
   <body ng-app="toRest">

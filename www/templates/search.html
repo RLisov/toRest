@@ -11,6 +11,11 @@
 
         <div class="card">
           <div class="list">
+            <div class="item">
+              <div class="card-title">
+                Место отправления
+              </div>
+            </div>
             <a class="item item-icon-right" ui-sref="countryOrigin">
               {{search.country_origin.name}}
               <i class="icon ion-ios-arrow-right"></i>
@@ -24,6 +29,11 @@
 
         <div class="card">
           <div class="list">
+            <div class="item">
+              <div class="card-title">
+                Место прибытия
+              </div>
+            </div>
             <a class="item item-icon-right" ui-sref="countryDestination">
               {{search.country_destination.name}}
               <i class="icon ion-ios-arrow-right"></i>
@@ -106,24 +116,20 @@
             <div class="item" ng-click="chooseFood()">
               Питание:
               <span class="item-note">
-               {{food_labels[search.food-1]}}
+               {{food_labels[search.food]}}
               </span>
             </div>
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" ng-if="search.country_destination.id > -1">
           <div class="list">
             <div class="item">
-              Категория:
-              <span class="item-note">
-                {{search.category}}+
-              </span>
-
-              <div>
-                <slider floor="1" ceiling="5" ng-model="search.category"></slider>
+              <div class="card-title">
+                Звёздность отелей
               </div>
             </div>
+            <ion-checkbox ng-repeat="category in categories" ng-model="category.selected" ng-click="updateCategories(category)">{{category.name}}</ion-checkbox>
           </div>
         </div>
       </div>

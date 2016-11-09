@@ -9,9 +9,10 @@
     	<div class="list tours">
         <a class="card item " href="#/tourpage/{{$index}}" ng-repeat="tour in tours.data | orderBy:'variants[0].cost'">
           <span class="row">
-            <span class="col-33 thumbnail" ng-style="{'background-image':'url({{tour.pictures[0]}})'}"></span>
+            <span class="col-33 thumbnail" ng-if="tour.pictures.length > 0" ng-style="{'background-image':'url({{tour.pictures[0]}})'}"></span>
+            <span class="col-33 thumbnail no-photo" ng-if="tour.pictures.length == 0"></span>
             <span class="col col-66 description">
-              <p class="title">{{tour.general.city}}</p>
+              <p class="title">{{tour.general.city.name}}</p>
               <p class="hotel">{{tour.general.hotel}}</p>
               <rating readOnly="true" ng-model="tour.general.category" max="5"></rating>
               <p class="during-time">с {{tour.date}} на {{tour.duration}} ночей</p>

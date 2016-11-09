@@ -1,0 +1,12 @@
+{
+  "name": "toRest",
+  "app_id": "55e572c2",
+  "v2": false,
+  "typescript": false,
+  "proxies": [
+    {
+      "path": "/v1",
+      "proxyUrl": "http://185.43.5.29/v1"
+    }
+  ]
+}

@@ -1,10 +1,12 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('toRest', ['ionic', 'toRest.controllers', 
-                          'ionic.rating', 'tabSlideBox', 'uiSlider','ionic-datepicker','ngCordova'])
+angular.module('toRest', [
+  'ionic', 
+  'toRest.controllers', 
+  'ionic.rating', 
+  'tabSlideBox', 
+  'uiSlider',
+  'ionic-datepicker',
+  'ngCordova'
+])
 
 .run(function($ionicPlatform, $ionicSlideBoxDelegate,$rootScope,$ionicPopup,ionicDatePicker,$ionicLoading,$http,$state,$interval) {
 
@@ -22,21 +24,21 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
   };
 
   //dev
-  $rootScope.baseUrl = '/api';
+  $rootScope.baseUrl = '/v1';
   //production
-  //$rootScope.baseUrl = 'http://185.43.5.29/api';
+  //$rootScope.baseUrl = 'http://185.43.5.29/v1';
 
 
   $rootScope.reset_search = { 
       "country_origin" : 
       {
         "name": "Россия",
-        "id": 4
+        "id": 150
       },
       "city_origin" :
       {
         "name": "Москва",
-        "id": 1104
+        "id": 832
       },
       "country_destination" :
       {
@@ -55,8 +57,8 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
       "tourists" : [0],
       "minCost" : 1000,
       "maxCost" : 100000,
-      "category" : 3,
-      "food" : 2
+      "category" : [],
+      "food" : 112
   };
   $rootScope.search = angular.copy($rootScope.reset_search);
 
@@ -70,37 +72,93 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
     var curr_date = date.getDate();
     var curr_month = date.getMonth();
     var curr_year = date.getFullYear();
-    return (('0' + curr_date).slice(-2))+"."+(('0'+(curr_month*1+1)).slice(-2)) + "." + curr_year ;
+    return (('0' + curr_date).slice(-2))+"."+(('0'+(curr_month*1+1)).slice(-2)) + "." + curr_year;
   };
 
   $rootScope.tourists_scope = [18,18];
+  
+  $rootScope.loadTours = function() {
+    $http.get($rootScope.baseUrl+'/request/' + $rootScope.requestId + '/results/').
+      success(function(data, status, headers, config) {
+        console.log(data);
+        $rootScope.tours = { data: [] };
+        $rootScope.tours.data = data;
+        $state.go('search_results');
+      }).
+      error(function(data, status, headers, config) {
+        $rootScope.showAlert('Неудачно!','Ошибка в ответе сервера');
+        console.log(data);
+      });
+  }
+
+  $rootScope.requestId = 12;
+  $rootScope.loadTours();
+
   $rootScope.send_search = function() {
-    $rootScope.loading_text = "Поиск займёт некоторое время<br/>Устраивайтесь поудобнее..."
-    var loading_texts = [ "Ищем туры...", "Пакуем чемоданы...", "Сверяем данные...", 
-                          "Подбираем гавайские рубашки...", "Созваниваемся с отелями...", "Смотрим фото номеров...", 
-                          "Ищем пляжи...", "Составляем маршрут...", "Пробуем завтраки...", "Проверяем билеты...", 
-                          "Изучаем вид из окна..."];
-    var loading_progress = $interval(function() {
-      $rootScope.loading_text = loading_texts[Math.floor(Math.random()*loading_texts.length)]
-    }, 5000);
-    $ionicLoading.show({
-      templateUrl: "templates/partials/search_loading.html",
-      noBackdrop: false
-    });
+
+    var loading_progress = false;
+
+    var startLoading = function() {
+      $rootScope.toursCount = 0;
+      $rootScope.loading_text = "Поиск займёт некоторое время<br/>Устраивайтесь поудобнее..."
+      var loading_texts = [ "Ищем туры...", "Пакуем чемоданы...", "Сверяем данные...", 
+                            "Подбираем гавайские рубашки...", "Созваниваемся с отелями...", "Смотрим фото номеров...", 
+                            "Ищем пляжи...", "Составляем маршрут...", "Пробуем завтраки...", "Проверяем билеты...", 
+                            "Изучаем вид из окна..."];
+
+      loading_progress = $interval(function() {
+        checkProgress();
+        $rootScope.loading_text = loading_texts[Math.floor(Math.random()*loading_texts.length)]
+      }, 3000);
+
+      $ionicLoading.show({
+        templateUrl: "templates/partials/search_loading.html",
+        noBackdrop: false
+      });
+    };
+
+    var stopLoading = function() {
+      $interval.cancel(loading_progress);
+      $ionicLoading.hide();
+    }
+
+    var checkProgress = function() {
+      $http.get($rootScope.baseUrl + '/request/' + $rootScope.requestId + '/').
+        success(function(data, status, headers, config) {
+          console.log(data);
+          switch (data.status) {
+            case 'done':
+              stopLoading();
+              $rootScope.loadTours();
+              break
+            case 'processing':
+              $rootScope.toursCount = data.count_found_tour;
+              break
+            case 'error':
+              $rootScope.showAlert('Неудачно!','Ошибка в ответе сервера');
+              break
+          }
+        }).
+        error(function(data, status, headers, config) {
+          stopLoading();
+          $rootScope.showAlert('Неудачно!','Ошибка в ответе сервера');
+          console.log(data);
+        });
+    }
 
     var data = {
-      country_origin : $rootScope.search.country_origin.id,          
+      //country_origin : $rootScope.search.country_origin.id,          
       city_origin: $rootScope.search.city_origin.id,              
       country_destination : $rootScope.search.country_destination.id,          
-      city_destination: $rootScope.search.city_destination.id,              
+      //city_destination: $rootScope.search.city_destination.id,              
       start_date : $rootScope.format_date($rootScope.search.start_date),      
       end_date : $rootScope.format_date($rootScope.search.end_date),        
-      minDays : $rootScope.search.minDays*1,
-      maxDays : $rootScope.search.maxDays*1,
-      minCost : $rootScope.search.minCost*1,
-      maxCost : $rootScope.search.maxCost*1,             
-      category : $rootScope.search.category*1 ,        
-      food : $rootScope.search.food,
+      min_days : $rootScope.search.minDays*1,
+      max_days : $rootScope.search.maxDays*1,
+      min_cost : $rootScope.search.minCost*1,
+      max_cost : $rootScope.search.maxCost*1,             
+      category : $rootScope.search.category,
+      food : [$rootScope.search.food],
       tourists: $rootScope.tourists_scope
     }
    
@@ -109,17 +167,10 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
     };
     console.log(data);
 
-    $http.post($rootScope.baseUrl+'/search/', data).
+    $http.post($rootScope.baseUrl+'/request/', data).
       success(function(data, status, headers, config) {
-        $interval.cancel(loading_progress);
-        $ionicLoading.hide();
-        $rootScope.tours = data;
-        console.log($rootScope.tours);
-        if ($rootScope.tours.status != 'fail') {
-          $state.go('search_results');
-        } else {
-          $rootScope.showAlert('Неудачно!', $rootScope.tours.data.text);
-        }
+        $rootScope.requestId = data.id;
+        startLoading();
       }).
       error(function(data, status, headers, config) {
         $interval.cancel(loading_progress);
@@ -225,10 +276,9 @@ angular.module('toRest', ['ionic', 'toRest.controllers',
     url: '/search_results',
     templateUrl: 'templates/search_results.html',
     controller: 'SearchResultsCtrl'
-  })
-
-
-  ;
+  });
 
   $urlRouterProvider.otherwise('/');
-})
+});
+
+angular.module('toRest.controllers', []);
