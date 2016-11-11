@@ -5,7 +5,7 @@
     "mask": {
       "minCost": 33703,
       "country_destination": {
-        "id": 6
+        "id": 58
       }
     }
   },
@@ -15,7 +15,7 @@
     "mask": {
       "minCost": 29950,
       "country_destination": {
-        "id": 236
+        "id": 51
       }
     }
   },
@@ -25,7 +25,7 @@
     "mask": {
       "minCost": 38140,
       "country_destination": {
-        "id": 242
+        "id": 73
       }
     }
   }

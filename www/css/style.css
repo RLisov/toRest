@@ -163,6 +163,12 @@ ion-content {
 	font-size: 1.1em;
 }
 
+.description .luxury {
+	font-family: "Lato Semibold", sans-serif;
+	color: #f59e35;
+	font-size: 0.9em;
+}
+
 .tours .card .description .during-time {
 	font-size: 0.9em;
 }

@@ -1,3 +1,5 @@
 <ion-spinner class="spinner-calm" icon="dots"></ion-spinner>
 <p>Найдено туров: <span ng-bind="toursCount"></span></p>
 <p ng-bind-html="loading_text"></p>
+<button ng-show="toursCount > 0" ng-click="goResults()" class="button button-energized">Показать результаты</button>
+<button ng-show="showCancelSearchButton" ng-click="stopLoading()" class="button button-calm">Отменить поиск</button>

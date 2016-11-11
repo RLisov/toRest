@@ -6,15 +6,24 @@
     </ion-nav-buttons>
 
     <ion-content>
+      <div ng-show="loading" class="list">
+        <div class="item" style="text-align: center;">
+          <ion-spinner></ion-spinner>
+        </div>
+      </div>
     	<div class="list tours">
-        <a class="card item " href="#/tourpage/{{$index}}" ng-repeat="tour in tours.data | orderBy:'variants[0].cost'">
+        <a class="card item " href="#/tourpage/{{$index}}" ng-repeat="tour in tours | orderBy:'variants[0].cost'">
           <span class="row">
             <span class="col-33 thumbnail" ng-if="tour.pictures.length > 0" ng-style="{'background-image':'url({{tour.pictures[0]}})'}"></span>
             <span class="col-33 thumbnail no-photo" ng-if="tour.pictures.length == 0"></span>
             <span class="col col-66 description">
-              <p class="title">{{tour.general.city.name}}</p>
+              <p class="title">{{cities[tour.general.city]}}</p>
               <p class="hotel">{{tour.general.hotel}}</p>
-              <rating readOnly="true" ng-model="tour.general.category" max="5"></rating>
+
+              <rating ng-show="tour.general.stars <= 5" readOnly="true" ng-model="tour.general.stars" max="5"></rating>
+              <p class="luxury" ng-show="tour.general.stars.length > 1" ng-bind="tour.general.stars"></p>
+
+
               <p class="during-time">с {{tour.date}} на {{tour.duration}} ночей</p>
               <span class="row prices">
                 <span class="col col-66">

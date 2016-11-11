@@ -24,9 +24,9 @@ angular.module('toRest', [
   };
 
   //dev
-  $rootScope.baseUrl = '/v1';
+  //$rootScope.baseUrl = '/v1';
   //production
-  //$rootScope.baseUrl = 'http://185.43.5.29/v1';
+  $rootScope.baseUrl = 'http://185.43.5.29/v1';
 
 
   $rootScope.reset_search = { 
@@ -57,7 +57,7 @@ angular.module('toRest', [
       "tourists" : [0],
       "minCost" : 1000,
       "maxCost" : 100000,
-      "category" : [],
+      "category" : [400, 401, 402, 403, 404, 405, 406],
       "food" : 112
   };
   $rootScope.search = angular.copy($rootScope.reset_search);
@@ -76,29 +76,25 @@ angular.module('toRest', [
   };
 
   $rootScope.tourists_scope = [18,18];
-  
-  $rootScope.loadTours = function() {
-    $http.get($rootScope.baseUrl+'/request/' + $rootScope.requestId + '/results/').
-      success(function(data, status, headers, config) {
-        console.log(data);
-        $rootScope.tours = { data: [] };
-        $rootScope.tours.data = data;
-        $state.go('search_results');
-      }).
-      error(function(data, status, headers, config) {
-        $rootScope.showAlert('Неудачно!','Ошибка в ответе сервера');
-        console.log(data);
-      });
+
+  var loading_progress = false,
+        counts_timeout   = 0;
+
+  $rootScope.stopLoading = function() {
+    $interval.cancel(loading_progress);
+    $ionicLoading.hide();
   }
 
-  $rootScope.requestId = 12;
-  $rootScope.loadTours();
+  $rootScope.goResults = function() {
+    $rootScope.stopLoading();
+    $state.go('search_results');
+  }
 
   $rootScope.send_search = function() {
 
-    var loading_progress = false;
-
     var startLoading = function() {
+      counts_timeout = 0;
+      $rootScope.showCancelSearchButton = false;
       $rootScope.toursCount = 0;
       $rootScope.loading_text = "Поиск займёт некоторое время<br/>Устраивайтесь поудобнее..."
       var loading_texts = [ "Ищем туры...", "Пакуем чемоданы...", "Сверяем данные...", 
@@ -107,8 +103,12 @@ angular.module('toRest', [
                             "Изучаем вид из окна..."];
 
       loading_progress = $interval(function() {
+        counts_timeout++;
         checkProgress();
         $rootScope.loading_text = loading_texts[Math.floor(Math.random()*loading_texts.length)]
+        if (counts_timeout > 5) {
+          $rootScope.showCancelSearchButton = ($rootScope.toursCount == 0);
+        }
       }, 3000);
 
       $ionicLoading.show({
@@ -117,19 +117,13 @@ angular.module('toRest', [
       });
     };
 
-    var stopLoading = function() {
-      $interval.cancel(loading_progress);
-      $ionicLoading.hide();
-    }
-
     var checkProgress = function() {
       $http.get($rootScope.baseUrl + '/request/' + $rootScope.requestId + '/').
         success(function(data, status, headers, config) {
           console.log(data);
           switch (data.status) {
             case 'done':
-              stopLoading();
-              $rootScope.loadTours();
+              $rootScope.goResults();
               break
             case 'processing':
               $rootScope.toursCount = data.count_found_tour;
@@ -140,7 +134,7 @@ angular.module('toRest', [
           }
         }).
         error(function(data, status, headers, config) {
-          stopLoading();
+          $rootScope.stopLoading();
           $rootScope.showAlert('Неудачно!','Ошибка в ответе сервера');
           console.log(data);
         });
@@ -161,10 +155,6 @@ angular.module('toRest', [
       food : [$rootScope.search.food],
       tourists: $rootScope.tourists_scope
     }
-   
-    $rootScope.tours = {
-      data: []
-    };
     console.log(data);
 
     $http.post($rootScope.baseUrl+'/request/', data).
