@@ -4,12 +4,13 @@
     <ion-content has-subheader="false" class="tourpage" scroll="false">
       <div class="head">
         <div class="row">
-          <div class="col col-25 thumbnail" ng-style="{'background-image':'url({{tour.pictures[0]}})'}"></div>
+          <div class="col col-25 thumbnail" ng-if="tour.pictures.length > 0" ng-style="{'background-image':'url({{tour.pictures[0]}})'}"></div>
+          <div class="col col-25 thumbnail no-photo" ng-if="tour.pictures.length == 0"></div>
           <div class="col col-75 description">
             <div class="item">
               <div class="row">
                 <div class="col">
-                  <p class="title">{{tour.general.country}}</p>
+                  <p class="title">{{cities[tour.general.city]}}</p>
                   <p class="hotel">{{tour.general.hotel}}</p>
                   <rating readOnly="true" ng-model="tour.general.category" max="5"></rating>
                 </div>
@@ -96,7 +97,7 @@
                 <hr class="horizontal-sep">
                 
                 <div class="head-hotel">
-                   <i class="icon-squares112"></i>
+                  <i class="icon-squares112"></i>
                   Дополнительная информация:
                 </div>
         

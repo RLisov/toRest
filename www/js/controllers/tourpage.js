@@ -1,13 +1,12 @@
 angular.module('toRest.controllers')
 
-  .controller('TourpageCtrl', function($scope,$timeout,$ionicSlideBoxDelegate,$stateParams,$rootScope,$state) {
+  .controller('TourpageCtrl', function($scope, $rootScope, $timeout, $ionicSlideBoxDelegate, $stateParams, $state) {
     $scope.max = 5;
     $scope.choice = null;
     $scope.tabIndex = 0;
-    var tour_id = $stateParams.tourId;
-    $scope.tour = $rootScope.tours.data[tour_id];
+    var hotel_id = $stateParams.hotelId*1;
+    $scope.tour = _.findWhere($rootScope.tours, {hotel_id: hotel_id});
     $scope.arrive_date = $rootScope.get_arrive_date($scope.tour.date, $scope.tour.duration)
-    console.log($scope.tour);
     $rootScope.reserved = {};
     $rootScope.reserved.tourists = $rootScope.tourists_scope.map(function(age) {
       return {
@@ -22,7 +21,7 @@ angular.module('toRest.controllers')
     $scope.go_reserved = function() {
       if ($rootScope.reserved.choice) {
         $state.go('reserved',
-          {tourId: tour_id}
+          {tourId: hotel_id}
         );  
       } else {
         $rootScope.showAlert('Ошибка бронирования','Сначала выберите вариант размещения выше');

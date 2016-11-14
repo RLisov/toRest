@@ -12,7 +12,7 @@
         </div>
       </div>
     	<div class="list tours">
-        <a class="card item " href="#/tourpage/{{$index}}" ng-repeat="tour in tours | orderBy:'variants[0].cost'">
+        <a class="card item " ui-sref="tourpage({hotelId: tour.hotel_id})" ng-repeat="tour in tours | orderBy:'variants[0].cost'">
           <span class="row">
             <span class="col-33 thumbnail" ng-if="tour.pictures.length > 0" ng-style="{'background-image':'url({{tour.pictures[0]}})'}"></span>
             <span class="col-33 thumbnail no-photo" ng-if="tour.pictures.length == 0"></span>

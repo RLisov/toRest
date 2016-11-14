@@ -1,6 +1,7 @@
 angular.module('toRest', [
   'ionic', 
-  'toRest.controllers', 
+  'toRest.controllers',
+  'toRest.filters',
   'ionic.rating', 
   'tabSlideBox', 
   'uiSlider',
@@ -24,9 +25,9 @@ angular.module('toRest', [
   };
 
   //dev
-  //$rootScope.baseUrl = '/v1';
+  $rootScope.baseUrl = '/v1';
   //production
-  $rootScope.baseUrl = 'http://185.43.5.29/v1';
+  //$rootScope.baseUrl = 'http://185.43.5.29/v1';
 
 
   $rootScope.reset_search = { 
@@ -58,7 +59,7 @@ angular.module('toRest', [
       "minCost" : 1000,
       "maxCost" : 100000,
       "category" : [400, 401, 402, 403, 404, 405, 406],
-      "food" : 112
+      "food" : [112]
   };
   $rootScope.search = angular.copy($rootScope.reset_search);
 
@@ -152,7 +153,7 @@ angular.module('toRest', [
       min_cost : $rootScope.search.minCost*1,
       max_cost : $rootScope.search.maxCost*1,             
       category : $rootScope.search.category,
-      food : [$rootScope.search.food],
+      food : $rootScope.search.food,
       tourists: $rootScope.tourists_scope
     }
     console.log(data);
@@ -209,7 +210,7 @@ angular.module('toRest', [
   })
 
   .state('tourpage', {
-    url: '/tourpage/:tourId',
+    url: '/tourpage/:hotelId',
     templateUrl: 'templates/tourpage.html',
     controller: 'TourpageCtrl'
   })
@@ -272,3 +273,4 @@ angular.module('toRest', [
 });
 
 angular.module('toRest.controllers', []);
+angular.module('toRest.filters', []);

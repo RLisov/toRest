@@ -12,26 +12,25 @@ angular.module('toRest.controllers')
           'Villas': 'Вилла'
         }
 
-    $scope.cities = {};
-    $scope.tours = [];
+    $rootScope.cities = {};
+    $rootScope.tours = [];
     $scope.loading = true;
 
     $http.get($rootScope.baseUrl+'/request/' + $rootScope.requestId + '/results/').
       success(function(data, status, headers, config) {
-        $scope.tours = data;
 
-        $scope.tours = $scope.tours.filter(function(tour) {
+        $rootScope.tours = data.filter(function(tour) {
           return tour.hotel_id > 0;
-        })      
+        });
 
-        $scope.tours.forEach(function(tour) {
+        $rootScope.tours.forEach(function(tour) {
           tour.general.stars = category_map[tour.general.category];
         });
 
-        $http.get($rootScope.baseUrl + '/countries/' + $scope.tours[0].general.country + '/cities/').
+        $http.get($rootScope.baseUrl + '/countries/' + $rootScope.tours[0].general.country + '/cities/').
           success(function(data, status, headers, config) {
             data.forEach(function(city) {
-              $scope.cities[city.id] = city.name;
+              $rootScope.cities[city.id] = city.name;
             });
             $scope.loading = false;
           }).

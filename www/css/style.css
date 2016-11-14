@@ -140,7 +140,7 @@ ion-content {
 	border-top-left-radius: 2px;
 }
 
-.tours .card .thumbnail.no-photo {
+.thumbnail.no-photo {
 	background-image: url('../img/no-photo.jpg');
 }
 
@@ -404,6 +404,14 @@ ion-content {
 .search .item-note {
 	font-family: "Lato Regular";
 	font-size: 1em;
+}
+
+.search .item-note.clipped {
+	text-overflow: ellipsis;
+  overflow: inherit;
+  width: 135px;
+  white-space: nowrap;
+  text-align: right;
 }
 
 .search .card:first-child {

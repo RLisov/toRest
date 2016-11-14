@@ -21,7 +21,7 @@ angular.module('toRest.controllers')
         city_origin = $rootScope.search.city_origin.id > -1,
         city_destination = $rootScope.search.city_destination.id > -1;
 
-    return (country_destination && country_origin && city_destination && city_origin);
+    return (country_destination && country_origin && city_origin);
   }
 
   $scope.process_search = function() {
@@ -44,21 +44,6 @@ angular.module('toRest.controllers')
     $rootScope.send_search();
   }
 
-  $http.get($rootScope.baseUrl+'/meals/').
-    success(function(data, status, headers, config) {
-      $scope.food = data ;
-      $scope.food_labels = []; 
-
-      data.forEach(function(item) {
-        $scope.food_labels[item.id] = item.name;
-      });
-
-      console.log($scope.food_labels)
-    }).
-    error(function(data, status, headers, config) {
-      console.log(data);
-    });
-
   $scope.$watch('search.country_destination.id', function(newValue) {
     if (newValue > -1) {
       loadStars();
@@ -72,12 +57,43 @@ angular.module('toRest.controllers')
         $scope.categories = data;
         $scope.category_index = 0;
         $scope.categories.forEach(function(item) {
-          item.selected = false;
+          item.selected = ($rootScope.reset_search.category.indexOf(item.id) > -1);
+        });
+
+        $scope.category_labels = [];
+        data.forEach(function(item) {
+          $scope.category_labels[item.id] = item.name;
         });
       }).
       error(function(data, status, headers, config) {
         console.log(data);
       });
+  }
+
+  $http.get($rootScope.baseUrl+'/meals/').
+    success(function(data, status, headers, config) {
+      $scope.food = data.map(function(item) {
+        item.selected = ($rootScope.reset_search.food.indexOf(item.id) > -1);
+        return item;
+      });
+      console.log($scope.food);
+      $scope.food_labels = [];
+
+      data.forEach(function(item) {
+        $scope.food_labels[item.id] = item.name;
+      });
+    }).
+    error(function(data, status, headers, config) {
+      console.log(data);
+    });
+
+  $scope.updateFood = function(food) {
+    if (food.selected) {
+      $rootScope.search.food.push(food.id);
+    } else {
+      $rootScope.search.food.splice($rootScope.search.food.indexOf(food.id), 1);
+    }
+    console.log($rootScope.search.food);
   }
 
   $scope.updateCategories = function(category) {
@@ -86,13 +102,27 @@ angular.module('toRest.controllers')
     } else {
       $rootScope.search.category.splice($rootScope.search.category.indexOf(category.id), 1);
     }
-    console.log($rootScope.search.category);
   }
    
   $scope.chooseFood = function() {
     var myPopup = $ionicPopup.show({
       templateUrl: 'templates/partials/popup_food.html',
       title: '<h4>Выберите питание</h4>',
+      scope: $scope,
+      buttons: [
+        { text: 'Отмена' },
+        {
+          text: '<b>Ок</b>',
+          type: 'button-positive',
+        }
+      ]
+    });
+  };
+
+  $scope.chooseCategory = function() {
+    var myPopup = $ionicPopup.show({
+      templateUrl: 'templates/partials/popup_category.html',
+      title: '<h4>Выберите категории отелей</h4>',
       scope: $scope,
       buttons: [
         { text: 'Отмена' },

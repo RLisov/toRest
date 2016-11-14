@@ -115,8 +115,8 @@
           <div class="list">
             <div class="item" ng-click="chooseFood()">
               Питание:
-              <span class="item-note">
-               {{food_labels[search.food]}}
+              <span class="item-note clipped">
+               {{search.food | arrayLabel:food_labels}}
               </span>
             </div>
           </div>
@@ -124,12 +124,12 @@
 
         <div class="card" ng-if="search.country_destination.id > -1">
           <div class="list">
-            <div class="item">
-              <div class="card-title">
-                Звёздность отелей
-              </div>
+            <div class="item" ng-click="chooseCategory()">
+              Звёздность:
+              <span class="item-note clipped">
+               {{search.category | arrayLabel:category_labels}}
+              </span>
             </div>
-            <ion-checkbox ng-repeat="category in categories" ng-model="category.selected" ng-click="updateCategories(category)">{{category.name}}</ion-checkbox>
           </div>
         </div>
       </div>
