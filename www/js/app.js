@@ -25,9 +25,9 @@ angular.module('toRest', [
   };
 
   //dev
-  $rootScope.baseUrl = '/v1';
+  //$rootScope.baseUrl = '/v1';
   //production
-  //$rootScope.baseUrl = 'http://185.43.5.29/v1';
+  $rootScope.baseUrl = 'http://185.43.5.29/v1';
 
 
   $rootScope.reset_search = { 
